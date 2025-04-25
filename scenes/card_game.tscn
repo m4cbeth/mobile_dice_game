@@ -1,0 +1,87 @@
+[gd_scene load_steps=11 format=3 uid="uid://d1ti5odadd840"]
+
+[ext_resource type="Texture2D" uid="uid://uixldpwro6i8" path="res://assets/backgrounds/pixelField.png" id="1_y0iof"]
+[ext_resource type="Script" uid="uid://bflst71urcn21" path="res://scripts/CardManager.gd" id="2_86uwx"]
+[ext_resource type="PackedScene" uid="uid://d278by0648fb0" path="res://scenes/card.tscn" id="2_bsf4w"]
+[ext_resource type="Script" uid="uid://dwkbp3is8tles" path="res://scenes/Camera2D.gd" id="2_iwjdk"]
+[ext_resource type="PackedScene" uid="uid://bgsw3bjf5we3n" path="res://scenes/node_2d(card(new)).tscn" id="5_uvlxg"]
+[ext_resource type="AudioStream" uid="uid://dbw14rt6j53hq" path="res://assets/music/Sketchbook 2024-10-13.ogg" id="6_427xc"]
+[ext_resource type="AudioStream" uid="uid://dko64tga8m4vu" path="res://assets/sounds/FUI Holographic Button Press-1.wav" id="7_45i77"]
+[ext_resource type="PackedScene" uid="uid://dnpqvg2wo1tj6" path="res://scenes/card_drop_area.tscn" id="8_0e170"]
+
+[sub_resource type="Environment" id="Environment_0k00j"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 0.26
+glow_strength = 0.64
+glow_bloom = 1.0
+glow_blend_mode = 1
+glow_hdr_threshold = 0.54
+
+[sub_resource type="GDScript" id="GDScript_d3rvi"]
+script/source = "extends Node2D
+
+signal hovered
+signal hovered_off
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	#
+	get_parent().connect_card_signals(self)
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+
+
+func _on_area_2d_mouse_entered():
+	print(\"entered\")
+	emit_signal(\"hovered\", self)
+
+func _on_area_2d_mouse_exited():
+	emit_signal(\"hovered_off\", self)
+"
+
+[node name="CardGame" type="Node2D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_0k00j")
+
+[node name="PixelFieldBackground" type="Sprite2D" parent="."]
+position = Vector2(201, 100)
+texture = ExtResource("1_y0iof")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(192, 110)
+zoom = Vector2(3, 3)
+limit_left = 0
+limit_top = 0
+limit_right = 386
+limit_bottom = 215
+script = ExtResource("2_iwjdk")
+
+[node name="CardManager" type="Node2D" parent="."]
+script = ExtResource("2_86uwx")
+
+[node name="Card" parent="CardManager" instance=ExtResource("2_bsf4w")]
+position = Vector2(173, 169)
+script = SubResource("GDScript_d3rvi")
+
+[node name="Card2" parent="CardManager" instance=ExtResource("2_bsf4w")]
+position = Vector2(99, 168)
+script = SubResource("GDScript_d3rvi")
+
+[node name="Node2D(Card(new))" parent="CardManager" instance=ExtResource("5_uvlxg")]
+position = Vector2(-3, 103)
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_427xc")
+autoplay = true
+
+[node name="CardDropSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_45i77")
+
+[node name="CardDropArea" parent="." instance=ExtResource("8_0e170")]
+position = Vector2(82, 4)

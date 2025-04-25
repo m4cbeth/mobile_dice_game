@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dye37w7einjeh"]
+
+[ext_resource type="PackedScene" uid="uid://bi0vn8w23a20b" path="res://scenes/arcane_techno_glyph.tscn" id="1_1f0pq"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Arcane-techno-glyph" parent="." instance=ExtResource("1_1f0pq")]

@@ -1,0 +1,68 @@
+[gd_scene load_steps=11 format=3 uid="uid://cvud7c8ld42ae"]
+
+[ext_resource type="Script" uid="uid://bviss48g1gdnl" path="res://scripts/Knight.gd" id="1_7etoi"]
+[ext_resource type="Texture2D" uid="uid://dr5788p5dql23" path="res://assets/sprites/Knight.png" id="2_m5yaj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1vina"]
+atlas = ExtResource("2_m5yaj")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_57qh5"]
+atlas = ExtResource("2_m5yaj")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_boy2u"]
+atlas = ExtResource("2_m5yaj")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7j1gv"]
+atlas = ExtResource("2_m5yaj")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_awvrn"]
+atlas = ExtResource("2_m5yaj")
+region = Rect2(400, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ph177"]
+atlas = ExtResource("2_m5yaj")
+region = Rect2(500, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6uma4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1vina")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_57qh5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_boy2u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7j1gv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_awvrn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ph177")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4sx8f"]
+radius = 5.0
+
+[node name="KnightNode" type="CharacterBody2D"]
+script = ExtResource("1_7etoi")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_6uma4")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_4sx8f")
