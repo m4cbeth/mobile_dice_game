@@ -8,6 +8,7 @@ var HOVER_SCALE_AMOUNT = 1.14
 var HOVER_TWEEEN_SPEED = 0.2
 var is_hovering_on_card
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect().size
@@ -21,6 +22,7 @@ func _process(_delta):
 	if card_being_dragged:
 		var mouse_pos = get_global_mouse_position() + drag_offset
 		card_being_dragged.global_position = Vector2(clamp(mouse_pos.x, 0, 386), clamp(mouse_pos.y, 0, 215))
+
 
 
 func _input(event):

@@ -1,10 +1,10 @@
 extends Camera2D
 
 var shake_amount = 0.0
-var shake_decay = 20.0
+var shake_decay = 50.0
 
 
-func trigger_shake(amount = 10.0):
+func trigger_shake(amount = 8.0):
 	shake_amount = amount
 
 # Called when the node enters the scene tree for the first time.
