@@ -1,0 +1,76 @@
+[gd_scene load_steps=12 format=3 uid="uid://cg3uapk2i3dy7"]
+
+[ext_resource type="Texture2D" uid="uid://dsvagi3rep0qk" path="res://assets/sprites/enemies/Green_Slime-Idle.png" id="1_371uh"]
+[ext_resource type="Script" uid="uid://dnqov7hyx0rxd" path="res://scripts/slime.gd" id="1_p2gj0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_82ybk"]
+atlas = ExtResource("1_371uh")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6mh84"]
+atlas = ExtResource("1_371uh")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s2308"]
+atlas = ExtResource("1_371uh")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f8vwx"]
+atlas = ExtResource("1_371uh")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tqu8w"]
+atlas = ExtResource("1_371uh")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v30j8"]
+atlas = ExtResource("1_371uh")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2debr"]
+atlas = ExtResource("1_371uh")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_buiih"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_82ybk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6mh84")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s2308")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f8vwx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tqu8w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v30j8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2debr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n6pvg"]
+radius = 9.0
+
+[node name="Slime" type="CharacterBody2D"]
+script = ExtResource("1_p2gj0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(526, 217)
+sprite_frames = SubResource("SpriteFrames_buiih")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(526, 240)
+shape = SubResource("CircleShape2D_n6pvg")

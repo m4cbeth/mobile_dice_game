@@ -7,13 +7,15 @@ var COLLISION_CARD_MASK = 1
 var HOVER_SCALE_AMOUNT = 1.14
 var HOVER_TWEEEN_SPEED = 0.2
 var is_hovering_on_card
+var most_recent_z_index
+var card_return_position
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect().size
-	print(screen_size)
 	print(get_viewport().get_camera_2d())
+	most_recent_z_index = 5
 
 
 
@@ -21,7 +23,7 @@ func _ready():
 func _process(_delta):
 	if card_being_dragged:
 		var mouse_pos = get_global_mouse_position() + drag_offset
-		card_being_dragged.global_position = Vector2(clamp(mouse_pos.x, 0, 386), clamp(mouse_pos.y, 0, 215))
+		card_being_dragged.global_position = Vector2(clamp(mouse_pos.x, 0, 640), clamp(mouse_pos.y, 0, 360))
 
 
 
@@ -34,7 +36,7 @@ func _input(event):
 				start_drag(card)
 			else:
 				if card_being_dragged:
-					finish_drag()
+					finish_drag(card)
 		else:
 			if card_being_dragged:
 				$"../Camera2D".trigger_shake()
@@ -42,10 +44,14 @@ func _input(event):
 			card_being_dragged = null
 
 func start_drag(card):
+	card_return_position = card.position
+	most_recent_z_index += 1
+	card.z_index = most_recent_z_index
 	card_being_dragged = card
 	card.scale = Vector2(1,1)
+	print(most_recent_z_index)
 
-func finish_drag():
+func finish_drag(card):
 	card_being_dragged.scale = Vector2(HOVER_SCALE_AMOUNT, HOVER_SCALE_AMOUNT)
 	card_being_dragged = null
 

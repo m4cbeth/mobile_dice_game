@@ -16,7 +16,6 @@ func _process(delta):
 
 
 func _on_area_2d_mouse_entered():
-	print("entered")
 	emit_signal("hovered", self)
 
 func _on_area_2d_mouse_exited():
