@@ -91,7 +91,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"default",
-"speed": 10.0
+"speed": 24.0
 }]
 
 [node name="Burning" type="AnimatedSprite2D"]

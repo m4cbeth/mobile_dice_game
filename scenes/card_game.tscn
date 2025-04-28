@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://d1ti5odadd840"]
+[gd_scene load_steps=14 format=3 uid="uid://d1ti5odadd840"]
 
 [ext_resource type="Texture2D" uid="uid://uixldpwro6i8" path="res://assets/backgrounds/pixelField.png" id="1_y0iof"]
 [ext_resource type="Script" uid="uid://bflst71urcn21" path="res://scripts/CardManager.gd" id="2_86uwx"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://bf0pa6kur8fsm" path="res://scripts/card_drop_area.gd" id="8_82ybk"]
 [ext_resource type="Script" uid="uid://b8oyhb3ihk7h6" path="res://scripts/player_hand.gd" id="9_6xg5x"]
 [ext_resource type="PackedScene" uid="uid://5dpfxn07yxd0" path="res://scenes/enemies.tscn" id="10_vu0qa"]
+[ext_resource type="Texture2D" uid="uid://miv4pvkq1osc" path="res://assets/sprites/Hearts.png" id="12_6mh84"]
 
 [sub_resource type="Environment" id="Environment_0k00j"]
 background_mode = 3
@@ -80,6 +81,41 @@ script = ExtResource("9_6xg5x")
 
 [node name="Enemies" parent="." instance=ExtResource("10_vu0qa")]
 position = Vector2(-5, 13)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="UI"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/Panel/HBoxContainer"]
+position = Vector2(10, 8)
+texture = ExtResource("12_6mh84")
+hframes = 4
+vframes = 5
+
+[node name="Sprite2D2" type="Sprite2D" parent="UI/Panel/HBoxContainer"]
+position = Vector2(24, 8)
+texture = ExtResource("12_6mh84")
+hframes = 4
+vframes = 5
+
+[node name="Sprite2D3" type="Sprite2D" parent="UI/Panel/HBoxContainer"]
+position = Vector2(38, 9)
+texture = ExtResource("12_6mh84")
+hframes = 4
+vframes = 5
+
+[node name="Sprite2D4" type="Sprite2D" parent="UI/Panel/HBoxContainer"]
+position = Vector2(54, 10)
+texture = ExtResource("12_6mh84")
+hframes = 4
+vframes = 5
 
 [connection signal="button_down" from="InvokeButton/Button" to="CardDropArea" method="_on_button_button_down"]
 [connection signal="button_down" from="InvokeButton/Button" to="PlayerHand" method="_on_button_button_down"]

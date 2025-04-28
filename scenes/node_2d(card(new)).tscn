@@ -72,7 +72,6 @@ scale = Vector2(1.14151, 1.08036)
 texture = ExtResource("2_hwrex")
 
 [node name="Dice" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(33.5, 61.5)
 scale = Vector2(1.0625, 1.0625)
 texture = ExtResource("3_traw1")
@@ -81,6 +80,7 @@ vframes = 15
 frame = 6
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
 position = Vector2(33.25, 62.25)
 scale = Vector2(1.09375, 1.09375)
 sprite_frames = SubResource("SpriteFrames_xu1gf")
