@@ -16,7 +16,7 @@ func _ready() -> void:
 
 # sprite will be spawn in between some range of y, such that... yes it will fall the same amount
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if is_falling:
 		fall_velocity += GRAVITY * delta
 		global_position.y += fall_velocity * delta
@@ -25,4 +25,12 @@ func _process(delta: float) -> void:
 	else:
 		var dir_vect = (target - global_position).normalized()
 		velocity = dir_vect * SPEED
-		move_and_slide()
+		var collision = move_and_collide(velocity * delta)
+		if collision:
+			print('zero"')
+			velocity = Vector2.ZERO
+
+func handleCollision():
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()

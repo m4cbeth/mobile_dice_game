@@ -16,3 +16,6 @@ func spawn_slime():
 func _on_timer_timeout() -> void:
 	spawn_slime()
 	pass # Replace with function body.
+	
+	
+	

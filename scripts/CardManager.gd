@@ -14,7 +14,6 @@ var card_return_position
 # Called when the node enters the scene tree for the first times.
 func _ready():
 	screen_size = get_viewport_rect().size
-	print(get_viewport().get_camera_2d())
 	most_recent_z_index = 5
 
 
@@ -49,7 +48,6 @@ func start_drag(card):
 	card.z_index = most_recent_z_index
 	card_being_dragged = card
 	card.scale = Vector2(1,1)
-	print(most_recent_z_index)
 
 func finish_drag(card):
 	card_being_dragged.scale = Vector2(HOVER_SCALE_AMOUNT, HOVER_SCALE_AMOUNT)

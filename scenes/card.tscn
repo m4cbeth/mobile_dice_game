@@ -1,63 +1,10 @@
-[gd_scene load_steps=30 format=3 uid="uid://d278by0648fb0"]
+[gd_scene load_steps=23 format=3 uid="uid://d278by0648fb0"]
 
 [ext_resource type="Script" uid="uid://c5tofklnx4lvb" path="res://scripts/card.gd" id="1_n5vys"]
 [ext_resource type="Texture2D" uid="uid://c4kwfgfcu4pby" path="res://assets/cards/CardTemplate.png" id="1_scsis"]
-[ext_resource type="Texture2D" uid="uid://dr5788p5dql23" path="res://assets/sprites/Knight.png" id="2_ptd81"]
+[ext_resource type="PackedScene" uid="uid://bhcgxuvur6jeq" path="res://scenes/KnightSpriteNode.tscn" id="3_sy11y"]
 [ext_resource type="Texture2D" uid="uid://ca1adrkm8b4n2" path="res://assets/sprites/Red Effect Bullet Impact Explosion 32x32.png" id="4_kg30u"]
 [ext_resource type="PackedScene" uid="uid://dfjvb57ts7pkm" path="res://scenes/burning_animation.tscn" id="5_sy11y"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0iavu"]
-atlas = ExtResource("2_ptd81")
-region = Rect2(0, 0, 100, 100)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3y20v"]
-atlas = ExtResource("2_ptd81")
-region = Rect2(100, 0, 100, 100)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_b80c1"]
-atlas = ExtResource("2_ptd81")
-region = Rect2(200, 0, 100, 100)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7bsvn"]
-atlas = ExtResource("2_ptd81")
-region = Rect2(300, 0, 100, 100)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2rv85"]
-atlas = ExtResource("2_ptd81")
-region = Rect2(400, 0, 100, 100)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_e65kt"]
-atlas = ExtResource("2_ptd81")
-region = Rect2(500, 0, 100, 100)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_6nkab"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0iavu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3y20v")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_b80c1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7bsvn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2rv85")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_e65kt")
-}],
-"loop": true,
-"name": &"default",
-"speed": 12.0
-}]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pi1jj"]
-size = Vector2(46, 72)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sy11y"]
 atlas = ExtResource("4_kg30u")
@@ -175,6 +122,9 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pi1jj"]
+size = Vector2(46, 72)
+
 [node name="Card" type="Node2D"]
 position = Vector2(78, 66)
 script = ExtResource("1_n5vys")
@@ -193,20 +143,16 @@ position = Vector2(-0.000244141, 0)
 scale = Vector2(1.11304, 1.06667)
 texture = ExtResource("1_scsis")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" parent="." instance=ExtResource("3_sy11y")]
 position = Vector2(-2, -6)
-sprite_frames = SubResource("SpriteFrames_6nkab")
-autoplay = "default"
+animation = &"default"
 
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 259
-collision_mask = 259
+[node name="Burning" parent="." instance=ExtResource("5_sy11y")]
+z_index = 0
+position = Vector2(0, -18)
+scale = Vector2(1.71875, 1.625)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-visible = false
-shape = SubResource("RectangleShape2D_pi1jj")
-
-[node name="DestructionAnimation" type="AnimatedSprite2D" parent="."]
+[node name="Destruction" type="AnimatedSprite2D" parent="."]
 z_index = 1
 position = Vector2(0, -4)
 scale = Vector2(2, 2)
@@ -214,9 +160,20 @@ sprite_frames = SubResource("SpriteFrames_rywyy")
 frame = 15
 frame_progress = 1.0
 
-[node name="Burning" parent="." instance=ExtResource("5_sy11y")]
-z_index = 0
-position = Vector2(-1.19209e-07, -18)
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+collision_layer = 258
+collision_mask = 258
+mass = 25.252
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource("RectangleShape2D_pi1jj")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 259
+collision_mask = 259
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_pi1jj")
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

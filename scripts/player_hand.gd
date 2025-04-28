@@ -7,8 +7,8 @@ const CARD_WIDTH = 45
 const center_screen_x = 330 + 10
 const DEFAULT_POSITION = Vector2(1, 280)
 const CARD_OVERLAP = 25
-const DEAL_SPEED = 0.9
-const DEAL_DELAY = 0.5
+const DEAL_SPEED = .5 # better called "delay"
+const DEAL_DELAY = 0.1
 const ROTATION_AMOUNT = 15.0
 
 var player_hand = []
