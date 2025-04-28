@@ -11,7 +11,7 @@ var most_recent_z_index
 var card_return_position
 
 
-# Called when the node enters the scene tree for the first time.
+# Called when the node enters the scene tree for the first times.
 func _ready():
 	screen_size = get_viewport_rect().size
 	print(get_viewport().get_camera_2d())

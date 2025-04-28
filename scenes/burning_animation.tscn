@@ -1,0 +1,102 @@
+[gd_scene load_steps=15 format=3 uid="uid://dfjvb57ts7pkm"]
+
+[ext_resource type="Texture2D" uid="uid://ca1adrkm8b4n2" path="res://assets/sprites/Red Effect Bullet Impact Explosion 32x32.png" id="1_mb03p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0d501"]
+atlas = ExtResource("1_mb03p")
+region = Rect2(448, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l85n3"]
+atlas = ExtResource("1_mb03p")
+region = Rect2(416, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b834i"]
+atlas = ExtResource("1_mb03p")
+region = Rect2(352, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kg30u"]
+atlas = ExtResource("1_mb03p")
+region = Rect2(512, 288, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rywyy"]
+atlas = ExtResource("1_mb03p")
+region = Rect2(544, 288, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_le4ky"]
+atlas = ExtResource("1_mb03p")
+region = Rect2(576, 288, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_125j1"]
+atlas = ExtResource("1_mb03p")
+region = Rect2(608, 288, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s05jc"]
+atlas = ExtResource("1_mb03p")
+region = Rect2(192, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5jtkw"]
+atlas = ExtResource("1_mb03p")
+region = Rect2(224, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4bydv"]
+atlas = ExtResource("1_mb03p")
+region = Rect2(256, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2xgn1"]
+atlas = ExtResource("1_mb03p")
+region = Rect2(288, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_khodh"]
+atlas = ExtResource("1_mb03p")
+region = Rect2(320, 192, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_io472"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0d501")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l85n3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b834i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kg30u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rywyy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_le4ky")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_125j1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s05jc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5jtkw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4bydv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2xgn1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_khodh")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="Burning" type="AnimatedSprite2D"]
+z_index = 2
+scale = Vector2(1.71875, 1.625)
+sprite_frames = SubResource("SpriteFrames_io472")
+frame = 11
+frame_progress = 1.0

@@ -21,7 +21,7 @@ func _ready() -> void:
 		var new_card = card_scene.instantiate()
 		new_card.position = DEFAULT_POSITION
 		new_card.z_index = 3 + i
-		new_card.name = "Card"
+		new_card.name = "Card" + str(i+1)
 		$"../CardManager".add_child(new_card)
 		add_card_to_hand(new_card)
 		await get_tree().create_timer(DEAL_DELAY).timeout

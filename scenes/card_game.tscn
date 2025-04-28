@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://d1ti5odadd840"]
+[gd_scene load_steps=13 format=3 uid="uid://d1ti5odadd840"]
 
 [ext_resource type="Texture2D" uid="uid://uixldpwro6i8" path="res://assets/backgrounds/pixelField.png" id="1_y0iof"]
 [ext_resource type="Script" uid="uid://bflst71urcn21" path="res://scripts/CardManager.gd" id="2_86uwx"]
@@ -8,8 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://h2o1qvha5lmw" path="res://assets/sprites/invoke_button.png" id="6_vu0qa"]
 [ext_resource type="AudioStream" uid="uid://dko64tga8m4vu" path="res://assets/sounds/FUI Holographic Button Press-1.wav" id="7_45i77"]
 [ext_resource type="PackedScene" uid="uid://dnpqvg2wo1tj6" path="res://scenes/card_drop_area.tscn" id="8_0e170"]
+[ext_resource type="Script" uid="uid://bf0pa6kur8fsm" path="res://scripts/card_drop_area.gd" id="8_82ybk"]
 [ext_resource type="Script" uid="uid://b8oyhb3ihk7h6" path="res://scripts/player_hand.gd" id="9_6xg5x"]
-[ext_resource type="PackedScene" uid="uid://cg3uapk2i3dy7" path="res://scenes/slime.tscn" id="10_vu0qa"]
+[ext_resource type="PackedScene" uid="uid://5dpfxn07yxd0" path="res://scenes/enemies.tscn" id="10_vu0qa"]
 
 [sub_resource type="Environment" id="Environment_0k00j"]
 background_mode = 3
@@ -22,6 +23,9 @@ glow_blend_mode = 1
 
 [node name="CardGame" type="Node2D"]
 position = Vector2(8, 26)
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_427xc")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_0k00j")
@@ -46,9 +50,6 @@ script = ExtResource("2_86uwx")
 [node name="Node2D(Card(new))" parent="CardManager" instance=ExtResource("5_uvlxg")]
 position = Vector2(-1, 217)
 
-[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_427xc")
-
 [node name="CardDropSound" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(186, 113)
 stream = ExtResource("7_45i77")
@@ -59,16 +60,26 @@ light_mask = 2
 visibility_layer = 2
 position = Vector2(141, 32)
 scale = Vector2(1.5, 1.5)
+script = ExtResource("8_82ybk")
 
 [node name="InvokeButton" type="Sprite2D" parent="."]
 position = Vector2(301, 19)
 scale = Vector2(0.11418, 0.11418)
 texture = ExtResource("6_vu0qa")
 
+[node name="Button" type="Button" parent="InvokeButton"]
+modulate = Color(1, 1, 1, 0)
+offset_left = -631.0
+offset_top = -184.0
+offset_right = 26.0
+offset_bottom = 201.0
+
 [node name="PlayerHand" type="Node2D" parent="."]
 position = Vector2(11, 254)
 script = ExtResource("9_6xg5x")
 
-[node name="Enemies" type="Node2D" parent="."]
+[node name="Enemies" parent="." instance=ExtResource("10_vu0qa")]
+position = Vector2(-5, 13)
 
-[node name="Slime" parent="Enemies" instance=ExtResource("10_vu0qa")]
+[connection signal="button_down" from="InvokeButton/Button" to="CardDropArea" method="_on_button_button_down"]
+[connection signal="button_down" from="InvokeButton/Button" to="PlayerHand" method="_on_button_button_down"]
