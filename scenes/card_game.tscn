@@ -72,7 +72,7 @@ texture = ExtResource("6_vu0qa")
 modulate = Color(1, 1, 1, 0)
 offset_left = -631.0
 offset_top = -184.0
-offset_right = 26.0
+offset_right = 613.0
 offset_bottom = 201.0
 
 [node name="PlayerHand" type="Node2D" parent="."]

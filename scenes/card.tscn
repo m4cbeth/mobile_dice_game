@@ -150,7 +150,6 @@ animation = &"default"
 [node name="Burning" parent="." instance=ExtResource("5_sy11y")]
 z_index = 0
 position = Vector2(0, -18)
-scale = Vector2(1.71875, 1.625)
 
 [node name="Destruction" type="AnimatedSprite2D" parent="."]
 z_index = 1
@@ -173,6 +172,13 @@ collision_layer = 259
 collision_mask = 259
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_pi1jj")
+
+[node name="CardBody" type="StaticBody2D" parent="."]
+collision_layer = 257
+collision_mask = 257
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="CardBody"]
 shape = SubResource("RectangleShape2D_pi1jj")
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]

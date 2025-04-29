@@ -35,7 +35,7 @@ func _input(event):
 				start_drag(card)
 			else:
 				if card_being_dragged:
-					finish_drag(card)
+					finish_drag()
 		else:
 			if card_being_dragged:
 				$"../Camera2D".trigger_shake()
@@ -49,7 +49,7 @@ func start_drag(card):
 	card_being_dragged = card
 	card.scale = Vector2(1,1)
 
-func finish_drag(card):
+func finish_drag():
 	card_being_dragged.scale = Vector2(HOVER_SCALE_AMOUNT, HOVER_SCALE_AMOUNT)
 	card_being_dragged = null
 
