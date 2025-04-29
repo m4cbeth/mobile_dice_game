@@ -7,6 +7,7 @@
 script = ExtResource("1_q4yn1")
 
 [node name="Slime" parent="." instance=ExtResource("2_ad2ka")]
+visible = false
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 1.747

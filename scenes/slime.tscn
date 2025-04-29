@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://dsvagi3rep0qk" path="res://assets/sprites/enemies/Green_Slime-Idle.png" id="1_371uh"]
 [ext_resource type="Script" uid="uid://dnqov7hyx0rxd" path="res://scripts/slime.gd" id="1_p2gj0"]
-[ext_resource type="Script" uid="uid://vtrrxjocmn18" path="res://scripts/state_machine.gd" id="3_n6pvg"]
-[ext_resource type="Script" uid="uid://d0vin3tgf07sw" path="res://scripts/state_walk.gd" id="4_pjw23"]
+[ext_resource type="Script" uid="uid://vtrrxjocmn18" path="res://scripts/state/state_machine.gd" id="3_n6pvg"]
+[ext_resource type="Script" uid="uid://d0vin3tgf07sw" path="res://scripts/state/state_walk.gd" id="4_pjw23"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_82ybk"]
 atlas = ExtResource("1_371uh")
@@ -72,19 +72,18 @@ collision_mask = 258
 script = ExtResource("1_p2gj0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(526, 217)
+position = Vector2(0, -32)
 sprite_frames = SubResource("SpriteFrames_buiih")
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(526, 240)
+position = Vector2(0, -9)
 shape = SubResource("CircleShape2D_n6pvg")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_n6pvg")
 initial_state = NodePath("Walk")
 
-[node name="Walk" type="Node" parent="StateMachine" node_paths=PackedStringArray("entity")]
+[node name="Walk" type="Node" parent="StateMachine"]
 script = ExtResource("4_pjw23")
-entity = NodePath("../..")
 metadata/_custom_type_script = "uid://d0vin3tgf07sw"
