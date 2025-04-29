@@ -1,16 +1,15 @@
 extends State
 class_name Walk
 
-var direction: Vector2
-var target
+#var direction: Vector2
+var target_vector: Vector2
 var avoiding: bool
 var avoid_timer: float
 var avoid_duration: float
 const DICE_COORDS = Vector2(41, 303)
 
-const SPEED = 120
+const SPEED = 12
 
-var is_falling = true
 var fall_velocity = 0.0
 const GRAVITY = 980
 
@@ -19,7 +18,7 @@ var fake_floor: int
 
 
 func enter():
-	#print(entity.global_position)
+	
 	pass
 
 func update(delta):
@@ -27,34 +26,42 @@ func update(delta):
 	if avoiding keep avoiding, remove delta from timer
 	"""
 func physics_update(delta):
-	if is_falling:
+	print(get_tree().get_root().get_children()[0].get_node("CardManager").get_child(0))
+	if $CardManager/DiceDeck:
+		var dice_coords = $CardManager/DiceDeck.get_child(0)
+		print(dice_coords)
+		
+	if entity.is_falling:
 		entity.velocity.x = 0 # do I need this line?
 		fall_velocity += GRAVITY * delta
 		entity.global_position.y += fall_velocity * delta
-		print(entity)
-		print(entity.fake_floor)
-		print(entity.position.y)
 		if entity.fake_floor:
 			if entity.global_position.y > entity.fake_floor:
-				is_falling = false
+				entity.is_falling = false
 	else:
-		# get target
-		target = get_target()
-		# get direction
-		 #get_sprite().flip_h = velocity.x < 0
-		# move and collide
+		if entity:
+			
+			#entity.velocity = Vector2.LEFT * SPEED
+			#entity.move_and_slide()
+			# get target
+			var target_coords = DICE_COORDS
+			# get direction
+			var direction = target_coords - entity.global_position
+			var dir_vect = direction.normalized()
+			entity.get_child(0).flip_h = entity.velocity.x > 0 # reverse is true for protagonist sprites
+			entity.move_and_collide(dir_vect)
 
 
 
 
-func get_target():
+func get_target_coords():
 	if entity.is_in_group("slimes"):
 		return DICE_COORDS
 	if entity.is_in_group("knights"):
 		var slimes = get_tree().get_nodes_in_group("slimes")
 		if slimes.size() > 0:
-			return find_closest(slimes)
-	return null
+			return find_closest(slimes).position
+	print('no target found')
 
 func find_closest(nodes: Array[Node2D]) -> Node2D:
 	var closest_distance = INF

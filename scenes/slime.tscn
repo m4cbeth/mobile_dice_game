@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://cg3uapk2i3dy7"]
+[gd_scene load_steps=20 format=3 uid="uid://cg3uapk2i3dy7"]
 
 [ext_resource type="Texture2D" uid="uid://dsvagi3rep0qk" path="res://assets/sprites/enemies/Green_Slime-Idle.png" id="1_371uh"]
 [ext_resource type="Script" uid="uid://dnqov7hyx0rxd" path="res://scripts/slime.gd" id="1_p2gj0"]
+[ext_resource type="Texture2D" uid="uid://ckamcf31wbhiv" path="res://assets/sprites/Blue Effect Bullet Impact Explosion 32x32.png" id="2_2npkn"]
 [ext_resource type="Script" uid="uid://vtrrxjocmn18" path="res://scripts/state/state_machine.gd" id="3_n6pvg"]
 [ext_resource type="Script" uid="uid://d0vin3tgf07sw" path="res://scripts/state/state_walk.gd" id="4_pjw23"]
 
@@ -62,6 +63,48 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_fd6lc"]
+atlas = ExtResource("2_2npkn")
+region = Rect2(192, 480, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gstla"]
+atlas = ExtResource("2_2npkn")
+region = Rect2(224, 480, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v5wyi"]
+atlas = ExtResource("2_2npkn")
+region = Rect2(256, 480, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0l8pv"]
+atlas = ExtResource("2_2npkn")
+region = Rect2(288, 480, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vnioy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fd6lc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gstla")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v5wyi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0l8pv")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"default",
+"speed": 9.0
+}]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_n6pvg"]
 radius = 9.0
 
@@ -75,6 +118,12 @@ script = ExtResource("1_p2gj0")
 position = Vector2(0, -32)
 sprite_frames = SubResource("SpriteFrames_buiih")
 autoplay = "default"
+
+[node name="EnterAnimation" type="AnimatedSprite2D" parent="."]
+position = Vector2(-2.38419e-07, -7)
+scale = Vector2(1.3, 1.3)
+sprite_frames = SubResource("SpriteFrames_vnioy")
+frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -9)

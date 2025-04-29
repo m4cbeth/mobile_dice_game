@@ -48,7 +48,7 @@ script = ExtResource("2_iwjdk")
 [node name="CardManager" type="Node2D" parent="."]
 script = ExtResource("2_86uwx")
 
-[node name="Node2D(Card(new))" parent="CardManager" instance=ExtResource("5_uvlxg")]
+[node name="DiceDeck" parent="CardManager" instance=ExtResource("5_uvlxg")]
 position = Vector2(-1, 217)
 
 [node name="CardDropSound" type="AudioStreamPlayer2D" parent="."]

@@ -1,5 +1,6 @@
 extends CharacterBody2D
 var fake_floor := 295
+var is_falling: bool
 #
 #const SPEED = 120
 #const dir = Vector2.LEFT

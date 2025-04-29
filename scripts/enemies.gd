@@ -13,7 +13,11 @@ func spawn_slime():
 	num_of_slime += 1
 	if num_of_slime > 5: return
 	var new_slime = slime_scene.instantiate()
+	var EnterAnimation = new_slime.get_child(1)
+	EnterAnimation.play()
+	#print (EnterAnimation)
 	new_slime.fake_floor = randi_range(TOP_OF_FIELD, BOT_OF_FIELD)
+	new_slime.is_falling = true
 	var enemey_x = randi_range(ENEMEY_X_DROP_LEFT, ENEMEY_X_DROP_RIGHT)
 	new_slime.position = Vector2(enemey_x, DROP_HEIGHT)
 	self.add_child(new_slime)
