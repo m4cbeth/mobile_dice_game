@@ -28,7 +28,7 @@ func update(delta):
 	if avoiding keep avoiding, remove delta from timer
 	"""
 func physics_update(delta):
-	dice_coords = get_tree().root.get_children()[0].find_child("DiceDeck").position
+	dice_coords = get_tree().root.get_children()[0].find_child("DiceDeck").global_position
 	print(dice_coords)
 		
 	if entity.is_falling:

@@ -49,7 +49,7 @@ script = ExtResource("2_iwjdk")
 script = ExtResource("2_86uwx")
 
 [node name="DiceDeck" parent="CardManager" instance=ExtResource("5_uvlxg")]
-position = Vector2(-1, 217)
+position = Vector2(47, 271)
 
 [node name="CardDropSound" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(186, 113)
