@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://uixldpwro6i8" path="res://assets/backgrounds/pixelField.png" id="1_y0iof"]
 [ext_resource type="Script" uid="uid://bflst71urcn21" path="res://scripts/CardManager.gd" id="2_86uwx"]
 [ext_resource type="Script" uid="uid://dwkbp3is8tles" path="res://scenes/Camera2D.gd" id="2_iwjdk"]
-[ext_resource type="PackedScene" uid="uid://bgsw3bjf5we3n" path="res://scenes/node_2d(card(new)).tscn" id="5_uvlxg"]
+[ext_resource type="PackedScene" uid="uid://dks7yhc2ba12p" path="res://scenes/DiceDeck.tscn" id="5_6mh84"]
 [ext_resource type="AudioStream" uid="uid://dbw14rt6j53hq" path="res://assets/music/Sketchbook 2024-10-13.ogg" id="6_427xc"]
 [ext_resource type="Texture2D" uid="uid://h2o1qvha5lmw" path="res://assets/sprites/invoke_button.png" id="6_vu0qa"]
 [ext_resource type="AudioStream" uid="uid://dko64tga8m4vu" path="res://assets/sounds/FUI Holographic Button Press-1.wav" id="7_45i77"]
@@ -49,8 +49,8 @@ script = ExtResource("2_iwjdk")
 [node name="CardManager" type="Node2D" parent="."]
 script = ExtResource("2_86uwx")
 
-[node name="DiceDeck" parent="CardManager" instance=ExtResource("5_uvlxg")]
-position = Vector2(47, 271)
+[node name="DiceDeck" parent="CardManager" instance=ExtResource("5_6mh84")]
+position = Vector2(40, 274)
 
 [node name="CardDropSound" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(186, 113)
