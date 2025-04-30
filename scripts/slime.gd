@@ -1,6 +1,7 @@
 extends CharacterBody2D
 var fake_floor := 295
 var is_falling: bool
+var entity_type = "Slime"
 #
 #const SPEED = 120
 #const dir = Vector2.LEFT

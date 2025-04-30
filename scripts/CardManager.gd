@@ -44,8 +44,8 @@ func _input(event):
 
 func start_drag(card):
 	card_return_position = card.position
-	most_recent_z_index += 1
-	card.z_index = most_recent_z_index
+	#most_recent_z_index += 1
+	#card.z_index = most_recent_z_index
 	card_being_dragged = card
 	card.scale = Vector2(1,1)
 

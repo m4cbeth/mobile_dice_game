@@ -65,6 +65,7 @@ script = ExtResource("1_traw1")
 
 [node name="ClippingMask" type="Sprite2D" parent="."]
 clip_children = 1
+z_index = -1
 position = Vector2(-0.5, 7.6604)
 scale = Vector2(0.0439453, 0.0464328)
 texture = ExtResource("2_hwrex")

@@ -1,10 +1,10 @@
 extends State
 class_name Walk
 
-#var direction: Vector2
 var target_vector: Vector2
+var direction: Vector2
 var avoiding: bool
-var avoid_timer: float
+var avoid_timer := 1.0
 var avoid_duration: float
 const DICE_COORDS = Vector2(41, 303)
 var dice_coords := DICE_COORDS
@@ -24,12 +24,16 @@ func enter():
 	pass
 
 func update(delta):
-	"""
-	if avoiding keep avoiding, remove delta from timer
-	"""
+	if avoiding:
+		avoid_timer -= delta
+		if avoid_timer < 0:
+			avoiding = false
 func physics_update(delta):
+	if avoiding:
+		entity.move_and_collide(direction)
+	
+	# Get dice coords on every frame
 	dice_coords = get_tree().root.get_children()[0].find_child("DiceDeck").global_position
-	print(dice_coords)
 		
 	if entity.is_falling:
 		entity.velocity.x = 0 # do I need this line?
@@ -43,10 +47,15 @@ func physics_update(delta):
 	else:
 		if entity:
 			var target_coords = dice_coords
-			var direction = target_coords - entity.global_position
+			direction = target_coords - entity.global_position
 			var dir_vect = direction.normalized()
 			entity.get_child(0).flip_h = entity.velocity.x > 0 # reverse is true for protagonist sprites
-			entity.move_and_collide(dir_vect)
+			var collision = entity.move_and_collide(dir_vect)
+			if collision:
+				if collision.get_collider() is not StaticBody2D:
+					if collision.get_collider().is_in_group('slimes'):
+						avoiding = true
+						direction = (Vector2.UP if randi() % 2 == 0 else Vector2.DOWN)
 
 
 

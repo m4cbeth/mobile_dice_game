@@ -32,6 +32,7 @@ stream = ExtResource("6_427xc")
 environment = SubResource("Environment_0k00j")
 
 [node name="PixelFieldBackground" type="Sprite2D" parent="."]
+z_index = -2
 position = Vector2(312, 166)
 scale = Vector2(1.47306, 1.47306)
 texture = ExtResource("1_y0iof")
