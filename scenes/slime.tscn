@@ -1,10 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://cg3uapk2i3dy7"]
+[gd_scene load_steps=21 format=3 uid="uid://cg3uapk2i3dy7"]
 
 [ext_resource type="Texture2D" uid="uid://dsvagi3rep0qk" path="res://assets/sprites/enemies/Green_Slime-Idle.png" id="1_371uh"]
 [ext_resource type="Script" uid="uid://dnqov7hyx0rxd" path="res://scripts/slime.gd" id="1_p2gj0"]
 [ext_resource type="Texture2D" uid="uid://ckamcf31wbhiv" path="res://assets/sprites/Blue Effect Bullet Impact Explosion 32x32.png" id="2_2npkn"]
 [ext_resource type="Script" uid="uid://vtrrxjocmn18" path="res://scripts/state/state_machine.gd" id="3_n6pvg"]
 [ext_resource type="Script" uid="uid://d0vin3tgf07sw" path="res://scripts/state/state_walk.gd" id="4_pjw23"]
+[ext_resource type="AudioStream" uid="uid://bn8h2b662kmlp" path="res://assets/sounds/HIT_SHORT_04.wav" id="6_fd6lc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_82ybk"]
 atlas = ExtResource("1_371uh")
@@ -136,3 +137,8 @@ initial_state = NodePath("Walk")
 [node name="Walk" type="Node" parent="StateMachine"]
 script = ExtResource("4_pjw23")
 metadata/_custom_type_script = "uid://d0vin3tgf07sw"
+
+[node name="LandSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_fd6lc")
+volume_db = -11.318
+pitch_scale = 0.65

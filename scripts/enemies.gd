@@ -15,7 +15,6 @@ func spawn_slime():
 	var new_slime = slime_scene.instantiate()
 	var EnterAnimation = new_slime.get_child(1)
 	EnterAnimation.play()
-	#print (EnterAnimation)
 	new_slime.fake_floor = randi_range(TOP_OF_FIELD, BOT_OF_FIELD)
 	new_slime.is_falling = true
 	var enemey_x = randi_range(ENEMEY_X_DROP_LEFT, ENEMEY_X_DROP_RIGHT)

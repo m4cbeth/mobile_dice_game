@@ -1,31 +1,31 @@
-[gd_scene load_steps=13 format=3 uid="uid://bgsw3bjf5we3n"]
+[gd_scene load_steps=13 format=3 uid="uid://wtn873cd3tdu"]
 
-[ext_resource type="Script" uid="uid://d2f7uywqo8ogs" path="res://scripts/DiceDeck.gd" id="1_traw1"]
-[ext_resource type="Texture2D" uid="uid://c4kwfgfcu4pby" path="res://assets/cards/CardTemplate.png" id="2_hwrex"]
-[ext_resource type="Texture2D" uid="uid://b0js7yvssexwl" path="res://assets/sprites/six sided die.png" id="3_traw1"]
+[ext_resource type="Script" uid="uid://d2f7uywqo8ogs" path="res://scripts/DiceDeck.gd" id="1_hobko"]
+[ext_resource type="Texture2D" uid="uid://c4kwfgfcu4pby" path="res://assets/cards/CardTemplate.png" id="2_fxxpg"]
+[ext_resource type="Texture2D" uid="uid://b0js7yvssexwl" path="res://assets/sprites/six sided die.png" id="3_i000b"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5xtmt"]
-atlas = ExtResource("3_traw1")
+atlas = ExtResource("3_i000b")
 region = Rect2(0, 96, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kwufd"]
-atlas = ExtResource("3_traw1")
+atlas = ExtResource("3_i000b")
 region = Rect2(16, 96, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x8n3b"]
-atlas = ExtResource("3_traw1")
+atlas = ExtResource("3_i000b")
 region = Rect2(32, 96, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m4tsb"]
-atlas = ExtResource("3_traw1")
+atlas = ExtResource("3_i000b")
 region = Rect2(48, 96, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lx6qa"]
-atlas = ExtResource("3_traw1")
+atlas = ExtResource("3_i000b")
 region = Rect2(64, 96, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gutvg"]
-atlas = ExtResource("3_traw1")
+atlas = ExtResource("3_i000b")
 region = Rect2(80, 96, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xu1gf"]
@@ -61,24 +61,24 @@ size = Vector2(44.5, 71)
 size = Vector2(27, 24)
 
 [node name="DiceDeck" type="Node2D"]
-script = ExtResource("1_traw1")
+script = ExtResource("1_hobko")
 
 [node name="ClippingMask" type="Sprite2D" parent="."]
 clip_children = 1
 position = Vector2(-0.5, 7.6604)
 scale = Vector2(0.0439453, 0.0464328)
-texture = ExtResource("2_hwrex")
+texture = ExtResource("2_fxxpg")
 
 [node name="CardTemplate" type="Sprite2D" parent="ClippingMask"]
 position = Vector2(0, -0.00012207)
 scale = Vector2(1.14151, 1.08036)
-texture = ExtResource("2_hwrex")
+texture = ExtResource("2_fxxpg")
 
 [node name="Dice" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(33.5, 61.5)
 scale = Vector2(1.0625, 1.0625)
-texture = ExtResource("3_traw1")
+texture = ExtResource("3_i000b")
 hframes = 6
 vframes = 15
 frame = 6
