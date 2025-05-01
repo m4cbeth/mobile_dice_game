@@ -33,7 +33,7 @@ func physics_update(delta):
 		entity.move_and_collide(direction)
 	
 	# Get dice coords on every frame
-	dice_coords = get_tree().root.get_children()[0].find_child("DiceDeck").global_position
+	dice_coords = get_dice_coords()
 		
 	if entity.is_falling:
 		entity.velocity.x = 0 # do I need this line?
@@ -56,17 +56,23 @@ func physics_update(delta):
 					if collision.get_collider().is_in_group('slimes'):
 						avoiding = true
 						direction = (Vector2.UP if randi() % 2 == 0 else Vector2.DOWN)
+					else:
+						print(collision.get_collider())
 
 
-
+func get_dice_coords():
+	return get_tree().root.get_node("CardGame").find_child("DiceDeck").global_position
+func get_slimes():
+	return get_tree().get_nodes_in_group("slimes")
 
 func get_target_coords():
 	if entity.is_in_group("slimes"):
-		return DICE_COORDS
+		return get_dice_coords()
 	if entity.is_in_group("knights"):
-		var slimes = get_tree().get_nodes_in_group("slimes")
+		var slimes = get_slimes()
 		if slimes.size() > 0:
 			return find_closest(slimes).position
+	return get_dice_coords()
 
 func find_closest(nodes: Array[Node2D]) -> Node2D:
 	var closest_distance = INF
@@ -77,6 +83,8 @@ func find_closest(nodes: Array[Node2D]) -> Node2D:
 			closest_distance = distance
 			closest_node = node
 	return closest_node
+
+
 
 """
 Walk

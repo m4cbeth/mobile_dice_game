@@ -1,7 +1,5 @@
 extends Node2D
 
-func p(x):
-	print(x)
 
 @onready var mob_scene = preload("res://scenes/Mob.tscn")
 
@@ -17,15 +15,25 @@ func _on_button_button_down() -> void:
 				"CardBackground":
 					card_back = child
 		if card_back:
-			print('Card Back found')
 			destroy_card(card)
 		
-				
+
+
+func summon_sprite(node):
+	"""
+	add to group
+	state is already walking (is that true?)
+	sprite.falling = true
+	
+	"""
+
+
 
 func destroy_card(card):
 	var destruction_animation
 	var burning_animation
 	var card_back
+	var fire_sound: AudioStreamPlayer
 	for child in card.get_children():
 			match child.name:
 				"Destruction":
@@ -34,8 +42,19 @@ func destroy_card(card):
 					burning_animation = child
 				"CardBackground":
 					card_back = child
+				"FireWhoosh":
+					fire_sound = child
+				"Area2D":
+					child.queue_free()
+				"CardBody":
+					child.queue_free()
 	destruction_animation.play()
+	fire_sound.play()
 	await get_tree().create_timer(0.5).timeout
 	burning_animation.play()
-	print(card_back)
 	destruction_animation.animation_finished.connect(func(): card_back.queue_free())
+	
+	#func after_desctruction():
+		# card_back.queue_free()
+		# card var falling
+		# card state walking

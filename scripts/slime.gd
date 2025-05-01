@@ -1,7 +1,8 @@
 extends CharacterBody2D
 var fake_floor := 295
+var health = 4
 var is_falling: bool
-var entity_type = "Slime"
+#var entity_type = "Slime" # don't do this, use .add_to_group and .is_in_group
 #
 #const SPEED = 120
 #const dir = Vector2.LEFT

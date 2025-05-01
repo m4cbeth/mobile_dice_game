@@ -15,7 +15,6 @@ func spawn_slime():
 	if num_of_slime > MAX_SLIMES: return
 	var new_slime = slime_scene.instantiate()
 	new_slime.add_to_group('slimes')
-	print(new_slime)
 	var EnterAnimation = new_slime.get_child(1)
 	EnterAnimation.play()
 	new_slime.fake_floor = randi_range(TOP_OF_FIELD, BOT_OF_FIELD)
@@ -24,7 +23,9 @@ func spawn_slime():
 	new_slime.position = Vector2(enemey_x, DROP_HEIGHT)
 	self.add_child(new_slime)
 	
-	$Timer.wait_time -= 0.05 * num_of_slime
+	if $Timer.wait_time > 1:
+		$Timer.wait_time -= 0.001 * num_of_slime
+
 # TIMER NODE attached to Enemines node
 func _on_timer_timeout() -> void:
 	spawn_slime()

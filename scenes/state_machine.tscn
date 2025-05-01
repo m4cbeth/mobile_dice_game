@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnhvveuy1obyo"]
+
+[ext_resource type="Script" uid="uid://vtrrxjocmn18" path="res://scripts/state/state_machine.gd" id="1_6rk0d"]
+[ext_resource type="Script" uid="uid://d0vin3tgf07sw" path="res://scripts/state/state_walk.gd" id="2_7f3de"]
+
+[node name="StateMachine" type="Node" node_paths=PackedStringArray("initial_state")]
+script = ExtResource("1_6rk0d")
+initial_state = NodePath("Walk")
+
+[node name="Walk" type="Node" parent="."]
+script = ExtResource("2_7f3de")
+metadata/_custom_type_script = "uid://d0vin3tgf07sw"
