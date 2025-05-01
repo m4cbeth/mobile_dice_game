@@ -31,6 +31,7 @@ func destroy_card(card):
 	var fire_sound: AudioStreamPlayer
 	
 	for child in card.get_children():
+			print(child)
 			match child.name:
 				"Destruction":
 					destruction_animation = child
@@ -55,9 +56,9 @@ func destroy_card(card):
 
 
 func summon_sprite(knight: CharacterBody2D):
-	knight.add_to_group("knights")
+	knight.add_to_group(Groups.knights)
 	knight.is_falling = true
-	knight.get_node("StateMachine").transition_to("Walk")
+	knight.find_child("StateMachine").transition_to("Walk")
 	"""
 	add to group
 	state is already walking (is that true?)

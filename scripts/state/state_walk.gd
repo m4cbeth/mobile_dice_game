@@ -24,7 +24,6 @@ func enter():
 	pass
 
 func update(delta):
-	print('thehe')
 	if avoiding:
 		avoid_timer -= delta
 		if avoid_timer < 0:
