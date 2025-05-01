@@ -1,4 +1,6 @@
 extends CharacterBody2D
+class_name Mob
+
 var health = 8
 var fake_floor := 300
 var is_falling: bool

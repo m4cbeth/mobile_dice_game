@@ -2,13 +2,13 @@ extends Node2D
 
 const slime_scene = preload("res://scenes/slime.tscn")
 
-var num_of_slime: int
+var num_of_slime = 0
 const TOP_OF_FIELD = 263
 const BOT_OF_FIELD = 324
 const ENEMEY_X_DROP_LEFT = 490
 const ENEMEY_X_DROP_RIGHT = 585
 const DROP_HEIGHT = 150
-const MAX_SLIMES = 10
+const MAX_SLIMES = 0
 
 func spawn_slime():
 	num_of_slime += 1
@@ -28,6 +28,7 @@ func spawn_slime():
 
 # TIMER NODE attached to Enemines node
 func _on_timer_timeout() -> void:
-	spawn_slime()
+	if num_of_slime < MAX_SLIMES:
+		spawn_slime()
 	
 	

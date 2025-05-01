@@ -28,7 +28,7 @@ func _physics_process(delta: float) -> void:
 		current_state.physics_update(delta)
 
 func transition_to(state_name: String, params: Dictionary = {}):
-	if state_name != current_state.name:
+	if current_state == null or state_name != current_state.name:
 		return
 	
 	var new_state = states.get(state_name)

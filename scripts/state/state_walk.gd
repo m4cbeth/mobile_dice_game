@@ -16,7 +16,7 @@ var fall_velocity = 0.0
 const GRAVITY = 980 * .7
 
 var fake_floor: int
-@export var speed := 12.0 # disagree, get based on type (knights faster than slimes)
+@export var speed := 12.0 # disagree w export, get based on type (knights faster than slimes)
 
 
 func enter():
@@ -24,6 +24,7 @@ func enter():
 	pass
 
 func update(delta):
+	print('thehe')
 	if avoiding:
 		avoid_timer -= delta
 		if avoid_timer < 0:
@@ -56,8 +57,8 @@ func physics_update(delta):
 					if collision.get_collider().is_in_group('slimes'):
 						avoiding = true
 						direction = (Vector2.UP if randi() % 2 == 0 else Vector2.DOWN)
-					else:
-						print(collision.get_collider())
+					#else:
+						#print(collision.get_collider())
 
 
 func get_dice_coords():
