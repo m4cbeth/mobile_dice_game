@@ -1,18 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://dnpqvg2wo1tj6"]
+[gd_scene load_steps=5 format=3 uid="uid://dnpqvg2wo1tj6"]
 
 [ext_resource type="Texture2D" uid="uid://djm0dsf3jhe5g" path="res://assets/sprites/arcane-techno-glyph.png" id="1_m6ryv"]
 [ext_resource type="Script" uid="uid://b0mcf3ly1w6kk" path="res://scripts/drop_area.gd" id="2_8eqmr"]
+[ext_resource type="Script" uid="uid://bah4chxwm01sq" path="res://scripts/glyph.gd" id="2_fgeon"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8eqmr"]
 radius = 11.1803
 
 [node name="CardDropArea" type="Node2D"]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.5, 0.5, 0.5, 1)
+[node name="Glyph" type="Sprite2D" parent="."]
+modulate = Color(0.8, 0.8, 0.8, 1)
 position = Vector2(106.5, 71)
 scale = Vector2(0.136719, 0.136719)
 texture = ExtResource("1_m6ryv")
+script = ExtResource("2_fgeon")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2

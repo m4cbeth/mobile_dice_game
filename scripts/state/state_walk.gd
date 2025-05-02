@@ -1,6 +1,7 @@
 extends State
 class_name Walk
 
+const AnimatedSprite = "AnimatedSprite2D"
 var target_vector: Vector2
 var direction: Vector2
 var avoiding: bool
@@ -10,7 +11,11 @@ const DICE_COORDS = Vector2(41, 303)
 var dice_coords := DICE_COORDS
 var fall_velocity = 0.0
 var speed_modifier: float
-
+const speed_modifiers = {
+	"slimes": 1.0,
+	"knights": 0.5,
+	"whatever'snext": 2
+}
 
 const GRAVITY = 980 * .7
 
@@ -19,9 +24,13 @@ var fake_floor: int
 
 
 func enter():
+	print(owner)
 	speed_modifier = 1.0 if get_parent().is_in_group(Groups.slimes) else 0.5
 	pass
-
+	
+func exit():
+	pass
+	
 func update(delta):
 	if avoiding:
 		avoid_timer -= delta
@@ -45,25 +54,20 @@ func physics_update(delta):
 				entity.is_falling = false
 	else:
 		if entity:
-			var target_coords = dice_coords
+			var target_coords = get_target_coords()
 			direction = target_coords - entity.global_position
-			var dir_vect = direction.normalized() * speed_modifier
-			entity.get_child(0).flip_h = entity.velocity.x > 0 # reverse is true for protagonist sprites
-			entity.get_child(0).flip_h = entity.velocity.x < 0 # reverse is true for protagonist sprites
-			var collision = entity.move_and_collide(dir_vect)
+			var velocity = direction.normalized() * speed_modifier
+			entity.velocity = velocity
+			flip_body(entity)
+			var collision = entity.move_and_collide(velocity)
 			if collision:
-				if collision.get_collider() is not StaticBody2D:
-					if collision.get_collider().is_in_group('slimes'):
+				var collider = collision.get_collider()
+				if collider is not StaticBody2D:
+					if collider.is_in_group('slimes'):
 						avoiding = true
 						direction = (Vector2.UP if randi() % 2 == 0 else Vector2.DOWN)
 					#else:
 						#print(collision.get_collider())
-
-
-func get_dice_coords():
-	return get_tree().root.get_node("CardGame").find_child("DiceDeck").global_position
-func get_slimes():
-	return get_tree().get_nodes_in_group("slimes")
 
 func get_target_coords():
 	if entity.is_in_group("slimes"):
@@ -73,6 +77,12 @@ func get_target_coords():
 		if slimes.size() > 0:
 			return find_closest(slimes).position
 	return get_dice_coords()
+
+func get_dice_coords():
+	return get_tree().root.get_node("CardGame").find_child("DiceDeck").global_position
+
+func get_slimes():
+	return get_tree().get_nodes_in_group("slimes")
 
 func find_closest(nodes: Array[Node2D]) -> Node2D:
 	var closest_distance = INF
@@ -84,20 +94,20 @@ func find_closest(nodes: Array[Node2D]) -> Node2D:
 			closest_node = node
 	return closest_node
 
+func flip_body(entity: CharacterBody2D):
+	if entity.is_in_group(Groups.good_guys):
+		if entity.velocity.x < 0:
+			entity.find_child("AnimatedSprite2D").flip_h = true
+		else:
+			entity.find_child("AnimatedSprite2D").flip_h = false
+	else:
+		if entity.velocity.x > 0:
+			entity.find_child("AnimatedSprite2D").flip_h = true
+		else:
+			entity.find_child("AnimatedSprite2D").flip_h = false
+
 
 
 """
-Walk
-aim at target, walk
-if collision
-	stop
-	match collision
-	if sameguy
-		go up/down randi() % 2 == 0
-		for two seconds
-	if guy is bad 
-		send damage(guy, amount I damage)
-	
+if hit, trans_to(groups.damage, damage_amount)
 """
-func exit():
-	pass
