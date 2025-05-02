@@ -8,11 +8,10 @@ var avoid_timer := 1.0
 var avoid_duration: float
 const DICE_COORDS = Vector2(41, 303)
 var dice_coords := DICE_COORDS
-
-
-const SPEED = 12
-
 var fall_velocity = 0.0
+var speed_modifier: float
+
+
 const GRAVITY = 980 * .7
 
 var fake_floor: int
@@ -20,7 +19,7 @@ var fake_floor: int
 
 
 func enter():
-	
+	speed_modifier = 1.0 if get_parent().is_in_group(Groups.slimes) else 0.5
 	pass
 
 func update(delta):
@@ -48,8 +47,9 @@ func physics_update(delta):
 		if entity:
 			var target_coords = dice_coords
 			direction = target_coords - entity.global_position
-			var dir_vect = direction.normalized()
+			var dir_vect = direction.normalized() * speed_modifier
 			entity.get_child(0).flip_h = entity.velocity.x > 0 # reverse is true for protagonist sprites
+			entity.get_child(0).flip_h = entity.velocity.x < 0 # reverse is true for protagonist sprites
 			var collision = entity.move_and_collide(dir_vect)
 			if collision:
 				if collision.get_collider() is not StaticBody2D:

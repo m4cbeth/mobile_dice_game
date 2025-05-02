@@ -8,9 +8,9 @@ func enter():
 	pass
 func exit():
 	pass
-func update(delta):
+func update(_delta):
 	pass
-func physics_Update(delta):
+func physics_Update(_delta):
 	pass
 func transition_to(state_name: String, params: Dictionary = {}) -> void:
 	state_machine.transition_to(state_name, params)

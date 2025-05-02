@@ -10,7 +10,7 @@ func _ready():
 	glow = $"../Sprite2D2"
 	blue_overlay = $"../Sprite2D3"
 
-func _on_area_entered(area: Area2D) -> void:
+func _on_area_entered(_area: Area2D) -> void:
 	glow.visible = true
 	card_count_on_stack = card_count_on_stack + 1
 	if card_count_on_stack > 1:
@@ -20,7 +20,7 @@ func _on_area_entered(area: Area2D) -> void:
 	
 
 
-func _on_area_exited(area: Area2D) -> void:
+func _on_area_exited(_area: Area2D) -> void:
 	card_count_on_stack = card_count_on_stack - 1
 	if card_count_on_stack < 2:
 		$"../Sprite2D4".visible = false

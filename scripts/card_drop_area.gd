@@ -9,18 +9,12 @@ func _on_button_button_down() -> void:
 	for area in $Area2D.get_overlapping_areas():
 		var card = area.get_parent()
 		var card_back
-		var knight
-		
 		for child in card.get_children():
 			match child.name:
 				"CardBackground":
 					card_back = child
-				"Knight":
-					knight = child
 		if card_back:
 			destroy_card(card)
-		
-
 
 
 func destroy_card(card):
@@ -29,9 +23,9 @@ func destroy_card(card):
 	var card_back: Node
 	var sprite: CharacterBody2D
 	var fire_sound: AudioStreamPlayer
+	var card_children = card.get_children()
 	
-	for child in card.get_children():
-			print(child)
+	for child in card_children:
 			match child.name:
 				"Destruction":
 					destruction_animation = child
@@ -57,11 +51,6 @@ func destroy_card(card):
 
 func summon_sprite(knight: CharacterBody2D):
 	knight.add_to_group(Groups.knights)
+	knight.add_to_group(Groups.good_guys)
 	knight.is_falling = true
 	knight.find_child("StateMachine").transition_to("Walk")
-	"""
-	add to group
-	state is already walking (is that true?)
-	sprite.falling = true
-	
-	"""

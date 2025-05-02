@@ -6,8 +6,8 @@ var health = 10
 var event_counts = {}
 
 
-func has_flag(name):
-	return flags.get(name, false)
+func has_flag(flag_name):
+	return flags.get(flag_name, false)
 
-func set_flag(name, value = true):
-	flags[name] = value
+func set_flag(flag_name, value = true):
+	flags[flag_name] = value

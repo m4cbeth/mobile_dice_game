@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://d278by0648fb0"]
+[gd_scene load_steps=28 format=3 uid="uid://d278by0648fb0"]
 
 [ext_resource type="Script" uid="uid://c5tofklnx4lvb" path="res://scripts/card.gd" id="1_n5vys"]
 [ext_resource type="Texture2D" uid="uid://c4kwfgfcu4pby" path="res://assets/cards/CardTemplate.png" id="1_scsis"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dfjvb57ts7pkm" path="res://scenes/burning_animation.tscn" id="5_sy11y"]
 [ext_resource type="Script" uid="uid://d0vin3tgf07sw" path="res://scripts/state/state_walk.gd" id="6_1yd6c"]
 [ext_resource type="AudioStream" uid="uid://bxfcqdn75gy47" path="res://assets/sounds/WHOOSH_Firesworn.wav" id="6_6ligt"]
+[ext_resource type="Script" uid="uid://dor0i5y5k10ru" path="res://scripts/state/state_idle.gd" id="7_we8pq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sy11y"]
 atlas = ExtResource("4_kg30u")
@@ -159,15 +160,18 @@ animation = &"death"
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Knight"]
 polygon = PackedVector2Array(-2, 1, 2, 1, 4, -1, 13, -1, 15, -5, 4, -5, 2, -7, -5, -7, -7, -3, -5, 1, -2, 1)
 
-[node name="StateMachine" type="Node" parent="Knight"]
+[node name="StateMachine" type="Node" parent="Knight" node_paths=PackedStringArray("initial_state")]
 script = ExtResource("4_8w5pg")
+initial_state = NodePath("Idle")
 metadata/_custom_type_script = "uid://vtrrxjocmn18"
 
 [node name="Walk" type="Node" parent="Knight/StateMachine"]
 script = ExtResource("6_1yd6c")
 metadata/_custom_type_script = "uid://d0vin3tgf07sw"
 
-[node name="Node" type="Node" parent="Knight/StateMachine"]
+[node name="Idle" type="Node" parent="Knight/StateMachine"]
+script = ExtResource("7_we8pq")
+metadata/_custom_type_script = "uid://dor0i5y5k10ru"
 
 [node name="Burning" parent="." instance=ExtResource("5_sy11y")]
 z_index = 0

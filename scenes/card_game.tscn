@@ -268,4 +268,3 @@ texture = SubResource("AtlasTexture_6mh84")
 stretch_mode = 2
 
 [connection signal="button_down" from="InvokeButton/Button" to="CardDropArea" method="_on_button_button_down"]
-[connection signal="button_down" from="InvokeButton/Button" to="PlayerHand" method="_on_button_button_down"]

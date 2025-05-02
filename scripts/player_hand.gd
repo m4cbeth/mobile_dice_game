@@ -44,7 +44,6 @@ func animate_card_to_position(card, new_position):
 	tween.tween_property(card, "position", new_position, DEAL_SPEED)
 
 func calculate_card_position(index):
-	var count = player_hand.size()
 	var total_width = (player_hand.size() - 1) * CARD_WIDTH
 	var x_offset = center_screen_x + index * CARD_WIDTH - total_width / 2.0 - CARD_OVERLAP * index
 	return x_offset
