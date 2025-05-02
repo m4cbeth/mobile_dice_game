@@ -24,7 +24,7 @@ var fake_floor: int
 
 
 func enter():
-	print(owner)
+	print(entity.mob_type)
 	speed_modifier = 1.0 if get_parent().is_in_group(Groups.slimes) else 0.5
 	pass
 	
@@ -84,7 +84,7 @@ func get_dice_coords():
 func get_slimes():
 	return get_tree().get_nodes_in_group("slimes")
 
-func find_closest(nodes: Array[Node2D]) -> Node2D:
+func find_closest(nodes: Array):
 	var closest_distance = INF
 	var closest_node = null
 	for node in nodes:
