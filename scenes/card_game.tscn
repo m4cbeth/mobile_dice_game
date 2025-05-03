@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://d1ti5odadd840"]
+[gd_scene load_steps=16 format=3 uid="uid://d1ti5odadd840"]
 
 [ext_resource type="Texture2D" uid="uid://uixldpwro6i8" path="res://assets/backgrounds/pixelField.png" id="1_y0iof"]
 [ext_resource type="Script" uid="uid://bflst71urcn21" path="res://scripts/CardManager.gd" id="2_86uwx"]
 [ext_resource type="Script" uid="uid://dwkbp3is8tles" path="res://scenes/Camera2D.gd" id="2_iwjdk"]
+[ext_resource type="Texture2D" uid="uid://bsvghgl8o2lyl" path="res://assets/backgrounds/background2.webp" id="2_s2308"]
 [ext_resource type="PackedScene" uid="uid://dks7yhc2ba12p" path="res://scenes/DiceDeck.tscn" id="5_6mh84"]
 [ext_resource type="AudioStream" uid="uid://dbw14rt6j53hq" path="res://assets/music/Sketchbook 2024-10-13.ogg" id="6_427xc"]
 [ext_resource type="Texture2D" uid="uid://h2o1qvha5lmw" path="res://assets/sprites/invoke_button.png" id="6_vu0qa"]
@@ -37,7 +38,14 @@ volume_db = -9.369
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_0k00j")
 
+[node name="Background2" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(951, 474)
+scale = Vector2(1.30339, 1.19336)
+texture = ExtResource("2_s2308")
+
 [node name="PixelFieldBackground" type="Sprite2D" parent="."]
+visible = false
 z_index = -2
 position = Vector2(988.256, 583.379)
 scale = Vector2(4.4823, 4.4823)
@@ -52,7 +60,7 @@ script = ExtResource("2_iwjdk")
 script = ExtResource("2_86uwx")
 
 [node name="DiceDeck" parent="CardManager" instance=ExtResource("5_6mh84")]
-position = Vector2(168, 813)
+position = Vector2(162, 868)
 scale = Vector2(4, 4)
 
 [node name="CardDropSound" type="AudioStreamPlayer2D" parent="."]
@@ -63,16 +71,17 @@ stream = ExtResource("7_45i77")
 modulate = Color(1, 3.825, 4.918, 1)
 light_mask = 2
 visibility_layer = 2
-position = Vector2(510, 138)
+position = Vector2(531, 187)
 scale = Vector2(4, 4)
 script = ExtResource("8_82ybk")
 
 [node name="InvokeButton" type="Sprite2D" parent="."]
-position = Vector2(936, 110)
-scale = Vector2(0.25, 0.25)
+position = Vector2(954, 166)
+scale = Vector2(0.251953, 0.25)
 texture = ExtResource("6_vu0qa")
 
 [node name="Button" type="Button" parent="InvokeButton"]
+visible = false
 modulate = Color(1, 1, 1, 0)
 offset_left = -631.0
 offset_top = -184.0
@@ -91,30 +100,18 @@ position = Vector2(-5, 13)
 [node name="Control" type="Control" parent="UI"]
 layout_mode = 3
 anchors_preset = 0
+offset_left = 22.0
+offset_top = 11.0
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/Control"]
 layout_mode = 0
-offset_right = 72.0
+offset_right = 129.0
 offset_bottom = 17.0
+scale = Vector2(4, 4)
 
 [node name="TextureRect" type="TextureRect" parent="UI/Control/HBoxContainer"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_6mh84")
-stretch_mode = 2
-
-[node name="TextureRect5" type="TextureRect" parent="UI/Control/HBoxContainer"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_6mh84")
-stretch_mode = 2
-
-[node name="TextureRect6" type="TextureRect" parent="UI/Control/HBoxContainer"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_6mh84")
-stretch_mode = 2
-
-[node name="TextureRect7" type="TextureRect" parent="UI/Control/HBoxContainer"]
 layout_mode = 2
 texture = SubResource("AtlasTexture_6mh84")
 stretch_mode = 2
@@ -149,106 +146,6 @@ layout_mode = 2
 texture = SubResource("AtlasTexture_6mh84")
 stretch_mode = 2
 
-[node name="TextureRect14" type="TextureRect" parent="UI/Control/HBoxContainer"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_6mh84")
-stretch_mode = 2
-
-[node name="TextureRect15" type="TextureRect" parent="UI/Control/HBoxContainer"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_6mh84")
-stretch_mode = 2
-
-[node name="TextureRect16" type="TextureRect" parent="UI/Control/HBoxContainer"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_6mh84")
-stretch_mode = 2
-
-[node name="TextureRect17" type="TextureRect" parent="UI/Control/HBoxContainer"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_6mh84")
-stretch_mode = 2
-
-[node name="TextureRect18" type="TextureRect" parent="UI/Control/HBoxContainer"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_6mh84")
-stretch_mode = 2
-
-[node name="TextureRect19" type="TextureRect" parent="UI/Control/HBoxContainer"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_6mh84")
-stretch_mode = 2
-
-[node name="TextureRect20" type="TextureRect" parent="UI/Control/HBoxContainer"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_6mh84")
-stretch_mode = 2
-
-[node name="TextureRect21" type="TextureRect" parent="UI/Control/HBoxContainer"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_6mh84")
-stretch_mode = 2
-
-[node name="TextureRect22" type="TextureRect" parent="UI/Control/HBoxContainer"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_6mh84")
-stretch_mode = 2
-
-[node name="TextureRect23" type="TextureRect" parent="UI/Control/HBoxContainer"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_6mh84")
-stretch_mode = 2
-
-[node name="TextureRect24" type="TextureRect" parent="UI/Control/HBoxContainer"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_6mh84")
-stretch_mode = 2
-
-[node name="TextureRect25" type="TextureRect" parent="UI/Control/HBoxContainer"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_6mh84")
-stretch_mode = 2
-
-[node name="TextureRect26" type="TextureRect" parent="UI/Control/HBoxContainer"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_6mh84")
-stretch_mode = 2
-
-[node name="TextureRect27" type="TextureRect" parent="UI/Control/HBoxContainer"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_6mh84")
-stretch_mode = 2
-
-[node name="TextureRect28" type="TextureRect" parent="UI/Control/HBoxContainer"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_6mh84")
-stretch_mode = 2
-
-[node name="TextureRect29" type="TextureRect" parent="UI/Control/HBoxContainer"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_6mh84")
-stretch_mode = 2
-
-[node name="TextureRect30" type="TextureRect" parent="UI/Control/HBoxContainer"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_6mh84")
-stretch_mode = 2
-
-[node name="TextureRect31" type="TextureRect" parent="UI/Control/HBoxContainer"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_6mh84")
-stretch_mode = 2
-
-[node name="TextureRect32" type="TextureRect" parent="UI/Control/HBoxContainer"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_6mh84")
-stretch_mode = 2
-
-[node name="TextureRect33" type="TextureRect" parent="UI/Control/HBoxContainer"]
-layout_mode = 2
-texture = SubResource("AtlasTexture_6mh84")
-stretch_mode = 2
-
 [node name="TextureRect2" type="TextureRect" parent="UI/Control/HBoxContainer"]
 layout_mode = 2
 texture = SubResource("AtlasTexture_6mh84")
@@ -260,6 +157,21 @@ texture = SubResource("AtlasTexture_6mh84")
 stretch_mode = 2
 
 [node name="TextureRect4" type="TextureRect" parent="UI/Control/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_6mh84")
+stretch_mode = 2
+
+[node name="TextureRect5" type="TextureRect" parent="UI/Control/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_6mh84")
+stretch_mode = 2
+
+[node name="TextureRect6" type="TextureRect" parent="UI/Control/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_6mh84")
+stretch_mode = 2
+
+[node name="TextureRect7" type="TextureRect" parent="UI/Control/HBoxContainer"]
 layout_mode = 2
 texture = SubResource("AtlasTexture_6mh84")
 stretch_mode = 2

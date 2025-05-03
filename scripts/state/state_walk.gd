@@ -17,8 +17,8 @@ const speed_modifiers = {
 	"whateversnext": 2
 }
 var velocity
-const GRAVITY = 980 * .7
-const max_height_min_y = 230
+const GRAVITY = 980 #* .7
+const MAX_HEIGHT_MIN_Y = 745
 
 var fake_floor: int
 @export var speed := 12.0 # disagree w export, get based on type (knights faster than slimes)
@@ -55,8 +55,8 @@ func physics_update(delta):
 	else:
 		if entity:
 			target_coords = get_target_coords()
-			if target_coords.y <  max_height_min_y:
-				target_coords.y = max_height_min_y
+			if target_coords.y <  MAX_HEIGHT_MIN_Y:
+				target_coords.y = MAX_HEIGHT_MIN_Y
 			direction = target_coords - entity.global_position
 			velocity = direction.normalized() * speed_modifier
 			entity.velocity = velocity
@@ -70,8 +70,8 @@ func physics_update(delta):
 						direction = (Vector2.UP if randi() % 2 == 0 else Vector2.DOWN)
 					#else:
 						#print(collision.get_collider())
-	if entity.global_position.y < max_height_min_y:
-		entity.global_position.y = max_height_min_y
+	if entity.global_position.y < MAX_HEIGHT_MIN_Y and !entity.is_falling:
+		entity.global_position.y = MAX_HEIGHT_MIN_Y
 
 func get_target_coords():
 	if entity.is_in_group("slimes"):

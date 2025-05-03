@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://dfiyo16w3vyaa"]
+
+[ext_resource type="Script" uid="uid://b6podv2knbvop" path="res://scripts/knight_mob.gd" id="1_6eskw"]
+[ext_resource type="PackedScene" uid="uid://bhcgxuvur6jeq" path="res://scenes/KnightSpriteNode.tscn" id="2_7fdty"]
+[ext_resource type="Script" uid="uid://vtrrxjocmn18" path="res://scripts/state/state_machine.gd" id="3_m4dc5"]
+[ext_resource type="Script" uid="uid://d0vin3tgf07sw" path="res://scripts/state/state_walk.gd" id="4_wjd2n"]
+[ext_resource type="Script" uid="uid://dor0i5y5k10ru" path="res://scripts/state/state_idle.gd" id="5_724m8"]
+
+[node name="Knight" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_6eskw")
+
+[node name="AnimatedSprite2D" parent="." instance=ExtResource("2_7fdty")]
+position = Vector2(-2, -6)
+animation = &"death"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-2, 1, 2, 1, 4, -1, 13, -1, 15, -5, 4, -5, 2, -7, -5, -7, -7, -3, -5, 1, -2, 1)
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_m4dc5")
+initial_state = NodePath("Idle")
+metadata/_custom_type_script = "uid://vtrrxjocmn18"
+
+[node name="Walk" type="Node" parent="StateMachine"]
+script = ExtResource("4_wjd2n")
+metadata/_custom_type_script = "uid://d0vin3tgf07sw"
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("5_724m8")
+metadata/_custom_type_script = "uid://dor0i5y5k10ru"
+
+[editable path="AnimatedSprite2D"]
