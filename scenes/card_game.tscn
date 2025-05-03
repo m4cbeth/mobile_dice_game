@@ -45,14 +45,8 @@ scale = Vector2(1.47306, 1.47306)
 texture = ExtResource("1_y0iof")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(396, -134)
-offset = Vector2(1280, 0)
-anchor_mode = 0
-limit_left = 0
-limit_top = 0
-limit_right = 640
-limit_bottom = 360
-editor_draw_limits = true
+position = Vector2(960, 540)
+offset = Vector2(-8, -26)
 script = ExtResource("2_iwjdk")
 
 [node name="CardManager" type="Node2D" parent="."]
@@ -69,14 +63,13 @@ stream = ExtResource("7_45i77")
 modulate = Color(1, 3.825, 4.918, 1)
 light_mask = 2
 visibility_layer = 2
-position = Vector2(141, 32)
-scale = Vector2(1.5, 1.5)
+position = Vector2(148, 40)
+scale = Vector2(4, 4)
 script = ExtResource("8_82ybk")
 
 [node name="InvokeButton" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(301, 19)
-scale = Vector2(0.11418, 0.11418)
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("6_vu0qa")
 
 [node name="Button" type="Button" parent="InvokeButton"]

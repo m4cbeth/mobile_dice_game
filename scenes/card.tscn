@@ -131,7 +131,8 @@ animations = [{
 size = Vector2(46, 72)
 
 [node name="Card" type="Node2D"]
-position = Vector2(78, 66)
+position = Vector2(0, 2)
+scale = Vector2(4, 4)
 script = ExtResource("1_n5vys")
 
 [node name="CardBackground" type="Sprite2D" parent="."]
