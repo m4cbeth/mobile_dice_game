@@ -2,7 +2,7 @@ extends CharacterBody2D
 var fake_floor := 295
 var health = 4
 var is_falling: bool
-const mob_type = "slimes"
+const mob_type = Groups.slimes
 #var entity_type = "Slime" # don't do this, use .add_to_group and .is_in_group
 #
 #const SPEED = 120

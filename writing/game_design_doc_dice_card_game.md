@@ -13,3 +13,15 @@ Eventually a wizard or something comes:
 	to reinforce and protect? From something else coming?
 
 Maybe slimes die and animate into hearts?
+
+
+# Dialogue
+## Scene: Wizard Finally appears (after X slimes)
+"what the hell are you doing?!" dead slime corpses everywhere
+hearts fill the whole top of screen, and they're also piling up
+"what are you, collecting their hearts? You frickin' psycho! You're nuts!"
+
+But wait. That's a comedy thing. I thought I was going for a serious, psychological thriller
+the game is playing you, making you "hack" but by getting you to call commands and attack nodes.
+Like... I don't know. Maybe that's dumb. Maybe go with what's easier/more natural? Fucking around
+and trying to be funny?

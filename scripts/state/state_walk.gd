@@ -2,7 +2,7 @@ extends State
 class_name Walk
 
 const AnimatedSprite = "AnimatedSprite2D"
-var target_vector: Vector2
+var target_coords: Vector2
 var direction: Vector2
 var avoiding: bool
 var avoid_timer := 1.0
@@ -14,17 +14,17 @@ var speed_modifier: float
 const speed_modifiers = {
 	"slimes": 1.0,
 	"knights": 0.5,
-	"whatever'snext": 2
+	"whateversnext": 2
 }
-
+var velocity
 const GRAVITY = 980 * .7
+const max_height_min_y = 230
 
 var fake_floor: int
 @export var speed := 12.0 # disagree w export, get based on type (knights faster than slimes)
 
 
 func enter():
-	print(entity.mob_type)
 	speed_modifier = 1.0 if get_parent().is_in_group(Groups.slimes) else 0.5
 	pass
 	
@@ -54,9 +54,11 @@ func physics_update(delta):
 				entity.is_falling = false
 	else:
 		if entity:
-			var target_coords = get_target_coords()
+			target_coords = get_target_coords()
+			if target_coords.y <  max_height_min_y:
+				target_coords.y = max_height_min_y
 			direction = target_coords - entity.global_position
-			var velocity = direction.normalized() * speed_modifier
+			velocity = direction.normalized() * speed_modifier
 			entity.velocity = velocity
 			flip_body(entity)
 			var collision = entity.move_and_collide(velocity)
@@ -68,6 +70,8 @@ func physics_update(delta):
 						direction = (Vector2.UP if randi() % 2 == 0 else Vector2.DOWN)
 					#else:
 						#print(collision.get_collider())
+	if entity.global_position.y < max_height_min_y:
+		entity.global_position.y = max_height_min_y
 
 func get_target_coords():
 	if entity.is_in_group("slimes"):
@@ -75,7 +79,7 @@ func get_target_coords():
 	if entity.is_in_group("knights"):
 		var slimes = get_slimes()
 		if slimes.size() > 0:
-			return find_closest(slimes).position
+			return find_closest(slimes).position + Vector2(0, 40)
 	return get_dice_coords()
 
 func get_dice_coords():
