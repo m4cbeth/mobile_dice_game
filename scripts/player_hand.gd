@@ -2,13 +2,13 @@ extends Node2D
 
 const HAND_COUNT = 4
 const CARD_SCENE_PATH = "res://scenes/card.tscn"
-const HAND_Y_AXIS = 275
-const CARD_WIDTH = 45
-const center_screen_x = 330 + 10
+const HAND_Y_AXIS = 900
+const CARD_WIDTH = 177
+const center_screen_x = 1920 / 2
 const DEFAULT_POSITION = Vector2(1, 280)
-const CARD_OVERLAP = 25
-const DEAL_SPEED = .5 # better called "delay"
-const DEAL_DELAY = 0.1
+const CARD_OVERLAP = 75
+const DEAL_SPEED = .75 # better called "delay"
+const DEAL_DELAY = 0.2
 const ROTATION_AMOUNT = 15.0
 
 var player_hand = []

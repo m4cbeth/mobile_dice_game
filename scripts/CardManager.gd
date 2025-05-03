@@ -3,28 +3,30 @@ extends Node2D
 var card_being_dragged
 var drag_offset = Vector2.ZERO
 var screen_size
-var COLLISION_CARD_MASK = 1
-var HOVER_SCALE_AMOUNT = 1.14
-var HOVER_TWEEEN_SPEED = 0.2
 var is_hovering_on_card
 var most_recent_z_index
 var card_return_position
 
+const COLLISION_CARD_MASK = 1
+const HOVER_SCALE_AMOUNT = 4.5
+const DEFAULT_SCALE_AMOUNT = Vector2(4,4)
+const HOVER_TWEEEN_SPEED = 0.2
+const MAX_X = 1920
+const MAX_Y = 1080
+
+func clamp_mouse(mouse_pos: Vector2):
+	return Vector2(clamp(mouse_pos.x, 0, MAX_X), clamp(mouse_pos.y, 0, MAX_Y))
 
 # Called when the node enters the scene tree for the first times.
 func _ready():
 	screen_size = get_viewport_rect().size
 	most_recent_z_index = 5
 
-
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if card_being_dragged:
 		var mouse_pos = get_global_mouse_position() + drag_offset
-		card_being_dragged.global_position = Vector2(clamp(mouse_pos.x, 0, 640), clamp(mouse_pos.y, 0, 360))
-
-
+		card_being_dragged.global_position = clamp_mouse(mouse_pos)
 
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
@@ -47,7 +49,7 @@ func start_drag(card):
 	#most_recent_z_index += 1
 	#card.z_index = most_recent_z_index
 	card_being_dragged = card
-	card.scale = Vector2(1,1)
+	card.scale = DEFAULT_SCALE_AMOUNT
 
 func finish_drag():
 	card_being_dragged.scale = Vector2(HOVER_SCALE_AMOUNT, HOVER_SCALE_AMOUNT)
@@ -76,13 +78,11 @@ func on_hovered_off_card(card):
 	
 
 func highlight_card(card, hovered):
-	var target_scale = Vector2(HOVER_SCALE_AMOUNT, HOVER_SCALE_AMOUNT) if hovered else Vector2(1, 1)
+	var target_scale = Vector2(HOVER_SCALE_AMOUNT, HOVER_SCALE_AMOUNT) if hovered else DEFAULT_SCALE_AMOUNT
 	var target_z = 2 if hovered else 1
-
+	card.z_index = target_z
 	var tween = card.create_tween()
 	tween.tween_property(card, "scale", target_scale, HOVER_TWEEEN_SPEED).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-
-	card.z_index = target_z
 
 
 func raycast_check_for_card():

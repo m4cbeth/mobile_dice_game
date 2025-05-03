@@ -38,10 +38,9 @@ volume_db = -9.369
 environment = SubResource("Environment_0k00j")
 
 [node name="PixelFieldBackground" type="Sprite2D" parent="."]
-visible = false
 z_index = -2
-position = Vector2(312, 166)
-scale = Vector2(1.47306, 1.47306)
+position = Vector2(988.256, 583.379)
+scale = Vector2(4.4823, 4.4823)
 texture = ExtResource("1_y0iof")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -53,7 +52,8 @@ script = ExtResource("2_iwjdk")
 script = ExtResource("2_86uwx")
 
 [node name="DiceDeck" parent="CardManager" instance=ExtResource("5_6mh84")]
-position = Vector2(40, 274)
+position = Vector2(168, 813)
+scale = Vector2(4, 4)
 
 [node name="CardDropSound" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(186, 113)
@@ -63,17 +63,16 @@ stream = ExtResource("7_45i77")
 modulate = Color(1, 3.825, 4.918, 1)
 light_mask = 2
 visibility_layer = 2
-position = Vector2(148, 40)
+position = Vector2(510, 138)
 scale = Vector2(4, 4)
 script = ExtResource("8_82ybk")
 
 [node name="InvokeButton" type="Sprite2D" parent="."]
-position = Vector2(301, 19)
+position = Vector2(936, 110)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("6_vu0qa")
 
 [node name="Button" type="Button" parent="InvokeButton"]
-visible = false
 modulate = Color(1, 1, 1, 0)
 offset_left = -631.0
 offset_top = -184.0
