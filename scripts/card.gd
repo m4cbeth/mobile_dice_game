@@ -3,13 +3,6 @@ extends Node2D
 signal hovered
 signal hovered_off
 
-const GROUPS = {
-	knights = "knights",
-	slimes = "slimes",
-	bad_guys = "bad_guys",
-	good_guys = "good_guys"
-}
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#

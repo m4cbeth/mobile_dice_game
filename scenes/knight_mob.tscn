@@ -16,7 +16,7 @@ position = Vector2(-2, -6)
 animation = &"death"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-2, 1, 2, 1, 4, -1, 13, -1, 15, -5, 4, -5, 2, -7, -5, -7, -7, -3, -5, 1, -2, 1)
+polygon = PackedVector2Array(-2, 1, 2, 1, 4, -1, 13, -1, 15, -5, 4, -5, 2, -5, 2, -11, -2, -11, -5, -8, -7, -3, -5, 1, -2, 1)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_m4dc5")

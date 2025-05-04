@@ -1,4 +1,21 @@
 # Mobile Dice Game
+
+# Gameplay
+So far the thought is this:
+	Can use cards to block, summon
+	Dice deck will eventually deal more.
+	They can damage and kill slimes
+	Until reveal that slimes were trying to help
+	Boss fight begins
+
+Then have to create "second" gameplay loop where:
+	you don't let the slimes die. i.e. don't summon knights when they're on field
+	can use cards to hurry up slimes
+	or drag deck to them.
+
+
+# Thoughts
+
 That's all it's been called so far. "Invoke" maybe? That's what the button says. And that's the goal.
 "Evoke" something lol.
 
