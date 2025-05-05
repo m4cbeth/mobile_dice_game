@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://cg3uapk2i3dy7"]
+[gd_scene load_steps=27 format=3 uid="uid://cg3uapk2i3dy7"]
 
 [ext_resource type="Texture2D" uid="uid://dsvagi3rep0qk" path="res://assets/sprites/enemies/Green_Slime-Idle.png" id="1_371uh"]
 [ext_resource type="Script" uid="uid://dnqov7hyx0rxd" path="res://scripts/slime.gd" id="1_p2gj0"]
 [ext_resource type="Texture2D" uid="uid://ckamcf31wbhiv" path="res://assets/sprites/Blue Effect Bullet Impact Explosion 32x32.png" id="2_2npkn"]
+[ext_resource type="Texture2D" uid="uid://da6j0uw18w5il" path="res://assets/sprites/enemies/Green_Slime-Run.png" id="3_gstla"]
 [ext_resource type="Script" uid="uid://vtrrxjocmn18" path="res://scripts/state/state_machine.gd" id="3_n6pvg"]
 [ext_resource type="Script" uid="uid://d0vin3tgf07sw" path="res://scripts/state/state_walk.gd" id="4_pjw23"]
 [ext_resource type="AudioStream" uid="uid://bn8h2b662kmlp" path="res://assets/sounds/HIT_SHORT_04.wav" id="6_fd6lc"]
@@ -35,6 +36,30 @@ region = Rect2(320, 0, 64, 64)
 atlas = ExtResource("1_371uh")
 region = Rect2(384, 0, 64, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_vnioy"]
+atlas = ExtResource("3_gstla")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2xjuo"]
+atlas = ExtResource("3_gstla")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a02ik"]
+atlas = ExtResource("3_gstla")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pu8ps"]
+atlas = ExtResource("3_gstla")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g40cl"]
+atlas = ExtResource("3_gstla")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cxm07"]
+atlas = ExtResource("3_gstla")
+region = Rect2(320, 0, 64, 64)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_buiih"]
 animations = [{
 "frames": [{
@@ -60,13 +85,31 @@ animations = [{
 "texture": SubResource("AtlasTexture_2debr")
 }],
 "loop": true,
-"name": &"default",
-"speed": 3.0
+"name": &"Idle",
+"speed": 9.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vnioy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2xjuo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a02ik")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pu8ps")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g40cl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cxm07")
+}],
 "loop": true,
-"name": &"new_animation",
-"speed": 5.0
+"name": &"Walk",
+"speed": 8.0
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fd6lc"]
@@ -121,8 +164,8 @@ script = ExtResource("1_p2gj0")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -32)
 sprite_frames = SubResource("SpriteFrames_buiih")
-animation = &"new_animation"
-autoplay = "default"
+animation = &"Idle"
+autoplay = "Idle"
 
 [node name="EnterAnimation" type="AnimatedSprite2D" parent="."]
 visible = false

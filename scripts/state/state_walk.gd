@@ -1,7 +1,8 @@
 extends State
 class_name Walk
 
-const AnimatedSprite = "AnimatedSprite2D"
+@onready var sprite: AnimatedSprite2D = owner.get_node("AnimatedSprite2D")
+
 var target_coords: Vector2
 var direction: Vector2
 var avoiding: bool
@@ -9,7 +10,6 @@ var avoid_timer := 1.0
 var avoid_duration: float
 const DICE_COORDS = Vector2(41, 303)
 var dice_coords := DICE_COORDS
-var fall_velocity = 0.0
 var speed_modifier: float
 const speed_modifiers = {
 	Groups.slimes: 1.0,
@@ -17,10 +17,11 @@ const speed_modifiers = {
 	"whateversnext": 2
 }
 var velocity
+var fall_velocity = 0.0
 const GRAVITY = 980 #* .7
 const MAX_HEIGHT_MIN_Y = 745
-
 var fake_floor: int
+
 @export var speed := 12.0 # disagree w export, get based on type (knights faster than slimes)
 
 
@@ -61,11 +62,13 @@ func physics_update(delta):
 			velocity = direction.normalized() * speed_modifier
 			entity.velocity = velocity
 			flip_body(entity)
+			if velocity and sprite.animation != States.Walk:
+				sprite.play(States.Walk)
 			var collision = entity.move_and_collide(velocity)
 			if collision:
 				var collider = collision.get_collider()
 				if collider is not StaticBody2D:
-					if collider.is_in_group('slimes'):
+					if collider.is_in_group(Groups.slimes):
 						avoiding = true
 						direction = (Vector2.UP if randi() % 2 == 0 else Vector2.DOWN)
 					#else:
