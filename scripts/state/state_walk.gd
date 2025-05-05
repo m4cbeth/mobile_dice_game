@@ -12,7 +12,7 @@ var dice_coords := DICE_COORDS
 var fall_velocity = 0.0
 var speed_modifier: float
 const speed_modifiers = {
-	"slimes": 1.0,
+	Groups.slimes: 1.0,
 	"knights": 0.5,
 	"whateversnext": 2
 }

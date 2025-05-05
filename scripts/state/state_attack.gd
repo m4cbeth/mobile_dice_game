@@ -1,7 +1,7 @@
 extends State
 class_name Attack
 
-@onready var sprite = entity.get_node("AnimatedSprite2D")
+@onready var sprite = owner.get_node("AnimatedSprite2D")
 @onready var attack_area = owner.get_node("DangerZone")
 
 var attack_timer := 0.0
