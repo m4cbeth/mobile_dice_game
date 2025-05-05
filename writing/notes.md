@@ -1,3 +1,11 @@
+attack, knockback (phyics? calculate friction deaccelleration).
+play walking.
+in state_walk, if enity's animatedsprite has animation called walking..
+if velocy, animation
+
+
+
+
 should I...:
 	- change the behavior of mobs to
 	if thing is above horizon:

@@ -98,17 +98,17 @@ func find_closest(nodes: Array):
 			closest_node = node
 	return closest_node
 
-func flip_body(entity: CharacterBody2D):
-	if entity.is_in_group(Groups.good_guys):
-		if entity.velocity.x < 0:
-			entity.find_child("AnimatedSprite2D").flip_h = true
+func flip_body(mob: CharacterBody2D):
+	if mob.is_in_group(Groups.good_guys):
+		if mob.velocity.x < 0:
+			mob.find_child("AnimatedSprite2D").flip_h = true
 		else:
-			entity.find_child("AnimatedSprite2D").flip_h = false
+			mob.find_child("AnimatedSprite2D").flip_h = false
 	else:
-		if entity.velocity.x > 0:
-			entity.find_child("AnimatedSprite2D").flip_h = true
+		if mob.velocity.x > 0:
+			mob.find_child("AnimatedSprite2D").flip_h = true
 		else:
-			entity.find_child("AnimatedSprite2D").flip_h = false
+			mob.find_child("AnimatedSprite2D").flip_h = false
 
 
 
