@@ -1,6 +1,35 @@
 # Mobile Dice Game
 
 # Gameplay
+
+Kill x slimes and zthings appear left of invoke
+they can damage knights from behind and take agro (because higher damage)
+then slimes hit from behind... But zthings only spawn in if...
+This is getting dumb.
+Because I'm not thinking about how a player will react....
+What will a player do?
+They will invoke the knights
+
+// hmm, the wizard that shows up later?
+	"what did you do?
+	
+	I'll just wait for my bus.
+	Don't worry, I'll leave this barrier down until the bus comes.
+	You can use it too or remove it depending if on who comes your way.
+		if player removes and knights on field:
+			knights attack, if land on Wizard:
+				Knight yells "what the fuck"
+				becomes hostile, soulstype music
+				can only _really_ beat if you've used the slimes
+					can speed up if you bring dicedeck to the slimes
+					each slime give one option
+						either
+							upgrade knights
+							upgrade dice
+							
+							once they have x, they get new cards (wolfs).
+
+
 So far the thought is this:
 	Can use cards to block, summon
 	Dice deck will eventually deal more.

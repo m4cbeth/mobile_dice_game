@@ -4,7 +4,7 @@ class_name State
 var entity: CharacterBody2D
 var state_machine: StateMachine
 
-func enter():
+func enter(msg: Dictionary = {}) -> void:
 	pass
 func exit():
 	pass

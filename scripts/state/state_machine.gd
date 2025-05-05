@@ -27,7 +27,7 @@ func _physics_process(delta: float) -> void:
 	if current_state:
 		current_state.physics_update(delta)
 
-func transition_to(state_name: String, _params: Dictionary = {}):
+func transition_to(state_name: String, msg: Dictionary = {}):
 	if current_state != null and state_name == current_state.name:
 		return
 	
@@ -39,5 +39,4 @@ func transition_to(state_name: String, _params: Dictionary = {}):
 		current_state.exit()
 	
 	current_state = states[state_name]
-	current_state.enter() #adding "params" breaks for now without going and changing, an ddon't need now
-	
+	current_state.enter(msg)

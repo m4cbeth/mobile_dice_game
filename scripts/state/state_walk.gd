@@ -24,7 +24,7 @@ var fake_floor: int
 @export var speed := 12.0 # disagree w export, get based on type (knights faster than slimes)
 
 
-func enter():
+func enter(msg: Dictionary = {}) -> void:
 	speed_modifier = 1.0 if get_parent().is_in_group(Groups.slimes) else 0.5
 	pass
 	

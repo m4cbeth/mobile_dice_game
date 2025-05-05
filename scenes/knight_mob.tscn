@@ -1,10 +1,11 @@
-[gd_scene load_steps=57 format=3 uid="uid://dfiyo16w3vyaa"]
+[gd_scene load_steps=58 format=3 uid="uid://dfiyo16w3vyaa"]
 
 [ext_resource type="Script" uid="uid://b6podv2knbvop" path="res://scripts/knight_mob.gd" id="1_6eskw"]
 [ext_resource type="Texture2D" uid="uid://dr5788p5dql23" path="res://assets/sprites/Knight.png" id="2_6eskw"]
 [ext_resource type="Script" uid="uid://vtrrxjocmn18" path="res://scripts/state/state_machine.gd" id="3_m4dc5"]
 [ext_resource type="Script" uid="uid://d0vin3tgf07sw" path="res://scripts/state/state_walk.gd" id="4_wjd2n"]
 [ext_resource type="Script" uid="uid://dor0i5y5k10ru" path="res://scripts/state/state_idle.gd" id="5_724m8"]
+[ext_resource type="Script" uid="uid://hpfnehdxwtm7" path="res://scripts/state/state_attack.gd" id="6_7fdty"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mpugr"]
 atlas = ExtResource("2_6eskw")
@@ -421,6 +422,10 @@ metadata/_custom_type_script = "uid://d0vin3tgf07sw"
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource("5_724m8")
 metadata/_custom_type_script = "uid://dor0i5y5k10ru"
+
+[node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource("6_7fdty")
+metadata/_custom_type_script = "uid://hpfnehdxwtm7"
 
 [node name="DangerZone" type="Area2D" parent="."]
 
