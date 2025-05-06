@@ -3,44 +3,91 @@ class_name TakeDamage
 
 @onready var sprite: AnimatedSprite2D = owner.get_node("AnimatedSprite2D")
  
-
 var attacker = null
 var damage_amount := 0.0
 var knockback_direction := Vector2.ZERO
-var knockback_strength := 750
+var knockback_strength := 750.0
 var damage_in_progress := false
- 
+var knockback_timer := 0.0
+var knockback_duration := 0.3  # Duration of knockback effect in seconds
+
 func enter(msg: Dictionary = {}) -> void:
-	print('entered takedamge state')
+	print('Entered TakeDamage state')
+	
+	# Reset state variables
+	damage_in_progress = true
+	knockback_timer = 0.0
+	
+	# Get damage info from message
 	if msg.has("damage"):
 		damage_amount = msg.damage
+	
+	# Set knockback direction based on attacker or facing direction
 	if msg.has("attacker") and msg.attacker != null:
 		attacker = msg.attacker
 		knockback_direction = (entity.global_position - attacker.global_position).normalized()
 	else:
-		knockback_direction = Vector2(-1 if entity.sprite.fiip_h else 1, 0)
+		# Fallback direction based on sprite facing
+		knockback_direction = Vector2(-1 if sprite.flip_h else 1, 0)
+	
+	# Connect animation finished signal - note the proper function name
 	if !sprite.animation_finished.is_connected(_on_animation_finished):
 		sprite.animation_finished.connect(_on_animation_finished)
-	if sprite and not damage_in_progress:
-		damage_in_progress = true
-		sprite.play('Hit')
+	
+	# Play damage animation - make sure it matches your actual animation name case
+	if sprite:
+		print("Playing Hit animation")
+		sprite.play("damage")  # Changed to "damage" based on your animation names list
+	
+	# Apply initial knockback
 	apply_knockback()
-	pass
-func exit():
+
+func exit() -> void:
+	print("Exiting TakeDamage state")
+	
+	# Clean up signal connection
 	if sprite.animation_finished.is_connected(_on_animation_finished):
 		sprite.animation_finished.disconnect(_on_animation_finished)
+	
 	damage_in_progress = false
 
-func update(_delta):
-	pass
+func update(delta: float) -> void:
+	# Track knockback duration
+	knockback_timer += delta
+	
+	# Debug animation state
+	if sprite:
+		if int(knockback_timer * 10) % 10 == 0:  # Print roughly every 1 second
+			print("Current animation: ", sprite.animation, " Frame: ", sprite.frame)
+	
+	# Transition to Walk if animation finished but signal didn't fire
+	if knockback_timer > 1.0 and damage_in_progress:
+		print("Fallback transition - animation may have completed without signal")
+		damage_in_progress = false
+		transition_to("Walk")
 
-func physics_update(_delta):
+func physics_update(delta: float) -> void:
+	# Gradually slow down knockback
 	entity.velocity *= 0.9
-	entity.move_and_slide()
+	
+	# Use move_and_slide for movement
+	var collision = entity.move_and_slide()
+	
+	# Debug collision info
+	if collision:
+		print("Collision during knockback")
 
-func apply_knockback():
+func apply_knockback() -> void:
+	print("Applying knockback: ", knockback_direction * knockback_strength)
 	entity.velocity = knockback_direction * knockback_strength
 
-func _on_animation_finished():
+# Fixed function name - was "*on*animation_finished"
+func _on_animation_finished() -> void:
+	print("Animation finished signal received!")
 	damage_in_progress = false
 	transition_to("Walk")
+
+# Helper function for state transition  
+func transition_to(state_name: String, msg: Dictionary = {}) -> void:
+	print("Transitioning from TakeDamage to ", state_name)
+	state_machine.transition_to(state_name, msg)
