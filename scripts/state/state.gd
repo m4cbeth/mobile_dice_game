@@ -10,7 +10,7 @@ func exit():
 	pass
 func update(_delta):
 	pass
-func physics_Update(_delta):
+func physics_update(_delta):
 	pass
 func transition_to(state_name: String, params: Dictionary = {}) -> void:
 	state_machine.transition_to(state_name, params)

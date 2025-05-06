@@ -2,7 +2,7 @@ extends Node2D
 
 const slime_scene = preload("res://scenes/slime.tscn")
 
-var num_of_slime = 0
+var num_of_slime := 0
 const TOP_OF_FIELD = 730
 const BOT_OF_FIELD = 1030
 const ENEMEY_X_DROP_LEFT = 1440
@@ -12,7 +12,6 @@ const MAX_SLIMES = 1
 
 func spawn_slime():
 	num_of_slime += 1
-	if num_of_slime > MAX_SLIMES: return
 	var new_slime = slime_scene.instantiate()
 	new_slime.add_to_group(Groups.slimes)
 	new_slime.add_to_group(Groups.bad_guys)

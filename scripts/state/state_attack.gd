@@ -3,9 +3,10 @@ class_name Attack
 
 @onready var sprite: AnimatedSprite2D = owner.get_node("AnimatedSprite2D")
 @onready var attack_area: Area2D = owner.get_node("DangerZone")
+@onready var damage : float = owner.damage
+var attack_damage: int
 var attack_timer := 0.0
 var target
-var attack_damage: int
 var attack_in_progress := false
 @export var can_attack := true
 @export var attack_cooldown := 0.5
@@ -27,7 +28,6 @@ func exit():
 	attack_in_progress = false
 
 func _on_animation_finished():
-	print('animation fin')	
 	if sprite.animation == "attack":
 		if attack_in_progress:
 			transition_to("Walk")
@@ -40,7 +40,7 @@ func perform_attack():
 	attack_in_progress = true
 	for body in attack_area.get_overlapping_bodies():
 		if body.is_in_group("bad_guys"):
-			body.take_damage()
+			body.take_damage(self, damage)
 	if sprite:
 		sprite.play("attack")
 

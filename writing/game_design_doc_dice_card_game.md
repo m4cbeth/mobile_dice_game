@@ -56,6 +56,21 @@ Then have to create "second" gameplay loop where:
 	can use cards to hurry up slimes
 	or drag deck to them.
 
+# Dice Mechanics
+
+Upgrade die...
+what is it now? You can pull cards... as long... as you have stamina?
+second green bars below hearts... If you pull cards without stamina loose heart
+Replace the 6 with a skull, roll skull, loose heart.
+
+
+Rogue or Assasin type. Seems like a shitty, maybe less that you wouldn't take?
+But it doesn't get agrroed by bad guys (i.e. not_add_to or add to their own group and exclude)
+and secret ugrade if you keep at least one on your die, it rigs the die so although the random
+animation still plays. What ever you clicked on is what it will be.
+(This might be dumb)
+Still not sure what the main thing with this is gonna be.
+
 
 # Thoughts
 
