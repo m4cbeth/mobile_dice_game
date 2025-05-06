@@ -3,12 +3,13 @@ class_name TakeDamage
 
 @onready var sprite: AnimatedSprite2D = owner.get_node("AnimatedSprite2D")
  
+
 var attacker = null
 var damage_amount := 0.0
 var knockback_direction := Vector2.ZERO
 var knockback_strength := 750
 var damage_in_progress := false
-
+ 
 func enter(msg: Dictionary = {}) -> void:
 	print('entered takedamge state')
 	if msg.has("damage"):
