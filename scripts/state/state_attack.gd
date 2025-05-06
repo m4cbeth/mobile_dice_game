@@ -1,13 +1,14 @@
 extends State
 class_name Attack
 
-@onready var sprite = owner.get_node("AnimatedSprite2D")
-@onready var attack_area = owner.get_node("DangerZone")
+@onready var sprite: AnimatedSprite2D = owner.get_node("AnimatedSprite2D")
+@onready var attack_area: Area2D = owner.get_node("DangerZone")
 var attack_timer := 0.0
 var target
 var attack_damage: int
-@export var attack_cooldown := 0.5
+var attack_in_progress := false
 @export var can_attack := true
+@export var attack_cooldown := 0.5
 @export var attack_target := []
 
 func enter(msg: Dictionary = {}) -> void:
@@ -15,39 +16,43 @@ func enter(msg: Dictionary = {}) -> void:
 		target = msg.target
 	if !sprite.animation_finished.is_connected(_on_animation_finished):
 		sprite.animation_finished.connect(_on_animation_finished)
+	attack_in_progress = true
 	if sprite:
-		sprite.play("Attack")
-		print("Playing attack animation: ", sprite.animation)
-		print("Animation frames: ", sprite.sprite_frames.get_animation_names())
-		print("Current frame: ", sprite.frame)
-		print("Total frames: ", sprite.sprite_frames.get_frame_count("Attack"))
+		sprite.play('attack')
 	attack_timer = 0.0
 
 func exit():
 	if sprite.animation_finished.is_connected(_on_animation_finished):
 		sprite.animation_finished.disconnect(_on_animation_finished)
+	attack_in_progress = false
 
-func _on_animation_finished(anim_name):
-	if anim_name == "Attack":
-		transition_to("Walk")
+func _on_animation_finished():
+	print('animation fin')	
+	if sprite.animation == "attack":
+		if attack_in_progress:
+			transition_to("Walk")
 
 func perform_attack():
 	attack_timer = 0.0
-	#if target.has_method("take_damage"): # fuck "target" should be "characterbody" not "vector"
-		#target.take_damage(attack_damage)
+	if attack_in_progress:
+		return
+	attack_timer = 0.0
+	attack_in_progress = true
 	for body in attack_area.get_overlapping_bodies():
 		if body.is_in_group("bad_guys"):
 			body.take_damage()
 	if sprite:
-		sprite.play("Attack")
+		sprite.play("attack")
 
 func update(delta):
 	if not is_instance_valid(target) or entity.global_position.distance_to(target) > 100:
-		transition_to("Walk")
+		if !attack_in_progress:
+			transition_to("Walk")
 		return
-	attack_timer += delta
-	if attack_timer > attack_cooldown:
-		perform_attack()
+	if !attack_in_progress:
+		attack_timer += delta
+		if attack_timer > attack_cooldown:
+			perform_attack()
 
 func physics_update(_delta):
 	pass

@@ -69,7 +69,7 @@ func physics_update(delta):
 			flip_body(entity)
 			if velocity and sprite.animation != "Walk":
 				sprite.play("Walk")
-			if entity.global_position.distance_to(target_coords) < 100 and sprite.animation != "Attack":
+			if entity.global_position.distance_to(target_coords) < 100 and sprite.animation != "attack":
 				transition_to("Attack", {target = target_coords})
 			var collision = entity.move_and_collide(velocity)
 			if collision:
