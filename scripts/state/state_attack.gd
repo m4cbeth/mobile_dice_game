@@ -13,17 +13,19 @@ var attack_damage: int
 func enter(msg: Dictionary = {}) -> void:
 	if msg.has("target"):
 		target = msg.target
-	if !sprite.animation_finished.is_connected(Callable(self, "_on_animation_finished")):
-		sprite.connect("animation_finished", Callable(self, "_on_animation_finished"))
+	if !sprite.animation_finished.is_connected(_on_animation_finished):
+		sprite.animation_finished.connect(_on_animation_finished)
 	if sprite:
 		sprite.play("Attack")
-		print(sprite.animation)
+		print("Playing attack animation: ", sprite.animation)
+		print("Animation frames: ", sprite.sprite_frames.get_animation_names())
+		print("Current frame: ", sprite.frame)
+		print("Total frames: ", sprite.sprite_frames.get_frame_count("Attack"))
 	attack_timer = 0.0
-	#perform_attack()
 
 func exit():
-	if sprite.animation_finished.is_connected(Callable(self, "_on_animation_finished")):
-		sprite.disconnect("animation_finished", Callable(self, "_on_animation_finished"))
+	if sprite.animation_finished.is_connected(_on_animation_finished):
+		sprite.animation_finished.disconnect(_on_animation_finished)
 
 func _on_animation_finished(anim_name):
 	if anim_name == "Attack":
