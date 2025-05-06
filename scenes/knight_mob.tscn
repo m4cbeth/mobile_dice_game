@@ -231,7 +231,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_rw1nd")
 }],
-"loop": true,
+"loop": false,
 "name": &"Attack",
 "speed": 13.0
 }, {
@@ -403,9 +403,8 @@ script = ExtResource("1_6eskw")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-2, -6)
 sprite_frames = SubResource("SpriteFrames_6nkab")
-animation = &"Attack"
+animation = &"Walk"
 autoplay = "Idle"
-frame_progress = 0.979454
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-2, 1, 2, 1, 4, -1, 13, -1, 15, -5, 4, -5, 2, -5, 2, -11, -2, -11, -5, -8, -7, -3, -5, 1, -2, 1)
@@ -428,6 +427,8 @@ script = ExtResource("6_7fdty")
 metadata/_custom_type_script = "uid://hpfnehdxwtm7"
 
 [node name="DangerZone" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DangerZone"]
 polygon = PackedVector2Array(7, -16, 2, -2, 13, -2, 15, -5, 15, -16)

@@ -1,7 +1,7 @@
 extends State
 class_name Idle
 
-func enter(msg: Dictionary = {}) -> void:
+func enter(_msg: Dictionary = {}) -> void:
 	pass
 func exit():
 	pass

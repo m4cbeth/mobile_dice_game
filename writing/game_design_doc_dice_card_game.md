@@ -1,6 +1,20 @@
 # Mobile Dice Game
 
 # Gameplay
+https://youtu.be/V8BvcwLvNZo?si=2QELhSMC-42T1NUz&t=118
+this tutorial is the antithesis of what we're going for.
+playing a game for the first time should be a discovery, not a lecture
+Gameplay loop of this is, as each wave comes, you don't know what mobs do what:
+	what they're hostile towards
+	what type of damage they do
+	what things are hostile towards them
+	special bonuses
+So far things we could have:
+	slimes,
+	knights
+	wizards,
+	wolves.
+Wolves alone are bad? Or eat slimes, knights can be used to defend slimes, but would also attack slimes
 
 Kill x slimes and zthings appear left of invoke
 they can damage knights from behind and take agro (because higher damage)
