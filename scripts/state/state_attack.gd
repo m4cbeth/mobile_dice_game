@@ -19,8 +19,7 @@ func enter(msg: Dictionary = {}) -> void:
 		sprite.animation_finished.connect(_on_animation_finished)
 	attack_in_progress = true
 	if sprite:
-		sprite.play('attack')
-	attack_timer = 0.0
+		sprite.play('Attack')
 
 func exit():
 	if sprite.animation_finished.is_connected(_on_animation_finished):
@@ -28,24 +27,27 @@ func exit():
 	attack_in_progress = false
 
 func _on_animation_finished():
-	if sprite.animation == "attack":
+	#for body in attack_area.get_overlapping_bodies():
+		#if body.is_in_group("bad_guys"):
+			#body.take_damage(entity, damage)
+	if sprite.animation == "Attack":
 		if attack_in_progress:
 			transition_to("Walk")
 
 func perform_attack():
-	attack_timer = 0.0
 	if attack_in_progress:
 		return
 	attack_timer = 0.0
 	attack_in_progress = true
-	for body in attack_area.get_overlapping_bodies():
-		if body.is_in_group("bad_guys"):
-			body.take_damage(self, damage)
 	if sprite:
-		sprite.play("attack")
+		sprite.play("Attack")
 
 func update(delta):
-	if not is_instance_valid(target) or entity.global_position.distance_to(target) > 100:
+	if attack_in_progress and sprite.frame == 1:
+		for body in attack_area.get_overlapping_bodies():
+			if body.is_in_group("bad_guys"):
+				body.take_damage(entity, damage)
+	if not is_instance_valid(target): #or entity.global_position.distance_to(target) > 95:
 		if !attack_in_progress:
 			transition_to("Walk")
 		return
@@ -53,6 +55,7 @@ func update(delta):
 		attack_timer += delta
 		if attack_timer > attack_cooldown:
 			perform_attack()
+		
 
 func physics_update(_delta):
 	pass

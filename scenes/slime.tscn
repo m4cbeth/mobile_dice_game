@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://cg3uapk2i3dy7"]
+[gd_scene load_steps=46 format=3 uid="uid://cg3uapk2i3dy7"]
 
 [ext_resource type="Texture2D" uid="uid://dsvagi3rep0qk" path="res://assets/sprites/enemies/Green_Slime-Idle.png" id="1_371uh"]
 [ext_resource type="Script" uid="uid://dnqov7hyx0rxd" path="res://scripts/slime.gd" id="1_p2gj0"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bxi85s04ro04r" path="res://assets/sprites/enemies/Green_Slime-Attack_Ground.png" id="2_v5wyi"]
 [ext_resource type="Texture2D" uid="uid://da6j0uw18w5il" path="res://assets/sprites/enemies/Green_Slime-Run.png" id="3_gstla"]
 [ext_resource type="Script" uid="uid://vtrrxjocmn18" path="res://scripts/state/state_machine.gd" id="3_n6pvg"]
+[ext_resource type="Texture2D" uid="uid://by7cr1cbsxeir" path="res://assets/sprites/enemies/Green_Slime-Hit_Ground.png" id="3_vnioy"]
 [ext_resource type="Script" uid="uid://d0vin3tgf07sw" path="res://scripts/state/state_walk.gd" id="4_pjw23"]
 [ext_resource type="AudioStream" uid="uid://bn8h2b662kmlp" path="res://assets/sounds/HIT_SHORT_04.wav" id="6_fd6lc"]
 [ext_resource type="Script" uid="uid://igtb0obeg75" path="res://scripts/state/state_take_damage.gd" id="8_0l8pv"]
@@ -57,6 +58,22 @@ region = Rect2(640, 0, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_qwlg4"]
 atlas = ExtResource("2_v5wyi")
 region = Rect2(704, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1sdgb"]
+atlas = ExtResource("3_vnioy")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rrr3x"]
+atlas = ExtResource("3_vnioy")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eyfvk"]
+atlas = ExtResource("3_vnioy")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iscye"]
+atlas = ExtResource("3_vnioy")
+region = Rect2(192, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_82ybk"]
 atlas = ExtResource("1_371uh")
@@ -152,6 +169,23 @@ animations = [{
 "loop": true,
 "name": &"Attack",
 "speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1sdgb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rrr3x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eyfvk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iscye")
+}],
+"loop": false,
+"name": &"Hit",
+"speed": 9.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -255,13 +289,11 @@ script = ExtResource("1_p2gj0")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -32)
 sprite_frames = SubResource("SpriteFrames_buiih")
-animation = &"Idle"
+animation = &"Walk"
 autoplay = "Idle"
-frame = 1
-frame_progress = 0.242054
+frame = 2
 
 [node name="EnterAnimation" type="AnimatedSprite2D" parent="."]
-visible = false
 position = Vector2(-2.38419e-07, -7)
 scale = Vector2(1.3, 1.3)
 sprite_frames = SubResource("SpriteFrames_vnioy")
@@ -271,7 +303,7 @@ frame = 1
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(0, -9.75)
 scale = Vector2(1, 0.975)
-polygon = PackedVector2Array(0, 10, 9, 10, 8.75, 0.769231, 5.5, -5.12821, -1.75, -5.64103, -7.5, -3.58974, -9.5, 4.87179, -9, 10)
+polygon = PackedVector2Array(0, 10, 9, 10, 8.75, 0.769231, 8.25, -6.15385, -1.75, -8.20513, -9, -5.38462, -12.5, -0.769231, -13.5, 10)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_n6pvg")
@@ -291,6 +323,9 @@ volume_db = -11.318
 pitch_scale = 0.65
 
 [node name="DangerZone" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DangerZone"]
+visible = false
 polygon = PackedVector2Array(-0.75, 0, -3.75, -17, -16.75, -21, -28.25, -17.5, -28.75, 0)

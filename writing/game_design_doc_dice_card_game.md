@@ -58,6 +58,7 @@ Then have to create "second" gameplay loop where:
 
 # Dice Mechanics
 
+
 Upgrade die...
 what is it now? You can pull cards... as long... as you have stamina?
 second green bars below hearts... If you pull cards without stamina loose heart
@@ -71,6 +72,14 @@ animation still plays. What ever you clicked on is what it will be.
 (This might be dumb)
 Still not sure what the main thing with this is gonna be.
 
+## Player hand
+if higher than X cards, n-x cards get desstroyed at random
+So you might be rolling to try to get one more card, but...
+	if you're at say 4 (and that's the num we go with)
+	and you roll 3 new cards
+	as soon as they land they might burst into flames
+	(probally not, probably 3 others)
+This needs refinement... but something like this.
 
 # Thoughts
 

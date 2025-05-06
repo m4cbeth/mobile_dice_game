@@ -29,6 +29,8 @@ func enter(_msg: Dictionary = {}) -> void:
 	if entity.has_node(DangerZone):
 		entity.find_child(DangerZone).connect("body_entered", Callable(self, "_on_detect_body_enter"))
 	speed_modifier = 1.0 if get_parent().is_in_group(Groups.slimes) else 0.5
+	if sprite:
+		sprite.play("Walk")
 
 func exit():
 	if entity.has_node(DangerZone):
@@ -69,7 +71,10 @@ func physics_update(delta):
 			flip_body(entity)
 			if velocity and sprite.animation != "Walk":
 				sprite.play("Walk")
-			if entity.global_position.distance_to(target_coords) < 100 and sprite.animation != "attack":
+			if entity.global_position.distance_to(target_coords) < 110 and sprite.animation != "Attack":
+			# this logic can be changed to "if diff_x is 110 and diff_y < 50"
+			# so that only attacking if on left or right.
+			# Would change target behavior to left/right above
 				transition_to("Attack", {target = target_coords})
 			var collision = entity.move_and_collide(velocity)
 			if collision:
@@ -90,6 +95,10 @@ func get_target_coords():
 		var slimes = get_slimes()
 		if slimes.size() > 0:
 			return find_closest(slimes).position + Vector2(0, 40)
+			# eventually we should change this to target.position.x +/- some distance,
+			# depending on which side is closer...
+			# this will make the target be the "front" or "back"
+			# so doesn't get stuck in attack above or below while swinging at air
 	return get_dice_coords()
 
 func get_dice_coords():
