@@ -12,7 +12,7 @@ var knockback_timer := 0.0
 var knockback_duration := 0.3  # Duration of knockback effect in seconds
 
 func enter(msg: Dictionary = {}) -> void:
-	print('Entered TakeDamage state')
+	#print('Entered TakeDamage state')
 	# Reset state variables
 	damage_in_progress = true
 	knockback_timer = 0.0
@@ -34,12 +34,12 @@ func enter(msg: Dictionary = {}) -> void:
 	
 	# Play damage animation and take health
 	if sprite:
-		print("Playing Hit animation")
+		#print("Playing Hit animation")
 		sprite.play("Hit")
 		entity.health -= damage_amount
 
 func exit() -> void:
-	print("Exiting TakeDamage state")
+	#print("Exiting TakeDamage state")
 	
 	# Clean up signal connection
 	if sprite.animation_finished.is_connected(_on_animation_finished):
@@ -52,13 +52,13 @@ func update(delta: float) -> void:
 	knockback_timer += delta
 	
 	# Debug animation state
-	if sprite:
-		if int(knockback_timer * 10) % 10 == 0:  # Print roughly every 1 second
-			print("Current animation: ", sprite.animation, " Frame: ", sprite.frame)
+	#if sprite:
+		#if int(knockback_timer * 10) % 10 == 0:  # Print roughly every 1 second
+			#print("Current animation: ", sprite.animation, " Frame: ", sprite.frame)
 	
 	# Transition to Walk if animation finished but signal didn't fire
 	if knockback_timer > 1.0 and damage_in_progress:
-		print("Fallback transition - animation may have completed without signal")
+		#print("Fallback transition - animation may have completed without signal")
 		damage_in_progress = false
 		transition_to("Walk")
 
@@ -70,16 +70,16 @@ func physics_update(delta: float) -> void:
 	var collision = entity.move_and_slide()
 	
 	# Debug collision info
-	if collision:
-		print("Collision during knockback")
+	#if collision:
+		#print("Collision during knockback")
 
 func apply_knockback() -> void:
-	print("Applying knockback: ", knockback_direction * knockback_strength)
+	#print("Applying knockback: ", knockback_direction * knockback_strength)
 	entity.velocity = knockback_direction * knockback_strength
 
 # Fixed function name - was "*on*animation_finished"
 func _on_animation_finished() -> void:
-	print("Animation finished signal received!")
+	#print("Animation finished signal received!")
 	damage_in_progress = false
 	transition_to("Walk")
 
