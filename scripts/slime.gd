@@ -14,9 +14,9 @@ var damage := 1.0
 func take_damage(attacker = null, dmg := 1) -> void:
 	if not shitlist.has(attacker):
 		shitlist.append(attacker)
-	health -= dmg
 	if health <= 0:
-		state_machine.transition_to("Death")
+		self.queue_free()
+		#state_machine.transition_to("Death")
 		return
 	else:
 		state_machine.transition_to("TakeDamage", {"attacker" = attacker, "damage" = dmg})

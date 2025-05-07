@@ -13,15 +13,12 @@ var knockback_duration := 0.3  # Duration of knockback effect in seconds
 
 func enter(msg: Dictionary = {}) -> void:
 	print('Entered TakeDamage state')
-	
 	# Reset state variables
 	damage_in_progress = true
 	knockback_timer = 0.0
-	
 	# Get damage info from message
 	if msg.has("damage"):
 		damage_amount = msg.damage
-	
 	# Set knockback direction based on attacker or facing direction
 	if msg.has("attacker") and msg.attacker != null:
 		attacker = msg.attacker
@@ -29,18 +26,17 @@ func enter(msg: Dictionary = {}) -> void:
 	else:
 		# Fallback direction based on sprite facing
 		knockback_direction = Vector2(-1 if sprite.flip_h else 1, 0)
-	
-	# Connect animation finished signal - note the proper function name
+	# Connect animation finished signal
 	if !sprite.animation_finished.is_connected(_on_animation_finished):
 		sprite.animation_finished.connect(_on_animation_finished)
-	
-	# Play damage animation - make sure it matches your actual animation name case
-	if sprite:
-		print("Playing Hit animation")
-		sprite.play("damage")  # Changed to "damage" based on your animation names list
-	
 	# Apply initial knockback
 	apply_knockback()
+	
+	# Play damage animation and take health
+	if sprite:
+		print("Playing Hit animation")
+		sprite.play("Hit")
+		entity.health -= damage_amount
 
 func exit() -> void:
 	print("Exiting TakeDamage state")
@@ -88,6 +84,6 @@ func _on_animation_finished() -> void:
 	transition_to("Walk")
 
 # Helper function for state transition  
-func transition_to(state_name: String, msg: Dictionary = {}) -> void:
-	print("Transitioning from TakeDamage to ", state_name)
-	state_machine.transition_to(state_name, msg)
+#func transition_to(state_name: String, msg: Dictionary = {}) -> void:
+	#print("Transitioning from TakeDamage to ", state_name)
+	#state_machine.transition_to(state_name, msg)
