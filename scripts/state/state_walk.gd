@@ -92,9 +92,9 @@ func get_target_coords():
 	if entity.is_in_group("slimes"):
 		return get_dice_coords()
 	if entity.is_in_group("knights"):
-		var slimes = get_slimes()
-		if slimes.size() > 0:
-			return find_closest(slimes).position + Vector2(0, 40)
+		var bad_guys = get_bad_guys()
+		if bad_guys.size() > 0:
+			return find_closest(bad_guys).position + Vector2(0, 40)
 			# eventually we should change this to target.position.x +/- some distance,
 			# depending on which side is closer...
 			# this will make the target be the "front" or "back"
@@ -104,8 +104,8 @@ func get_target_coords():
 func get_dice_coords():
 	return get_tree().root.get_node("CardGame").find_child("DiceDeck").global_position
 
-func get_slimes():
-	return get_tree().get_nodes_in_group("slimes")
+func get_bad_guys():
+	return get_tree().get_nodes_in_group(Groups.bad_guys)
 
 func find_closest(nodes: Array):
 	var closest_distance = INF

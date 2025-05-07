@@ -1,9 +1,10 @@
-[gd_scene load_steps=69 format=3 uid="uid://d1ti5odadd840"]
+[gd_scene load_steps=71 format=3 uid="uid://d1ti5odadd840"]
 
 [ext_resource type="Texture2D" uid="uid://uixldpwro6i8" path="res://assets/backgrounds/pixelField.png" id="1_y0iof"]
 [ext_resource type="Script" uid="uid://bflst71urcn21" path="res://scripts/CardManager.gd" id="2_86uwx"]
 [ext_resource type="Script" uid="uid://dwkbp3is8tles" path="res://scenes/Camera2D.gd" id="2_iwjdk"]
 [ext_resource type="Texture2D" uid="uid://bsvghgl8o2lyl" path="res://assets/backgrounds/background2.webp" id="2_s2308"]
+[ext_resource type="Texture2D" uid="uid://bcr1eujrl30l3" path="res://assets/backgrounds/pixelFieldNight3.png" id="3_tqu8w"]
 [ext_resource type="PackedScene" uid="uid://dks7yhc2ba12p" path="res://scenes/DiceDeck.tscn" id="5_6mh84"]
 [ext_resource type="AudioStream" uid="uid://dbw14rt6j53hq" path="res://assets/music/Sketchbook 2024-10-13.ogg" id="6_427xc"]
 [ext_resource type="Texture2D" uid="uid://h2o1qvha5lmw" path="res://assets/sprites/invoke_button.png" id="6_vu0qa"]
@@ -13,6 +14,7 @@
 [ext_resource type="Script" uid="uid://b8oyhb3ihk7h6" path="res://scripts/player_hand.gd" id="9_6xg5x"]
 [ext_resource type="PackedScene" uid="uid://5dpfxn07yxd0" path="res://scenes/enemies.tscn" id="10_vu0qa"]
 [ext_resource type="Texture2D" uid="uid://miv4pvkq1osc" path="res://assets/sprites/Hearts.png" id="12_6mh84"]
+[ext_resource type="Script" uid="uid://cjx68p4viots6" path="res://scripts/invoke_button.gd" id="12_v30j8"]
 [ext_resource type="Texture2D" uid="uid://dr5788p5dql23" path="res://assets/sprites/Knight.png" id="14_f8vwx"]
 
 [sub_resource type="Environment" id="Environment_0k00j"]
@@ -435,6 +437,11 @@ position = Vector2(951, 474)
 scale = Vector2(1.30339, 1.19336)
 texture = ExtResource("2_s2308")
 
+[node name="PixelFieldNight3" type="Sprite2D" parent="."]
+position = Vector2(954, 412)
+scale = Vector2(1.34375, 1.34375)
+texture = ExtResource("3_tqu8w")
+
 [node name="PixelFieldBackground" type="Sprite2D" parent="."]
 visible = false
 z_index = -2
@@ -470,6 +477,7 @@ script = ExtResource("8_82ybk")
 position = Vector2(954, 166)
 scale = Vector2(0.251953, 0.25)
 texture = ExtResource("6_vu0qa")
+script = ExtResource("12_v30j8")
 
 [node name="Button" type="Button" parent="InvokeButton"]
 modulate = Color(1, 1, 1, 0)
@@ -581,3 +589,4 @@ texture = SubResource("AtlasTexture_6mh84")
 stretch_mode = 2
 
 [connection signal="button_down" from="InvokeButton/Button" to="CardDropArea" method="_on_button_button_down"]
+[connection signal="button_down" from="InvokeButton/Button" to="InvokeButton" method="_on_button_button_down"]

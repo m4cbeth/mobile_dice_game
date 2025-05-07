@@ -8,7 +8,7 @@ const BOT_OF_FIELD = 1030
 const ENEMEY_X_DROP_LEFT = 1440
 const ENEMEY_X_DROP_RIGHT = 1890
 const DROP_HEIGHT = 300
-const MAX_SLIMES = 1
+const MAX_SLIMES = 0
 
 func spawn_slime():
 	num_of_slime += 1

@@ -1,8 +1,32 @@
-[gd_scene load_steps=13 format=3 uid="uid://dks7yhc2ba12p"]
+[gd_scene load_steps=19 format=3 uid="uid://dks7yhc2ba12p"]
 
 [ext_resource type="Script" uid="uid://d2f7uywqo8ogs" path="res://scripts/DiceDeck.gd" id="1_wvwjc"]
 [ext_resource type="Texture2D" uid="uid://c4kwfgfcu4pby" path="res://assets/cards/CardTemplate.png" id="2_labqa"]
 [ext_resource type="Texture2D" uid="uid://b0js7yvssexwl" path="res://assets/sprites/six sided die.png" id="3_sx018"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wvwjc"]
+atlas = ExtResource("3_sx018")
+region = Rect2(0, 96, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_labqa"]
+atlas = ExtResource("3_sx018")
+region = Rect2(16, 160, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sx018"]
+atlas = ExtResource("3_sx018")
+region = Rect2(48, 176, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mupm1"]
+atlas = ExtResource("3_sx018")
+region = Rect2(32, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w6w26"]
+atlas = ExtResource("3_sx018")
+region = Rect2(64, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vkakg"]
+atlas = ExtResource("3_sx018")
+region = Rect2(80, 160, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5xtmt"]
 atlas = ExtResource("3_sx018")
@@ -30,6 +54,29 @@ region = Rect2(80, 96, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xu1gf"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wvwjc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_labqa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sx018")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mupm1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w6w26")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vkakg")
+}],
+"loop": true,
+"name": &"Hit",
+"speed": 8.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5xtmt")
@@ -88,6 +135,7 @@ position = Vector2(-0.75, 0.25)
 scale = Vector2(1.09375, 1.09375)
 sprite_frames = SubResource("SpriteFrames_xu1gf")
 autoplay = "default"
+frame_progress = 0.409243
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(0, 7)
@@ -95,6 +143,7 @@ collision_layer = 0
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
 position = Vector2(-0.25, 0)
 shape = SubResource("RectangleShape2D_jfvdx")
 
@@ -103,6 +152,7 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+visible = false
 position = Vector2(-1, 0)
 shape = SubResource("CircleShape2D_wvwjc")
 

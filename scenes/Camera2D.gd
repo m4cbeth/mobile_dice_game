@@ -22,3 +22,7 @@ func _process(delta):
 		shake_amount = max(shake_amount - shake_decay * delta, 0)
 	else:
 		offset = Vector2.ZERO
+
+
+func _on_button_button_down() -> void:
+	pass # Replace with function body.

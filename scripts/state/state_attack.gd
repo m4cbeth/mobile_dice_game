@@ -43,7 +43,7 @@ func perform_attack():
 		sprite.play("Attack")
 
 func update(delta):
-	if attack_in_progress and sprite.frame == 1:
+	if attack_in_progress and sprite.frame == 3:
 		for body in attack_area.get_overlapping_bodies():
 			if body.is_in_group("bad_guys"):
 				body.take_damage(entity, damage)

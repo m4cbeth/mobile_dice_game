@@ -4,6 +4,7 @@ class_name Death
 @onready var sprite: AnimatedSprite2D = owner.get_node("AnimatedSprite2D")
 
 func enter(_msg: Dictionary = {}) -> void:
+	entity.remove_from_group(Groups.bad_guys) # stops targeting immediately instead of after queue_free
 	print('enter death')
 	sprite.play("Death")
 func exit():
