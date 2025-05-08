@@ -4,10 +4,9 @@ extends Node2D
 @onready var mob_scene = preload("res://scenes/Mob.tscn")
 
 
-# INVOKE button (left side invisible area button)
+# INVOKE button
 func _on_button_button_down() -> void:
 	if $Area2D.get_overlapping_areas().size() == 0:
-		return
 		$"../Enemies".spawn_slime()
 	for area in $Area2D.get_overlapping_areas():
 		var card = area.get_parent()

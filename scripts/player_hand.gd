@@ -15,11 +15,11 @@ var player_hand = []
 
 
 func _ready() -> void:
-	
+	var dice_deck_position = get_parent().find_child("CardManager").find_child("DiceDeck").global_position
 	var card_scene = preload("res://scenes/card.tscn")
 	for i in range(HAND_COUNT):
 		var new_card = card_scene.instantiate()
-		new_card.position = DEFAULT_POSITION
+		new_card.position = dice_deck_position
 		new_card.z_index = 3 + i
 		new_card.name = "Card" + str(i+1)
 		$"../CardManager".add_child(new_card)

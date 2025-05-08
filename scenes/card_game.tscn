@@ -590,3 +590,4 @@ stretch_mode = 2
 
 [connection signal="button_down" from="InvokeButton/Button" to="CardDropArea" method="_on_button_button_down"]
 [connection signal="button_down" from="InvokeButton/Button" to="InvokeButton" method="_on_button_button_down"]
+[connection signal="button_up" from="InvokeButton/Button" to="InvokeButton" method="_on_button_button_up"]
