@@ -71,7 +71,10 @@ func physics_update(delta):
 			flip_body(entity)
 			if velocity and sprite.animation != "Walk":
 				sprite.play("Walk")
-			if entity.global_position.distance_to(target_coords) < 110 and sprite.animation != "Attack":
+			var distance_to_target = entity.global_position.distance_to(target_coords)
+			var is_in_y_range = abs(entity.global_position.y - target_coords.y) < 50
+			var is_in_strike_range = distance_to_target < 110
+			if is_in_strike_range and is_in_y_range and sprite.animation != "Attack":
 			# this logic can be changed to "if diff_x is 110 and diff_y < 50"
 			# so that only attacking if on left or right.
 			# Would change target behavior to left/right above
