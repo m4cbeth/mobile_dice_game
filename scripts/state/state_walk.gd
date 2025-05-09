@@ -2,6 +2,8 @@ extends State
 class_name Walk
 
 @onready var sprite: AnimatedSprite2D = owner.get_node("AnimatedSprite2D")
+@onready var attack_area: Area2D = owner.get_node("DangerZone")
+
 
 var target_coords: Vector2
 var direction: Vector2
@@ -24,18 +26,11 @@ var fake_floor: int
 
 @export var speed := 12.0 # disagree w export, get based on type (knights faster than slimes)
 
-const DangerZone = "DangerZone"
 func enter(_msg: Dictionary = {}) -> void:
-	if entity.has_node(DangerZone):
-		entity.find_child(DangerZone).connect("body_entered", Callable(self, "_on_detect_body_enter"))
 	speed_modifier = 1.0 if get_parent().is_in_group(Groups.slimes) else 0.5
 	if sprite:
 		sprite.play("Walk")
 
-func exit():
-	if entity.has_node(DangerZone):
-		if entity.find_child(DangerZone).is_connected("body_entered", Callable(self, "_on_detect_body_enter")):
-			entity.find_child(DangerZone).disconnect("body_entered", Callable(self, "_on_detect_body_enter"))
 
 func update(delta):
 	if avoiding:
@@ -43,11 +38,7 @@ func update(delta):
 		if avoid_timer < 0:
 			avoiding = false
 func physics_update(delta):
-	# if entity.global_position < horizon:
-		#entity.is_falling = true
 
-	if avoiding:
-		entity.move_and_collide(direction)
 	
 	# Get dice coords on every frame
 	dice_coords = get_dice_coords()
@@ -89,6 +80,7 @@ func physics_update(delta):
 	if entity.global_position.y < MAX_HEIGHT_MIN_Y and !entity.is_falling:
 		entity.global_position.y = MAX_HEIGHT_MIN_Y
 
+
 func get_target_coords():
 	if entity.is_in_group("slimes"):
 		return get_dice_coords()
@@ -126,24 +118,51 @@ func find_closest(nodes: Array):
 	return closest_node
 
 func flip_body(mob: CharacterBody2D):
+	#if mob.is_in_group(Groups.knights):
+		#print("target and mob x: ", target_coords.x, " ", mob.global_position.x)
+		#if target_coords.x <= mob.global_position.x and mob.scale.x == 1:
+			#mob.scale.x = -1
+		#else:
+			#mob.scale.x = 1
+		#return
 	#eventually, logic of "if more opposites(enemies/goodguys) are left/right"
+	
+	
+	
 	if velocity.x == 0:
-		if not mob.is_in_group(Groups.good_guys):
-			return
-		if target_coords.x > mob.global_position.x:
-			mob.find_child("AnimatedSprite2D").flip_h = false
-		else:
-			mob.find_child("AnimatedSprite2D").flip_h = true
+		return
 	if mob.is_in_group(Groups.good_guys):
-		if mob.velocity.x < 0:
-			mob.find_child("AnimatedSprite2D").flip_h = true
+		print("Target coords: ", target_coords.x)
+		print("Mobs x coords: ", mob.global_position.x)
+		print("Target less than: ", target_coords.x < mob.global_position.x)
+		if target_coords.x < mob.global_position.x:
+			mob.scale.x = -1
 		else:
-			mob.find_child("AnimatedSprite2D").flip_h = false
+			mob.scale.x = 1
 	else:
 		if mob.velocity.x > 0:
-			mob.find_child("AnimatedSprite2D").flip_h = true
+			mob.scale.x = -4
 		else:
-			mob.find_child("AnimatedSprite2D").flip_h = false
+			mob.scale.x = 4
+	
+	
+	#if velocity.x == 0:
+		#if not mob.is_in_group(Groups.good_guys):
+			#return
+		#if target_coords.x > mob.global_position.x:
+			#mob.find_child("AnimatedSprite2D").flip_h = false
+		#else:
+			#mob.find_child("AnimatedSprite2D").flip_h = true
+	#if mob.is_in_group(Groups.good_guys):
+		#if mob.velocity.x < 0:
+			#mob.find_child("AnimatedSprite2D").flip_h = true
+		#else:
+			#mob.find_child("AnimatedSprite2D").flip_h = false
+	#else:
+		#if mob.velocity.x > 0:
+			#mob.find_child("AnimatedSprite2D").flip_h = true
+		#else:
+			#mob.find_child("AnimatedSprite2D").flip_h = false
 
 
 

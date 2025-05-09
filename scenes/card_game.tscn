@@ -1,6 +1,5 @@
-[gd_scene load_steps=71 format=3 uid="uid://d1ti5odadd840"]
+[gd_scene load_steps=70 format=3 uid="uid://d1ti5odadd840"]
 
-[ext_resource type="Texture2D" uid="uid://uixldpwro6i8" path="res://assets/backgrounds/pixelField.png" id="1_y0iof"]
 [ext_resource type="Script" uid="uid://bflst71urcn21" path="res://scripts/CardManager.gd" id="2_86uwx"]
 [ext_resource type="Script" uid="uid://dwkbp3is8tles" path="res://scenes/Camera2D.gd" id="2_iwjdk"]
 [ext_resource type="Texture2D" uid="uid://bsvghgl8o2lyl" path="res://assets/backgrounds/background2.webp" id="2_s2308"]
@@ -437,16 +436,10 @@ scale = Vector2(1.30339, 1.19336)
 texture = ExtResource("2_s2308")
 
 [node name="PixelFieldNight3" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(962, 438)
 scale = Vector2(1.34375, 1.34375)
 texture = ExtResource("3_tqu8w")
-
-[node name="PixelFieldBackground" type="Sprite2D" parent="."]
-visible = false
-z_index = -2
-position = Vector2(988.256, 583.379)
-scale = Vector2(4.4823, 4.4823)
-texture = ExtResource("1_y0iof")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(968, 566)

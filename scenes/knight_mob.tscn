@@ -405,8 +405,7 @@ position = Vector2(-2, -6)
 sprite_frames = SubResource("SpriteFrames_6nkab")
 animation = &"Attack"
 autoplay = "Idle"
-frame = 6
-frame_progress = 1.0
+frame = 3
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-2, 1, 2, 1, 2, -5, 2, -11, -2, -11, -5, -8, -7, -3, -5, 1, -2, 1)
