@@ -422,7 +422,6 @@ region = Rect2(0, 0, 15.803, 17)
 filter_clip = true
 
 [node name="CardGame" type="Node2D"]
-position = Vector2(8, 26)
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_427xc")
@@ -433,12 +432,12 @@ environment = SubResource("Environment_0k00j")
 
 [node name="Background2" type="Sprite2D" parent="."]
 z_index = -2
-position = Vector2(951, 474)
+position = Vector2(959, 500)
 scale = Vector2(1.30339, 1.19336)
 texture = ExtResource("2_s2308")
 
 [node name="PixelFieldNight3" type="Sprite2D" parent="."]
-position = Vector2(954, 412)
+position = Vector2(962, 438)
 scale = Vector2(1.34375, 1.34375)
 texture = ExtResource("3_tqu8w")
 
@@ -450,11 +449,12 @@ scale = Vector2(4.4823, 4.4823)
 texture = ExtResource("1_y0iof")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(960, 540)
+position = Vector2(968, 566)
 offset = Vector2(-8, -26)
 script = ExtResource("2_iwjdk")
 
 [node name="CardManager" type="Node2D" parent="."]
+position = Vector2(8, 26)
 script = ExtResource("2_86uwx")
 
 [node name="DiceDeck" parent="CardManager" instance=ExtResource("5_6mh84")]
@@ -462,19 +462,19 @@ position = Vector2(162, 868)
 scale = Vector2(4, 4)
 
 [node name="CardDropSound" type="AudioStreamPlayer2D" parent="."]
-position = Vector2(186, 113)
+position = Vector2(194, 139)
 stream = ExtResource("7_45i77")
 
 [node name="CardDropArea" parent="." instance=ExtResource("8_0e170")]
 modulate = Color(1, 3.825, 4.918, 1)
 light_mask = 2
 visibility_layer = 2
-position = Vector2(531, 187)
+position = Vector2(539, 213)
 scale = Vector2(4, 4)
 script = ExtResource("8_82ybk")
 
 [node name="InvokeButton" type="Sprite2D" parent="."]
-position = Vector2(954, 166)
+position = Vector2(962, 192)
 scale = Vector2(0.251953, 0.25)
 texture = ExtResource("6_vu0qa")
 script = ExtResource("12_v30j8")
@@ -487,7 +487,7 @@ offset_right = 613.0
 offset_bottom = 201.0
 
 [node name="PlayerHand" type="Node2D" parent="."]
-position = Vector2(11, 254)
+position = Vector2(19, 280)
 script = ExtResource("9_6xg5x")
 
 [node name="TestingDoll" type="AnimatedSprite2D" parent="."]
@@ -505,17 +505,17 @@ frame_progress = 0.196188
 shape = SubResource("CircleShape2D_f8vwx")
 
 [node name="Enemies" parent="." instance=ExtResource("10_vu0qa")]
-position = Vector2(-5, 13)
+position = Vector2(3, 39)
 
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="Control" type="Control" parent="UI"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 22.0
-offset_top = 11.0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 30.0
+offset_top = 37.0
+offset_right = 48.0
+offset_bottom = 66.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/Control"]
 layout_mode = 0

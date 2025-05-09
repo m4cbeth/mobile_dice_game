@@ -75,9 +75,6 @@ func physics_update(delta):
 			var is_in_y_range = abs(entity.global_position.y - target_coords.y) < 50
 			var is_in_strike_range = distance_to_target < 110
 			if is_in_strike_range and is_in_y_range and sprite.animation != "Attack":
-			# this logic can be changed to "if diff_x is 110 and diff_y < 50"
-			# so that only attacking if on left or right.
-			# Would change target behavior to left/right above
 				transition_to("Attack", {target = target_coords})
 			var collision = entity.move_and_collide(velocity)
 			if collision:
@@ -88,6 +85,7 @@ func physics_update(delta):
 						direction = (Vector2.UP if randi() % 2 == 0 else Vector2.DOWN)
 					#else:
 						#print(collision.get_collider())
+	#keep below horizion
 	if entity.global_position.y < MAX_HEIGHT_MIN_Y and !entity.is_falling:
 		entity.global_position.y = MAX_HEIGHT_MIN_Y
 
@@ -97,6 +95,13 @@ func get_target_coords():
 	if entity.is_in_group("knights"):
 		var bad_guys = get_bad_guys()
 		if bad_guys.size() > 0:
+			var x_shift
+			var shift_amount = 50
+			if entity.global_position.x > target_coords.x:
+				x_shift = 1 * shift_amount
+			else:
+				x_shift = -1 * shift_amount
+			#x_shift
 			return find_closest(bad_guys).position + Vector2(0, 40)
 			# eventually we should change this to target.position.x +/- some distance,
 			# depending on which side is closer...
@@ -123,7 +128,12 @@ func find_closest(nodes: Array):
 func flip_body(mob: CharacterBody2D):
 	#eventually, logic of "if more opposites(enemies/goodguys) are left/right"
 	if velocity.x == 0:
-		return
+		if not mob.is_in_group(Groups.good_guys):
+			return
+		if target_coords.x > mob.global_position.x:
+			mob.find_child("AnimatedSprite2D").flip_h = false
+		else:
+			mob.find_child("AnimatedSprite2D").flip_h = true
 	if mob.is_in_group(Groups.good_guys):
 		if mob.velocity.x < 0:
 			mob.find_child("AnimatedSprite2D").flip_h = true

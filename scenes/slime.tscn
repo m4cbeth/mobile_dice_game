@@ -373,8 +373,9 @@ script = ExtResource("1_p2gj0")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -32)
 sprite_frames = SubResource("SpriteFrames_buiih")
-animation = &"Death"
+animation = &"Walk"
 autoplay = "Idle"
+frame_progress = 0.905902
 
 [node name="EnterAnimation" type="AnimatedSprite2D" parent="."]
 position = Vector2(-2.38419e-07, -7)
@@ -386,7 +387,7 @@ frame = 1
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(0, -9.75)
 scale = Vector2(1, 0.975)
-polygon = PackedVector2Array(0, 10, 14, 10, 15.25, 2.05128, 14.5, -7.4359, 6.53336, -7.81301, -0.75, -13.3333, -5.25, -7.94872, -14, -6.92308, -17.25, 1.28205, -13.5, 10)
+polygon = PackedVector2Array(0, 10, 14, 10, 13, 1.53846, 6.53336, -7.81301, 0.75, -7.94872, -5.25, -7.94872, -14, -6.92308, -15.25, 3.33333, -13.5, 10)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_n6pvg")
