@@ -93,9 +93,11 @@ func take_damage(amount: int):
 	# Don't start a new damage sequence if already taking damage
 	if is_taking_damage:
 		return
-		
-	is_taking_damage = true
 	
+	print('taking damage on dice')
+	
+	is_taking_damage = true
+	dice_health -= amount
 	# Play damage animation
 	animated_sprite.play("Hit")
 	
@@ -107,7 +109,7 @@ func take_damage(amount: int):
 	var rumble_duration = 0.6
 	var rumble_intensity = 15.0
 	var rotation_intensity = 0.1
-	var num_shakes = 4
+	var num_shakes = 6
 	
 	# Add position and rotation shakes that diminish over time
 	for i in range(num_shakes):

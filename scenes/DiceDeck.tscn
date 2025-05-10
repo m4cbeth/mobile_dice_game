@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dks7yhc2ba12p"]
+[gd_scene load_steps=32 format=3 uid="uid://dks7yhc2ba12p"]
 
 [ext_resource type="Script" uid="uid://d2f7uywqo8ogs" path="res://scripts/DiceDeck.gd" id="1_wvwjc"]
 [ext_resource type="Texture2D" uid="uid://c4kwfgfcu4pby" path="res://assets/cards/CardTemplate.png" id="2_labqa"]
@@ -52,6 +52,30 @@ region = Rect2(64, 96, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_gutvg"]
 atlas = ExtResource("3_sx018")
 region = Rect2(80, 96, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yrn48"]
+atlas = ExtResource("3_sx018")
+region = Rect2(0, 128, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_onrif"]
+atlas = ExtResource("3_sx018")
+region = Rect2(16, 144, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jgqsu"]
+atlas = ExtResource("3_sx018")
+region = Rect2(32, 128, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_825a1"]
+atlas = ExtResource("3_sx018")
+region = Rect2(48, 144, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5p6bs"]
+atlas = ExtResource("3_sx018")
+region = Rect2(64, 128, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bg2xg"]
+atlas = ExtResource("3_sx018")
+region = Rect2(80, 144, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xxi7n"]
 atlas = ExtResource("4_labqa")
@@ -127,6 +151,29 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_yrn48")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_onrif")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jgqsu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_825a1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5p6bs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bg2xg")
+}],
+"loop": true,
+"name": &"green",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_xxi7n")
 }, {
 "duration": 1.0,
@@ -145,7 +192,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_ld45t")
 }],
 "loop": true,
-"name": &"new_animation",
+"name": &"mob_die",
 "speed": 3.0
 }]
 
@@ -205,14 +252,14 @@ visible = false
 position = Vector2(-0.75, 0.25)
 scale = Vector2(0.546875, 0.546875)
 sprite_frames = SubResource("SpriteFrames_xu1gf")
-animation = &"new_animation"
-autoplay = "new_animation"
-frame_progress = 0.353244
+animation = &"mob_die"
+autoplay = "mob_die"
+frame_progress = 0.593685
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(0, 7)
-collision_layer = 0
-collision_mask = 0
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-0.25, 0)
@@ -225,10 +272,24 @@ offset_right = 18.0
 offset_bottom = 11.0
 
 [node name="DiceDome" type="StaticBody2D" parent="." groups=["dice"]]
+visible = false
 collision_layer = 3
 collision_mask = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DiceDome"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DiceDome" groups=["dice"]]
+visible = false
+light_mask = 3
+visibility_layer = 3
+position = Vector2(-1, 0)
+shape = SubResource("CircleShape2D_wvwjc")
+
+[node name="Area2D2" type="Area2D" parent="." groups=["dice"]]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D2" groups=["dice"]]
+light_mask = 3
+visibility_layer = 3
 position = Vector2(-1, 0)
 shape = SubResource("CircleShape2D_wvwjc")
 

@@ -49,8 +49,9 @@ func physics_update(delta):
 					entity.find_child("LandSound").play()
 				entity.is_falling = false
 	else:
-		if entity:
-			target_coords = get_target_coords()
+		var target = get_target()
+		if entity and target:			
+			target_coords = target.global_position
 			if target_coords.y <  MAX_HEIGHT_MIN_Y:
 				target_coords.y = MAX_HEIGHT_MIN_Y
 			direction = target_coords - entity.global_position
@@ -97,6 +98,22 @@ func get_target_coords():
 			return Vector2(base_position.x + x_shift, base_position.y + y_shift)
 	return get_dice_coords()
 
+func get_target():
+	if entity.is_in_group("slimes"):
+		return get_dicedeck_ref()
+	if entity.is_in_group("knights"):
+		var bad_guys = get_bad_guys()
+		if bad_guys.size() > 0:
+			var closest_guy = find_closest(bad_guys)
+			return closest_guy
+		else:
+			#this would be a good place to idle if they do that
+			return get_dicedeck_ref()
+	
+
+
+func get_dicedeck_ref():
+	return get_tree().root.get_node("CardGame").find_child("DiceDeck")
 func get_dice_coords():
 	return get_tree().root.get_node("CardGame").find_child("DiceDeck").global_position
 

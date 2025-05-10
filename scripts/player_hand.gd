@@ -1,6 +1,6 @@
 extends Node2D
 
-const HAND_COUNT = 0
+const HAND_COUNT = 2
 #YETTOBE IMPLEMENTED CONST MAXCARDS
 const CARD_SCENE_PATH = "res://scenes/card.tscn"
 const HAND_Y_AXIS = 900
@@ -8,8 +8,8 @@ const CARD_WIDTH = 177
 const center_screen_x = 1920.0 / 2.0
 const DEFAULT_POSITION = Vector2(1, 280)
 const CARD_OVERLAP = 75
-const DEAL_SPEED = .75
-const DEAL_DELAY = 0.75
+const DEAL_SPEED = .3 # lower = faster
+const DEAL_DELAY = 0.25
 const ROTATION_AMOUNT = 5.0
 
 var player_hand = []
