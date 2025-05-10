@@ -44,6 +44,7 @@ func _process(delta: float) -> void:
 				randf_range(-rumble_intensity, rumble_intensity)
 			)
 			animated_sprite.rotation = initial_rotation + randf_range(-rotation_intensity, rotation_intensity)
+
 func start_rumble():
 	is_rumbling = true
 	rumble_time_left = rumble_duration
