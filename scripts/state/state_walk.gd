@@ -116,12 +116,14 @@ func find_closest(nodes: Array):
 func flip_body(mob: CharacterBody2D):
 	if mob.is_in_group(Groups.good_guys):
 		attack_area.scale.x = sign(mob.velocity.x)
+		mob.find_child('CollisionPolygon2D').scale.x = sign(mob.velocity.x)
 		if mob.velocity.x < 0:
 			mob.find_child("AnimatedSprite2D").flip_h = true
 		else:
 			mob.find_child("AnimatedSprite2D").flip_h = false
 	else:
 		attack_area.scale.x = sign(mob.velocity.x) * -1 #enemies are opposite
+		mob.find_child('CollisionPolygon2D').scale.x = sign(mob.velocity.x) * -1
 		if mob.velocity.x > 0:
 			mob.find_child("AnimatedSprite2D").flip_h = true
 		else:

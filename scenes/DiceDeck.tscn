@@ -194,10 +194,11 @@ scale = Vector2(1.14151, 1.08036)
 texture = ExtResource("2_labqa")
 
 [node name="BlueDie" type="AnimatedSprite2D" parent="."]
+light_mask = 3
+visibility_layer = 3
 position = Vector2(-0.75, 0.25)
 scale = Vector2(1.09375, 1.09375)
 sprite_frames = SubResource("SpriteFrames_xu1gf")
-frame = 5
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -206,7 +207,7 @@ scale = Vector2(0.546875, 0.546875)
 sprite_frames = SubResource("SpriteFrames_xu1gf")
 animation = &"new_animation"
 autoplay = "new_animation"
-frame_progress = 0.572671
+frame_progress = 0.820796
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(0, 7)
@@ -223,11 +224,11 @@ offset_top = -25.0
 offset_right = 18.0
 offset_bottom = 11.0
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="DiceDome" type="StaticBody2D" parent="." groups=["dice"]]
 collision_layer = 3
 collision_mask = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DiceDome"]
 position = Vector2(-1, 0)
 shape = SubResource("CircleShape2D_wvwjc")
 

@@ -4,7 +4,6 @@ class_name Attack
 @onready var sprite: AnimatedSprite2D = owner.get_node("AnimatedSprite2D")
 @onready var attack_area: Area2D = owner.get_node("DangerZone")
 @onready var damage : float = owner.damage
-var attack_damage: int
 var attack_timer := 0.0
 var target
 var attack_in_progress := false
@@ -27,9 +26,6 @@ func exit():
 	attack_in_progress = false
 
 func _on_animation_finished():
-	#for body in attack_area.get_overlapping_bodies():
-		#if body.is_in_group("bad_guys"):
-			#body.take_damage(entity, damage)
 	if sprite.animation == "Attack":
 		if attack_in_progress:
 			transition_to("Walk")
@@ -45,6 +41,8 @@ func perform_attack():
 func update(delta):
 	if attack_in_progress and sprite.frame == 3:
 		for body in attack_area.get_overlapping_bodies():
+			if body.is_in_group(Groups.dice):
+				body.get_parent().take_damage({"damage" = damage})
 			if body.is_in_group("bad_guys"):
 				body.take_damage(entity, damage)
 	if not is_instance_valid(target): #or entity.global_position.distance_to(target) > 95:

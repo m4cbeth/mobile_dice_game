@@ -506,9 +506,9 @@ position = Vector2(3, 39)
 layout_mode = 3
 anchors_preset = 0
 offset_left = 30.0
-offset_top = 37.0
+offset_top = 18.0
 offset_right = 48.0
-offset_bottom = 66.0
+offset_bottom = 76.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/Control"]
 layout_mode = 0
