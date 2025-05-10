@@ -42,7 +42,7 @@ func update(delta):
 	if attack_in_progress and sprite.frame == 3:
 		for body in attack_area.get_overlapping_bodies():
 			if body.is_in_group(Groups.dice):
-				body.get_parent().take_damage({"damage" = damage})
+				body.get_parent().take_damage(damage)
 			if body.is_in_group("bad_guys"):
 				body.take_damage(entity, damage)
 	if not is_instance_valid(target): #or entity.global_position.distance_to(target) > 95:
