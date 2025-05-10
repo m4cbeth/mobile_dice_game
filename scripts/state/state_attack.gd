@@ -38,25 +38,38 @@ func perform_attack():
 	attack_in_progress = true
 	if sprite:
 		sprite.play("Attack")
+func end_attack():
+	attack_in_progress = false
+	transition_to("Walk")
 
 func update(delta):
 	attack_timer += delta
+	
+	var overlapping = attack_area.get_overlapping_areas()
+	if entity.is_in_group(Groups.good_guys):
+		var areas = overlapping.filter(func(area): return not area.is_in_group(Groups.good_guys))
+		if areas.size() == 0:
+			end_attack()
+	elif entity.is_in_group(Groups.bad_guys):
+		var areas = overlapping.filter(func(area): return not area.is_in_group(Groups.bad_guys))
+		if areas.size() == 0:
+			end_attack()
 	if attack_area.get_overlapping_areas().size() == 0:
 		attack_in_progress = false
 		transition_to("Walk")
 	if attack_in_progress and entity.is_in_group(Groups.knights) and sprite.frame == 3:
 		for body in attack_area.get_overlapping_areas():
 			if body.is_in_group(Groups.dice):
-				body.get_parent().take_damage(damage)
+				body.get_parent().take_damage(entity, damage)
 			if body.is_in_group("bad_guys"):
-				body.take_damage(entity, damage)
+				body.get_parent().take_damage(entity, damage)
 	elif  attack_in_progress and entity.is_in_group(Groups.slimes) and sprite.frame == 6:
 		for body in attack_area.get_overlapping_areas():
 			if body.is_in_group(Groups.knights):
-				#do damage
+				#do damage to knights
 				pass
 			if body.is_in_group(Groups.dice):
-				#do points of growth
+				body.get_parent().hit_by_slime()
 				pass
 
 	if not is_instance_valid(target): #or entity.global_position.distance_to(target) > 95:

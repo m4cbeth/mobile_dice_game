@@ -15,7 +15,7 @@ var dice_coords := DICE_COORDS
 var speed_modifier: float
 const speed_modifiers = {
 	Groups.slimes: 1.0,
-	"knights": 0.5,
+	"knights": 2,
 	"whateversnext": 2
 }
 var velocity
@@ -37,6 +37,7 @@ func update(delta):
 		avoid_timer -= delta
 		if avoid_timer < 0:
 			avoiding = false
+
 func physics_update(delta):
 
 	if entity.is_falling:
@@ -72,8 +73,7 @@ func physics_update(delta):
 					if collider.is_in_group(Groups.slimes):
 						avoiding = true
 						direction = (Vector2.UP if randi() % 2 == 0 else Vector2.DOWN)
-					#else:
-						#print(collision.get_collider())
+
 	#keep below horizion
 	if entity.global_position.y < MAX_HEIGHT_MIN_Y and !entity.is_falling:
 		entity.global_position.y = MAX_HEIGHT_MIN_Y

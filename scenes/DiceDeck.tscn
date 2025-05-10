@@ -254,7 +254,7 @@ scale = Vector2(0.546875, 0.546875)
 sprite_frames = SubResource("SpriteFrames_xu1gf")
 animation = &"mob_die"
 autoplay = "mob_die"
-frame_progress = 0.593685
+frame_progress = 0.622346
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(0, 7)
