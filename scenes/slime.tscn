@@ -375,7 +375,7 @@ position = Vector2(0, -32)
 sprite_frames = SubResource("SpriteFrames_buiih")
 animation = &"Walk"
 autoplay = "Idle"
-frame_progress = 0.773293
+frame_progress = 0.873201
 
 [node name="EnterAnimation" type="AnimatedSprite2D" parent="."]
 position = Vector2(-2.38419e-07, -7)

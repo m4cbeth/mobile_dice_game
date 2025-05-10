@@ -39,9 +39,6 @@ func update(delta):
 			avoiding = false
 func physics_update(delta):
 
-	
-	# Get dice coords on every frame
-	dice_coords = get_dice_coords()
 	if entity.is_falling:
 		entity.velocity.x = 0 # do I need this line?
 		fall_velocity += GRAVITY * delta
@@ -87,18 +84,17 @@ func get_target_coords():
 	if entity.is_in_group("knights"):
 		var bad_guys = get_bad_guys()
 		if bad_guys.size() > 0:
+			var closest_guy = find_closest(bad_guys)
+			var base_position = closest_guy.position
 			var x_shift
+			var y_shift = 40
 			var shift_amount = 50
 			if entity.global_position.x > target_coords.x:
 				x_shift = 1 * shift_amount
 			else:
 				x_shift = -1 * shift_amount
 			#x_shift
-			return find_closest(bad_guys).position + Vector2(0, 40)
-			# eventually we should change this to target.position.x +/- some distance,
-			# depending on which side is closer...
-			# this will make the target be the "front" or "back"
-			# so doesn't get stuck in attack above or below while swinging at air
+			return Vector2(base_position.x + x_shift, base_position.y + y_shift)
 	return get_dice_coords()
 
 func get_dice_coords():
@@ -118,54 +114,15 @@ func find_closest(nodes: Array):
 	return closest_node
 
 func flip_body(mob: CharacterBody2D):
-	#if mob.is_in_group(Groups.knights):
-		#print("target and mob x: ", target_coords.x, " ", mob.global_position.x)
-		#if target_coords.x <= mob.global_position.x and mob.scale.x == 1:
-			#mob.scale.x = -1
-		#else:
-			#mob.scale.x = 1
-		#return
-	#eventually, logic of "if more opposites(enemies/goodguys) are left/right"
-	
-	
-	
-	if velocity.x == 0:
-		return
 	if mob.is_in_group(Groups.good_guys):
-		print("Target coords: ", target_coords.x)
-		print("Mobs x coords: ", mob.global_position.x)
-		print("Target less than: ", target_coords.x < mob.global_position.x)
-		if target_coords.x < mob.global_position.x:
-			mob.scale.x = -1
+		attack_area.scale.x = sign(mob.velocity.x)
+		if mob.velocity.x < 0:
+			mob.find_child("AnimatedSprite2D").flip_h = true
 		else:
-			mob.scale.x = 1
+			mob.find_child("AnimatedSprite2D").flip_h = false
 	else:
+		attack_area.scale.x = sign(mob.velocity.x) * -1 #enemies are opposite
 		if mob.velocity.x > 0:
-			mob.scale.x = -4
+			mob.find_child("AnimatedSprite2D").flip_h = true
 		else:
-			mob.scale.x = 4
-	
-	
-	#if velocity.x == 0:
-		#if not mob.is_in_group(Groups.good_guys):
-			#return
-		#if target_coords.x > mob.global_position.x:
-			#mob.find_child("AnimatedSprite2D").flip_h = false
-		#else:
-			#mob.find_child("AnimatedSprite2D").flip_h = true
-	#if mob.is_in_group(Groups.good_guys):
-		#if mob.velocity.x < 0:
-			#mob.find_child("AnimatedSprite2D").flip_h = true
-		#else:
-			#mob.find_child("AnimatedSprite2D").flip_h = false
-	#else:
-		#if mob.velocity.x > 0:
-			#mob.find_child("AnimatedSprite2D").flip_h = true
-		#else:
-			#mob.find_child("AnimatedSprite2D").flip_h = false
-
-
-
-"""
-if hit, trans_to(groups.damage, damage_amount)
-"""
+			mob.find_child("AnimatedSprite2D").flip_h = false
