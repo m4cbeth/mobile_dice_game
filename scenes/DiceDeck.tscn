@@ -146,7 +146,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_gutvg")
 }],
-"loop": false,
+"loop": true,
 "name": &"default",
 "speed": 3.0
 }, {
@@ -253,7 +253,7 @@ visibility_layer = 3
 position = Vector2(-0.75, 0.25)
 scale = Vector2(1.09375, 1.09375)
 sprite_frames = SubResource("SpriteFrames_xu1gf")
-animation = &"Hit"
+autoplay = "default"
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
 visible = false
