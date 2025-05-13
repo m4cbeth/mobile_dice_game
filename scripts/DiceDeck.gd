@@ -8,9 +8,9 @@ var current_frame := 0
 var dice_health := 10.0
 var is_taking_damage := false
 
-# 
+##
 
-##3
+##
 
 @export var rumble_duration: float = 0.5  # How long the rumble lasts
 @export var rumble_intensity: float = 3.0  # How strong the position rumble is (in pixels)
@@ -93,6 +93,8 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 		start_roll()
 
 func hit_by_slime():
+	print('hit by slime')
+	take_damage(-1)
 	pass
 
 func take_damage(amount: int):
@@ -104,7 +106,10 @@ func take_damage(amount: int):
 	is_taking_damage = true
 	dice_health -= amount
 	# Play damage animation
-	animated_sprite.play("Hit")
+	if amount > 0:
+		animated_sprite.play("Hit")
+	else:
+		animated_sprite.play('green')
 	
 	# Create a tween for the rumble effect
 	var tween = create_tween()

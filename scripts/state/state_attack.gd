@@ -60,7 +60,7 @@ func update(delta):
 	if attack_in_progress and entity.is_in_group(Groups.knights) and sprite.frame == 3:
 		for body in attack_area.get_overlapping_areas():
 			if body.is_in_group(Groups.dice):
-				body.get_parent().take_damage(entity, damage)
+				body.get_parent().take_damage(damage)
 			if body.is_in_group("bad_guys"):
 				body.get_parent().take_damage(entity, damage)
 	elif  attack_in_progress and entity.is_in_group(Groups.slimes) and sprite.frame == 6:
