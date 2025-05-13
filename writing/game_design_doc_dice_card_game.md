@@ -8,12 +8,14 @@ Wizard: "they're green lil smiley slimey guys. What's wrong with you?!"
 / SOMETHING ELSE. If player clicks the maybe:
 	the next wave of green guys carry little white flags
 
-
+# Icons to use:
+	https://copypastecharacter.com/all-characters
+	great website to copy and paste:
+		☊⎌☋⌮☈ therefore ∴ and because  ∵
+		Ω ∞ and so many more.
+		Be able to use these instead of numbers as part of the discovery process.
 
 # Gameplay
-
-
-
 https://youtu.be/V8BvcwLvNZo?si=2QELhSMC-42T1NUz&t=118
 this tutorial is the antithesis of what we're going for.
 playing a game for the first time should be a discovery, not a lecture

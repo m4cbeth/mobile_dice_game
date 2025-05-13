@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dks7yhc2ba12p"]
+[gd_scene load_steps=34 format=3 uid="uid://dks7yhc2ba12p"]
 
 [ext_resource type="Script" uid="uid://d2f7uywqo8ogs" path="res://scripts/DiceDeck.gd" id="1_wvwjc"]
 [ext_resource type="Texture2D" uid="uid://c4kwfgfcu4pby" path="res://assets/cards/CardTemplate.png" id="2_labqa"]
@@ -202,6 +202,12 @@ size = Vector2(44.5, 71)
 [sub_resource type="CircleShape2D" id="CircleShape2D_wvwjc"]
 radius = 9.0
 
+[sub_resource type="Theme" id="Theme_labqa"]
+default_font_size = 30
+
+[sub_resource type="Theme" id="Theme_sx018"]
+default_font_size = 30
+
 [node name="DiceDeck" type="Node2D"]
 script = ExtResource("1_wvwjc")
 
@@ -246,6 +252,7 @@ visibility_layer = 3
 position = Vector2(-0.75, 0.25)
 scale = Vector2(1.09375, 1.09375)
 sprite_frames = SubResource("SpriteFrames_xu1gf")
+animation = &"Hit"
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -272,7 +279,6 @@ offset_right = 18.0
 offset_bottom = 11.0
 
 [node name="DiceDome" type="StaticBody2D" parent="." groups=["dice"]]
-visible = false
 collision_layer = 3
 collision_mask = 3
 
@@ -292,6 +298,26 @@ light_mask = 3
 visibility_layer = 3
 position = Vector2(-1, 0)
 shape = SubResource("CircleShape2D_wvwjc")
+
+[node name="HealthNumber" type="Node2D" parent="."]
+
+[node name="Label" type="Label" parent="HealthNumber"]
+modulate = Color(1, 1, 1, 0)
+offset_left = -24.0
+offset_top = -71.0
+offset_right = 78.0
+offset_bottom = -16.0
+theme = SubResource("Theme_labqa")
+text = "  ⍼"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HealthNumber"]
+visible = false
+offset_left = -32.0
+offset_top = -71.0
+offset_right = 137.0
+offset_bottom = 23.0
+theme = SubResource("Theme_sx018")
+text = "   ⍼"
 
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]

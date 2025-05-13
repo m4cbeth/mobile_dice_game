@@ -5,7 +5,7 @@ var rolling := false
 var tween: Tween
 var faces := 6
 var current_frame := 0
-var dice_health := 10.0
+var dice_health := 2.0
 var is_taking_damage := false
 
 ##
@@ -23,25 +23,20 @@ var initial_position: Vector2
 var initial_rotation: float
 var animated_sprite: AnimatedSprite2D
 
+
 func _ready():
 	animated_sprite = $BlueDie
 	initial_position = $BlueDie.position
 	initial_rotation = $BlueDie.rotation
+	
+func _process(delta: float) -> void:
+	pass
 
 func reset_die_position():
 	animated_sprite.position = initial_position
 	animated_sprite.rotation = initial_rotation
-	
-func _process(delta: float) -> void:
-	pass
-	
-func start_rumble():
-	is_rumbling = true
-	rumble_time_left = rumble_duration
-	initial_position = animated_sprite.position
-	initial_rotation = animated_sprite.rotation
-	animated_sprite.play('Hit')
-			
+
+
 func start_roll():
 	if not rolling:
 		roll_dice()
@@ -92,17 +87,13 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 	if is_clicked(event):
 		start_roll()
 
-func hit_by_slime():
-	print('hit by slime')
-	take_damage(-1)
-	pass
 
 func take_damage(amount: int):
-	# Don't start a new damage sequence if already taking damage
+	# don't start if already taking damage
 	if is_taking_damage:
 		return
 	
-	
+	# add/minus damage and put in damage state
 	is_taking_damage = true
 	dice_health -= amount
 	# Play damage animation
@@ -150,4 +141,3 @@ func take_damage(amount: int):
 		is_taking_damage = false
 		animated_sprite.play("default")
 		reset_die_position())
-	
