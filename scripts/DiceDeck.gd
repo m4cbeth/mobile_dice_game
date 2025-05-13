@@ -78,12 +78,13 @@ func start_roll():
 func _on_button_button_down() -> void:
 	start_roll()
 
-func is_clicked(e):
-	if e is InputEventMouseButton and e.button_index == MOUSE_BUTTON_LEFT and e.pressed:
-		return true
-func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	if is_clicked(event):
-		start_roll()
+#func is_clicked(e):
+	#if e is InputEventMouseButton and e.button_index == MOUSE_BUTTON_LEFT and e.pressed:
+		#return true
+##func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	##if is_clicked(event):
+		###start_roll()
+		##print('test')
 
 func hit_by_slime():
 	print('hit by slime')
