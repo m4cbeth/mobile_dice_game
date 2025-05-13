@@ -1,4 +1,5 @@
 extends Node2D
+class_name PlayerHand
 
 const HAND_COUNT = 1
 #YETTOBE IMPLEMENTED CONST MAXCARDS
@@ -17,7 +18,7 @@ var player_hand = []
 
 func _ready() -> void:
 	var dice_deck_position = get_parent().find_child("CardManager").find_child("DiceDeck").global_position
-	var card_scene = preload("res://scenes/card.tscn")
+	var card_scene = preload(CARD_SCENE_PATH)
 	for i in range(HAND_COUNT):
 		var new_card = card_scene.instantiate()
 		new_card.position = dice_deck_position

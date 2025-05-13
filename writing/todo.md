@@ -14,6 +14,9 @@ DONE -----------------------:
 
 
 Current Bugs:
+	
+	Player hand location isn't correct doesn't stay centered,	
+	
 	Die get's 'hit' (changes yellow red) when clicked at beginning.
 	
 	Knights go I don't know where when there's no slime...

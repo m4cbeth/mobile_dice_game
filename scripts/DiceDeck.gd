@@ -1,5 +1,6 @@
 extends Node2D
 
+@onready var card_scene = preload("res://scenes/card.tscn")
 @onready var dice_sprite = $BlueDie
 @onready var health_display = $HealthNumber
 
@@ -76,15 +77,8 @@ func start_roll():
 	animated_sprite.play()
 
 func _on_button_button_down() -> void:
-	start_roll()
-
-#func is_clicked(e):
-	#if e is InputEventMouseButton and e.button_index == MOUSE_BUTTON_LEFT and e.pressed:
-		#return true
-##func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	##if is_clicked(event):
-		###start_roll()
-		##print('test')
+	#start_roll()
+	spawn_card()
 
 func hit_by_slime():
 	print('hit by slime')
@@ -145,15 +139,36 @@ func take_damage(amount: int):
 		animated_sprite.play("default")
 		reset_die_position())
 
+
+func spawn_card():
+	var card_manager = get_parent()
+	var player_hand: PlayerHand = owner.find_child("PlayerHand")
+	"""
+	todo steps:
+		add to array
+		update positions
+		time it correctly.
+	done steps:
+		ref preload
+		instantiate
+		get dice deck coords
+		pos = coords
+		add_child
+	"""
+	var deck_coords = self.global_position
+	var new_card = card_scene.instantiate()
+	new_card.global_position = deck_coords
+	card_manager.add_child(new_card)
+	player_hand.add_card_to_hand(new_card)
+	player_hand.update_hand_positions()
+
 func deal_cards_after_roll(number_of_cards):
 	if number_of_cards <= 0:
 		return
 	
-	
-	
-	
-	
-	
+	# spawn 1 card
+	# position it at deck
+	# move it to hand (use add to array of player hand function)
 	
 	
 	
