@@ -10,6 +10,13 @@ NEXT GOALS ----------------:
 		rolls the dice
 		deals cards to hand
 		if more than max cards, remove random hand_count-max_count cards
+	3) Sound design:
+		we're missing a lot of sounds that would help:
+			attack swipe
+			hit splat slime
+			dice hit
+			card deal
+			slime summon sound
 DONE -----------------------:
 
 
