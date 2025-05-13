@@ -1,6 +1,6 @@
 extends Node2D
 
-const HAND_COUNT = 2
+const HAND_COUNT = 1
 #YETTOBE IMPLEMENTED CONST MAXCARDS
 const CARD_SCENE_PATH = "res://scenes/card.tscn"
 const HAND_Y_AXIS = 900

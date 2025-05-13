@@ -1,6 +1,19 @@
-# Mobile Dice Game
+#### Mobile Dice Game ####
+(which is slowly just becoming a desktop game)
+
+# Dialogue
+Wizard: "they're green lil smiley slimey guys. What's wrong with you?!"
+	"what do you need the nice guys to carry signs"
+[BUTTON]: MAYBE
+/ SOMETHING ELSE. If player clicks the maybe:
+	the next wave of green guys carry little white flags
+
+
 
 # Gameplay
+
+
+
 https://youtu.be/V8BvcwLvNZo?si=2QELhSMC-42T1NUz&t=118
 this tutorial is the antithesis of what we're going for.
 playing a game for the first time should be a discovery, not a lecture
