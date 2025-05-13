@@ -1,6 +1,6 @@
 # TODO
 
-NEXT GOALS:
+NEXT GOALS ----------------:
 	1) Die Damage and Growth:
 		slimes do X damage and die changes to red die.
 	NEXT BUT SAME:
@@ -10,13 +10,17 @@ NEXT GOALS:
 		rolls the dice
 		deals cards to hand
 		if more than max cards, remove random hand_count-max_count cards
+DONE -----------------------:
+
 
 Current Bugs:
+	Die get's 'hit' (changes yellow red) when clicked at beginning.
+	
 	Knights go I don't know where when there's no slime...
-	Is there a slime off screen to the left?
-	They marched there and killed something before going to the dice omg lol
-	Guess debugging you gotta let things play out sometimes.
-	Ok they damage dice. good.
+		Is there a slime off screen to the left?
+		They marched there and killed something before going to the dice omg lol
+		Guess debugging you gotta let things play out sometimes.
+		Ok they damage dice. good.
 
 
 

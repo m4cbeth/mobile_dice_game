@@ -280,6 +280,7 @@ offset_right = 18.0
 offset_bottom = 11.0
 
 [node name="DiceDome" type="StaticBody2D" parent="." groups=["dice"]]
+visible = false
 collision_layer = 3
 collision_mask = 3
 
@@ -291,6 +292,7 @@ position = Vector2(-1, 0)
 shape = SubResource("CircleShape2D_wvwjc")
 
 [node name="Area2D2" type="Area2D" parent="." groups=["dice"]]
+visible = false
 collision_layer = 2
 collision_mask = 2
 
@@ -301,6 +303,7 @@ position = Vector2(-1, 0)
 shape = SubResource("CircleShape2D_wvwjc")
 
 [node name="HealthNumber" type="Node2D" parent="."]
+visible = false
 script = ExtResource("5_sx018")
 
 [node name="Label" type="Label" parent="HealthNumber"]
