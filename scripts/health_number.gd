@@ -2,15 +2,22 @@ extends Node2D
 
 @onready var infoglypho: Label = $Label
 @onready var base_position = $Label.position
+@onready var text_box = $TextBoxt
 
 const duration = 0.5
 const y_offset = 10
 const y_goto = 30
 
-#func _ready() -> void:
-	#doathing()
+func setText():
+	text_box.text = str(get_parent().dice_health)
 
-func show_number():
+func _ready() -> void:
+	setText()
+
+func show_number(damage):
+	if damage == 0:
+		return
+	setText()
 	var label_position = infoglypho.position
 	var start_pos = Vector2(label_position.x, label_position.y + y_offset)
 	var endin_pos = Vector2(label_position.x, label_position.y - y_goto)

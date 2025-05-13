@@ -1,6 +1,8 @@
 extends Node2D
 
 @onready var dice_sprite = $BlueDie
+@onready var health_display = $HealthNumber
+
 var rolling := false
 var tween: Tween
 var faces := 6
@@ -87,6 +89,9 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 	if is_clicked(event):
 		start_roll()
 
+func hit_by_slime():
+	print('hit by slime')
+	take_damage(-1)
 
 func take_damage(amount: int):
 	# don't start if already taking damage
@@ -97,6 +102,7 @@ func take_damage(amount: int):
 	is_taking_damage = true
 	dice_health -= amount
 	# Play damage animation
+	health_display.show_number(amount)
 	if amount > 0:
 		animated_sprite.play("Hit")
 	else:
