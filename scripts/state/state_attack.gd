@@ -69,7 +69,7 @@ func update(delta):
 				#do damage to knights
 				pass
 			if body.is_in_group(Groups.dice):
-				body.get_parent().hit_by_slime()
+				body.get_parent().hit_by_slime(entity)
 				pass
 
 	if not is_instance_valid(target): #or entity.global_position.distance_to(target) > 95:

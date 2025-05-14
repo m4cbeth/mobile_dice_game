@@ -4,7 +4,7 @@ class_name PlayerHand
 const HAND_COUNT = 1
 #YETTOBE IMPLEMENTED CONST MAXCARDS
 const CARD_SCENE_PATH = "res://scenes/card.tscn"
-const HAND_Y_AXIS = 975
+const HAND_Y_AXIS = 920
 const CARD_WIDTH = 177
 const center_screen_x = 1920.0 / 2.0
 const DEFAULT_POSITION = Vector2(1, 280)

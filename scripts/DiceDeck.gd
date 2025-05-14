@@ -80,8 +80,9 @@ func _on_button_button_down() -> void:
 	#start_roll()
 	spawn_card()
 
-func hit_by_slime():
-	print('hit by slime')
+func hit_by_slime(entity: CharacterBody2D):
+	if dice_health >= 4:
+		entity.state_machine.transition_to("Death")
 	take_damage(-1)
 
 func take_damage(amount: int):

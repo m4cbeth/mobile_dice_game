@@ -32,7 +32,9 @@ DONE -----------------------:
 Current Bugs:
 	
 	Player hand location isn't correct doesn't stay centered,	
-	
+		The card isn't being removed from the array that tracks "player hand"
+		also, what happens when player picks a card up from the hand? Leaves it?
+		Only re enter if dropped back on deck?
 	Die get's 'hit' (changes yellow red) when clicked at beginning.
 	
 	Knights go I don't know where when there's no slime...
