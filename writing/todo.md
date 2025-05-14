@@ -1,5 +1,10 @@
 # TODO
 
+CURR GOALS ----------------:
+	Die roll, land on number, deal that many cards.
+		if hand_count > max cards:
+			destroy extra cards
+
 NEXT GOALS ----------------:
 	1) Die Damage and Growth:
 		slimes do X damage and die changes to red die.
@@ -17,6 +22,10 @@ NEXT GOALS ----------------:
 			dice hit
 			card deal
 			slime summon sound
+	4) Invoke logic:
+		color should be based not on seperate layers, but:
+			controling the RAW values via dynamic code (i.e. card count body overlap)
+	
 DONE -----------------------:
 
 

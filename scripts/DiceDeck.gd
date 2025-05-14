@@ -143,18 +143,6 @@ func take_damage(amount: int):
 func spawn_card():
 	var card_manager = get_parent()
 	var player_hand: PlayerHand = owner.find_child("PlayerHand")
-	"""
-	todo steps:
-		add to array
-		update positions
-		time it correctly.
-	done steps:
-		ref preload
-		instantiate
-		get dice deck coords
-		pos = coords
-		add_child
-	"""
 	var deck_coords = self.global_position
 	var new_card = card_scene.instantiate()
 	new_card.global_position = deck_coords
@@ -165,8 +153,8 @@ func spawn_card():
 func deal_cards_after_roll(number_of_cards):
 	if number_of_cards <= 0:
 		return
-	
 	# spawn 1 card
+	
 	# position it at deck
 	# move it to hand (use add to array of player hand function)
 	
