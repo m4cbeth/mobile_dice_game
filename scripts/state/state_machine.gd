@@ -28,6 +28,8 @@ func _physics_process(delta: float) -> void:
 		current_state.physics_update(delta)
 
 func transition_to(state_name: String, msg: Dictionary = {}):
+	if current_state is Death:
+		return
 	if current_state and current_state.name == state_name:
 		return	
 	if not states.has(state_name):
