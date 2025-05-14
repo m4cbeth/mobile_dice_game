@@ -64,6 +64,17 @@ func physics_update(delta):
 			var distance_to_target = entity.global_position.distance_to(target_coords)
 			var is_in_y_range = abs(entity.global_position.y - target_coords.y) < 50
 			var is_in_strike_range = distance_to_target < 110
+			var test = attack_area.get_overlapping_areas()
+			print(test.size())
+			"""
+			
+			THE BELOW IF:
+				should be adding if attack_area.get_overlapping.size() > 0
+				but right now that would need sopme reorganization of what is in which group
+				(because the dice deck card is an area...)
+				this will either be done via groups or collision masks
+			
+			"""
 			if is_in_strike_range and is_in_y_range and sprite.animation != "Attack":
 				transition_to("Attack", {target = target_coords})
 			var collision = entity.move_and_collide(velocity)
