@@ -5,8 +5,7 @@ extends Node2D
 var card_being_dragged: Node2D
 var drag_offset = Vector2.ZERO
 var is_hovering_on_card
-var most_recent_z_index
-var card_return_position
+var index_dragged_from := 0
 
 const COLLISION_CARD_MASK = 1
 const HOVER_SCALE_AMOUNT = 4.5
@@ -42,7 +41,7 @@ func start_drag(card):
 	card_being_dragged = card
 	card.scale = DEFAULT_SCALE_AMOUNT
 	var hand_array: Array = playerhand_node.player_hand
-	var index_dragged_from = hand_array.find(card)
+	index_dragged_from = hand_array.find(card)
 	hand_array.erase(card)
 	playerhand_node.update_hand_positions()
 	
@@ -58,20 +57,22 @@ func start_drag(card):
 func finish_drag(card):
 	card_being_dragged.scale = Vector2(HOVER_SCALE_AMOUNT, HOVER_SCALE_AMOUNT)
 	# check for overlap
-	if card.is_in_group("playing_cards"):
-		var overlapping = cardarea.get_overlapping_areas()
-		if overlapping.any(func(elem): return elem.is_in_group("glyph")):
-			print('is overlapping glpyth')
-		else:
-			print('nope')
-		#var cardarea: Area2D = card.find_child("Area2D")
-		#for each in overlap:
-			#print(each.is_in_group('glyph'))
+	if card:
+		print(card)
+		print(card.is_in_group("playing_cards"))
+		var cardarea: Area2D = card.find_child("Area2D")
+		if card.is_in_group("playing_cards"):
+			var overlapping = cardarea.get_overlapping_areas()
+			if overlapping.any(func(elem): return elem.is_in_group("glyph")):
+				print('is overlapping glpyth')
+			else:
+				# return to hand
+				playerhand_node.add_card_to_hand(card, index_dragged_from)
+				
 	
 	card_being_dragged = null
 	
-	
-	#playerhand_node.update_hand_positions() ONLY IF no overlap
+	# this works.... until card is laid on glyph. Then the logic stops...
 
 """
 

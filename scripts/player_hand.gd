@@ -1,6 +1,8 @@
 extends Node2D
 class_name PlayerHand
 
+@onready var dice_deck_node = $"../CardManager/DiceDeck"
+
 const HAND_COUNT = 1
 #YETTOBE IMPLEMENTED CONST MAXCARDS
 const CARD_SCENE_PATH = "res://scenes/card.tscn"
@@ -18,17 +20,16 @@ func _ready() -> void:
 	var dice_deck_position = get_parent().find_child("CardManager").find_child("DiceDeck").global_position
 	var card_scene = preload(CARD_SCENE_PATH)
 	for i in range(HAND_COUNT):
-		var new_card = card_scene.instantiate()
-		new_card.position = dice_deck_position
-		new_card.z_index = 3 + i
-		new_card.name = "Card" + str(i+1)
-		$"../CardManager".add_child(new_card)
-		add_card_to_hand(new_card)
+		
+		dice_deck_node.spawn_card()
+		
+		
 		await get_tree().create_timer(DEAL_DELAY).timeout
 
-func add_card_to_hand(card):
-	player_hand.insert(0, card)
+func add_card_to_hand(card, pos = 0):
+	player_hand.insert(pos, card)
 	update_hand_positions()
+	print('playerhand: ', player_hand)
 
 func update_hand_positions():
 	for i in range(player_hand.size()):
