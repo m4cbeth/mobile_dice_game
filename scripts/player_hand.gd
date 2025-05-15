@@ -12,7 +12,6 @@ const CARD_OVERLAP = 75
 const DEAL_SPEED = .3 # lower = faster
 const DEAL_DELAY = 0.25
 const ROTATION_AMOUNT = 5.0
-
 var player_hand = []
 
 
@@ -31,9 +30,11 @@ func _ready() -> void:
 func add_card_to_hand(card):
 	player_hand.insert(0, card)
 	update_hand_positions()
-	
+
 func update_hand_positions():
 	for i in range(player_hand.size()):
+		# z index based off some base num + index of card in hand
+		
 		var card = player_hand[i]
 		var new_position = Vector2(calculate_card_position(i), HAND_Y_AXIS)
 		animate_card_to_position(card, new_position)
@@ -56,3 +57,15 @@ func calculate_card_rotation(index):
 		return 0.0
 	var t = index / float(count -1) * 2.0 - 1.0
 	return t * ROTATION_AMOUNT
+
+#func raycast_check_for_card():
+	#var space_state = get_world_2d().direct_space_state
+	#var parameters = PhysicsPointQueryParameters2D.new()
+	#parameters.position = get_global_mouse_position()
+	#parameters.collide_with_areas = true
+	#parameters.collision_mask = COLLISION_CARD_MASK
+	#var result = space_state.intersect_point(parameters)
+	#if result.size() > 0:
+	##	return result[0].collider.get_parent()
+		#return get_card_with_highest_z_index(result)
+	#return null

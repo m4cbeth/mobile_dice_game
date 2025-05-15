@@ -13,10 +13,11 @@ var avoid_duration: float
 const DICE_COORDS = Vector2(41, 303)
 var dice_coords := DICE_COORDS
 var speed_modifier: float
+const base_speed = 2
 const speed_modifiers = {
-	Groups.slimes: 1.0,
-	"knights": 2,
-	"whateversnext": 2
+	Groups.slimes: 1 * base_speed,
+	"knights": 2 * base_speed,
+	"whateversnext": 2 * base_speed
 }
 var velocity
 var fall_velocity = 0.0
@@ -27,7 +28,7 @@ var fake_floor: int
 @export var speed := 12.0 # disagree w export, get based on type (knights faster than slimes)
 
 func enter(_msg: Dictionary = {}) -> void:
-	speed_modifier = 1.0 if get_parent().is_in_group(Groups.slimes) else 0.5
+	speed_modifier = speed_modifiers["knights"] if get_parent().is_in_group(Groups.slimes) else speed_modifiers[Groups.slimes]
 	if sprite:
 		sprite.play("Walk")
 

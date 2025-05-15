@@ -1,4 +1,4 @@
-[gd_scene load_steps=97 format=3 uid="uid://dks7yhc2ba12p"]
+[gd_scene load_steps=96 format=3 uid="uid://dks7yhc2ba12p"]
 
 [ext_resource type="Script" uid="uid://d2f7uywqo8ogs" path="res://scripts/DiceDeck.gd" id="1_wvwjc"]
 [ext_resource type="Texture2D" uid="uid://c4kwfgfcu4pby" path="res://assets/cards/CardTemplate.png" id="2_labqa"]
@@ -7,9 +7,6 @@
 [ext_resource type="Script" uid="uid://0iyclu05yuj0" path="res://scripts/health_number.gd" id="5_sx018"]
 [ext_resource type="Texture2D" uid="uid://bbpoksnfsspth" path="res://assets/sprites/enemies/Werewolf.png" id="5_w6w26"]
 [ext_resource type="Texture2D" uid="uid://d3256eiob1g4j" path="res://assets/vfx/Free Smoke Fx  Pixel 06.png" id="6_mupm1"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jfvdx"]
-size = Vector2(44.5, 71)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wvwjc"]
 atlas = ExtResource("3_sx018")
@@ -693,17 +690,6 @@ offset_top = -18.0
 offset_right = 18.0
 offset_bottom = 18.0
 
-[node name="Area2D" type="Area2D" parent="."]
-visible = false
-position = Vector2(0, 7)
-collision_layer = 2
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-visible = false
-position = Vector2(-0.25, 0)
-shape = SubResource("RectangleShape2D_jfvdx")
-
 [node name="BlueDie" type="AnimatedSprite2D" parent="."]
 light_mask = 3
 visibility_layer = 3
@@ -719,7 +705,7 @@ scale = Vector2(0.546875, 0.546875)
 sprite_frames = SubResource("SpriteFrames_xu1gf")
 animation = &"mob_die"
 autoplay = "mob_die"
-frame_progress = 0.44754
+frame_progress = 0.218912
 
 [node name="DiceDome" type="StaticBody2D" parent="." groups=["dice"]]
 collision_layer = 3
@@ -763,7 +749,6 @@ offset_bottom = 27.0
 theme = SubResource("Theme_sx018")
 
 [node name="GreenSmoke" type="AnimatedSprite2D" parent="."]
-visible = false
 modulate = Color(0.181933, 0.796221, 0.50448, 1)
 sprite_frames = SubResource("SpriteFrames_w6w26")
 animation = &"eight_reveal"
@@ -771,6 +756,3 @@ frame = 11
 frame_progress = 1.0
 
 [connection signal="button_down" from="DeckOCards/Button" to="." method="_on_button_button_down"]
-[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
-[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
-[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

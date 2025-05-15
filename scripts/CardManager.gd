@@ -46,27 +46,21 @@ func _input(event):
 
 func start_drag(card):
 	card_return_position = card.position
-	#most_recent_z_index += 1
-	#card.z_index = most_recent_z_index
 	card_being_dragged = card
 	card.scale = DEFAULT_SCALE_AMOUNT
+	
+	# var index of card
+	# array.remove() or .erase() based on if we know index or name of card
 
 func finish_drag():
 	card_being_dragged.scale = Vector2(HOVER_SCALE_AMOUNT, HOVER_SCALE_AMOUNT)
 	card_being_dragged = null
 
-
-
-func connect_card_signals(card):
-	card.connect("hovered", on_hovered_over_card)
-	card.connect("hovered_off", on_hovered_off_card)
-
-
 func on_hovered_over_card(card):
 	if !is_hovering_on_card:
 		is_hovering_on_card = true
 		highlight_card(card, true)
-	
+
 func on_hovered_off_card(card):
 	if !card_being_dragged:		
 		highlight_card(card, false)
@@ -75,7 +69,6 @@ func on_hovered_off_card(card):
 			highlight_card(new_card_hovered, true)
 		else:
 			is_hovering_on_card = false
-	
 
 func highlight_card(card, hovered):
 	var target_scale = Vector2(HOVER_SCALE_AMOUNT, HOVER_SCALE_AMOUNT) if hovered else DEFAULT_SCALE_AMOUNT
@@ -83,7 +76,6 @@ func highlight_card(card, hovered):
 	card.z_index = target_z
 	var tween = card.create_tween()
 	tween.tween_property(card, "scale", target_scale, HOVER_TWEEEN_SPEED).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-
 
 func raycast_check_for_card():
 	var space_state = get_world_2d().direct_space_state
@@ -93,7 +85,6 @@ func raycast_check_for_card():
 	parameters.collision_mask = COLLISION_CARD_MASK
 	var result = space_state.intersect_point(parameters)
 	if result.size() > 0:
-	#	return result[0].collider.get_parent()
 		return get_card_with_highest_z_index(result)
 	return null
 
@@ -109,3 +100,7 @@ func get_card_with_highest_z_index(cards):
 			highest_z_card = current_card
 			highest_z_index = current_card.z_index
 	return highest_z_card
+
+func connect_card_signals(card):
+	card.connect("hovered", on_hovered_over_card)
+	card.connect("hovered_off", on_hovered_off_card)

@@ -8,6 +8,16 @@ Wizard: "they're green lil smiley slimey guys. What's wrong with you?!"
 / SOMETHING ELSE. If player clicks the maybe:
 	the next wave of green guys carry little white flags
 
+# Gameplay (will player ever need to move whole hand)
+Or some thing to grab a lot of mobs? If so I thought of funny dialogue.
+Some voice, "need a hand?" tehehehe ala undertale or whatever I'm thinking of
+"well, I'll give you a hand. If you need a hand, play a hand"
+...
+"You need to play a certain nubmer of cards, I'll give you five guesses"
+(get it; if you play a hand, you'll get a hand tool maybe? To pick up the whole hand?)
+
+
+
 # Icons to use:
 	https://copypastecharacter.com/all-characters
 	great website to copy and paste:
