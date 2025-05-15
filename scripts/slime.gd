@@ -9,7 +9,7 @@ var health = 2.0
 var is_falling: bool
 const mob_type = Groups.slimes
 var shitlist := [] # a list of people who've harmed me
-var damage := 1.0
+var damage := 1
 
 func take_damage(attacker = null, dmg := 1) -> void:
 	if not shitlist.has(attacker):

@@ -7,10 +7,10 @@ var health = 10.0
 var fake_floor := 800
 var is_falling := false
 var shitlist := [] # a list of people who've harmed me
-var damage := 1.0
+var damage := 1
 const mob_type = Groups.knights
 
-func take_damage(attacker = null, dmg := 1.0) -> void:
+func take_damage(attacker = null, dmg := 1) -> void:
 	if not shitlist.has(attacker):
 		shitlist.append(attacker)
 	health -= dmg

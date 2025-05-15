@@ -64,9 +64,9 @@ func physics_update(delta):
 			var distance_to_target = entity.global_position.distance_to(target_coords)
 			var is_in_y_range = abs(entity.global_position.y - target_coords.y) < 50
 			var is_in_strike_range = distance_to_target < 110
+			"""
 			var test = attack_area.get_overlapping_areas()
 			print(test.size())
-			"""
 			
 			THE BELOW IF:
 				should be adding if attack_area.get_overlapping.size() > 0
@@ -113,6 +113,19 @@ func get_target():
 	if entity.is_in_group("slimes"):
 		return get_dicedeck_ref()
 	if entity.is_in_group("knights"):
+		
+		
+		
+		
+		var en = get_bad_guys()
+		for each in en:
+			print("Object is ", each, "; and owner is: ", each.owner)
+		
+		
+		
+		
+		
+		
 		var bad_guys = get_bad_guys()
 		if bad_guys.size() > 0:
 			var closest_guy = find_closest(bad_guys)

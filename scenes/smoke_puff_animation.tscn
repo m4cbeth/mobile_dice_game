@@ -137,9 +137,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_j8ima")
 }],
-"loop": true,
+"loop": false,
 "name": &"figure8reveal",
-"speed": 5.0
+"speed": 14.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -188,6 +188,6 @@ animations = [{
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 modulate = Color(0.181933, 0.796221, 0.50448, 1)
 sprite_frames = SubResource("SpriteFrames_87xbd")
-animation = &"square_reveal"
-frame = 8
-frame_progress = 0.11392
+animation = &"figure8reveal"
+frame = 11
+frame_progress = 1.0

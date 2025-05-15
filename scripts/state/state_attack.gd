@@ -3,7 +3,7 @@ class_name Attack
 
 @onready var sprite: AnimatedSprite2D = owner.get_node("AnimatedSprite2D")
 @onready var attack_area: Area2D = owner.get_node("DangerZone")
-@onready var damage : float = owner.damage
+@onready var damage : int = owner.damage
 var attack_timer := 0.0
 var target
 var attack_in_progress := false

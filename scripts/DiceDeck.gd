@@ -8,7 +8,7 @@ var rolling := false
 var tween: Tween
 var faces := 6
 var current_frame := 0
-var dice_health := 2.0
+var dice_health := 2
 var is_taking_damage := false
 
 @export var rumble_duration: float = 0.5  # How long the rumble lasts
