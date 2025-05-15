@@ -2,9 +2,8 @@ extends Node2D
 
 @onready var playerhand_node = $"../PlayerHand"
 
-var card_being_dragged
+var card_being_dragged: Node2D
 var drag_offset = Vector2.ZERO
-var screen_size
 var is_hovering_on_card
 var most_recent_z_index
 var card_return_position
@@ -19,10 +18,6 @@ const MAX_Y = 1080
 func clamp_mouse(mouse_pos: Vector2):
 	return Vector2(clamp(mouse_pos.x, 0, MAX_X), clamp(mouse_pos.y, 0, MAX_Y))
 
-# Called when the node enters the scene tree for the first times.
-func _ready():
-	screen_size = get_viewport_rect().size
-	most_recent_z_index = 5
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -37,43 +32,33 @@ func _input(event):
 			if card:
 				drag_offset = card.global_position - get_global_mouse_position()
 				start_drag(card)
-			else:
-				if card_being_dragged:
-					print('hel')
-					finish_drag()
-		else:
+		else: # ON RELEASE
 			if card_being_dragged:
+				finish_drag()
 				$"../Camera2D".trigger_shake()
 				$"../CardDropSound".play()
-			card_being_dragged = null
 
 func start_drag(card):
-	print(card)
-	card_return_position = card.position
 	card_being_dragged = card
 	card.scale = DEFAULT_SCALE_AMOUNT
-	
 	var hand_array: Array = playerhand_node.player_hand
+	var index_dragged_from = hand_array.find(card)
 	hand_array.erase(card)
+	playerhand_node.update_hand_positions()
 	
 	"""
-	
-	
 	# var index of card
 	# array.remove() or .erase() based on if we know index or name of card
 
 	slight change of plan. don't remove right away
 	remove on release if over...
+	
 	"""
-
 
 func finish_drag():
 	card_being_dragged.scale = Vector2(HOVER_SCALE_AMOUNT, HOVER_SCALE_AMOUNT)
 	card_being_dragged = null
-	print(playerhand_node)
-	print(playerhand_node.update_hand_positions)
-	playerhand_node.update_hand_positions()
-	playerhand_node.update_hand_positions()
+	#playerhand_node.update_hand_positions()
 
 """
 
@@ -82,13 +67,7 @@ if card body collison over lapping with invoke?
 else:
 	add back to hand or leave in hand and call update hand pos funciton
 
-
 """
-
-
-
-
-
 
 
 

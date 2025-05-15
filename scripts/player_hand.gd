@@ -6,8 +6,7 @@ const HAND_COUNT = 1
 const CARD_SCENE_PATH = "res://scenes/card.tscn"
 const HAND_Y_AXIS = 920
 const CARD_WIDTH = 177
-const center_screen_x = 1920.0 / 2.0
-const DEFAULT_POSITION = Vector2(1, 280)
+const center_screen_x = 2020.0 / 2.0
 const CARD_OVERLAP = 75
 const DEAL_SPEED = .3 # lower = faster
 const DEAL_DELAY = 0.25
@@ -48,9 +47,13 @@ func animate_card_to_position(card, new_position):
 	tween.tween_property(card, "position", new_position, DEAL_SPEED)
 
 func calculate_card_position(index):
-	var total_width = (player_hand.size() - 1) * CARD_WIDTH
-	var x_offset = center_screen_x + index * CARD_WIDTH - total_width / 2.0 - CARD_OVERLAP * index
-	return x_offset
+	var hand_size = player_hand.size()
+	if hand_size == 0:
+		return center_screen_x
+	var total_width = CARD_WIDTH + (hand_size - 1) * (CARD_WIDTH - CARD_OVERLAP)
+	var start_x = center_screen_x - total_width / 2.0
+	return start_x + index * (CARD_WIDTH - CARD_OVERLAP)
+
 
 func calculate_card_rotation(index):
 	var count = player_hand.size()
