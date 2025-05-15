@@ -687,20 +687,22 @@ position = Vector2(0, -0.00012207)
 scale = Vector2(1.14151, 1.08036)
 texture = ExtResource("2_labqa")
 
+[node name="Button" type="Button" parent="DeckOCards"]
+offset_left = -20.0
+offset_top = -18.0
+offset_right = 18.0
+offset_bottom = 18.0
+
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 position = Vector2(0, 7)
 collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
 position = Vector2(-0.25, 0)
 shape = SubResource("RectangleShape2D_jfvdx")
-
-[node name="Button" type="Button" parent="Area2D"]
-offset_left = -20.0
-offset_top = -25.0
-offset_right = 18.0
-offset_bottom = 11.0
 
 [node name="BlueDie" type="AnimatedSprite2D" parent="."]
 light_mask = 3
@@ -717,15 +719,13 @@ scale = Vector2(0.546875, 0.546875)
 sprite_frames = SubResource("SpriteFrames_xu1gf")
 animation = &"mob_die"
 autoplay = "mob_die"
-frame_progress = 0.605884
+frame_progress = 0.44754
 
 [node name="DiceDome" type="StaticBody2D" parent="." groups=["dice"]]
-visible = false
 collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DiceDome" groups=["dice"]]
-visible = false
 light_mask = 3
 visibility_layer = 3
 position = Vector2(-1, 0)
@@ -737,6 +737,7 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D2" groups=["dice"]]
+visible = false
 light_mask = 3
 visibility_layer = 3
 position = Vector2(-1, 0)
@@ -762,13 +763,14 @@ offset_bottom = 27.0
 theme = SubResource("Theme_sx018")
 
 [node name="GreenSmoke" type="AnimatedSprite2D" parent="."]
+visible = false
 modulate = Color(0.181933, 0.796221, 0.50448, 1)
 sprite_frames = SubResource("SpriteFrames_w6w26")
 animation = &"eight_reveal"
 frame = 11
 frame_progress = 1.0
 
+[connection signal="button_down" from="DeckOCards/Button" to="." method="_on_button_button_down"]
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
-[connection signal="button_down" from="Area2D/Button" to="." method="_on_button_button_down"]
