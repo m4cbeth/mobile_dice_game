@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var playerhand_node = $"../PlayerHand"
+@onready var playerhand_node: PlayerHand = $"../PlayerHand"
 
 var card_being_dragged: Node2D
 var drag_offset = Vector2.ZERO
@@ -54,9 +54,9 @@ func start_drag(card):
 	
 	"""
 
-func finish_drag(card):
-	card_being_dragged.scale = Vector2(HOVER_SCALE_AMOUNT, HOVER_SCALE_AMOUNT)
-	# check for overlap
+func finish_drag(card: Node):
+	if card and card.is_in_group(Groups.playing_cards):
+		card_being_dragged.scale = Vector2(HOVER_SCALE_AMOUNT, HOVER_SCALE_AMOUNT)
 	if card:
 		print(card)
 		print(card.is_in_group("playing_cards"))
@@ -68,7 +68,8 @@ func finish_drag(card):
 			else:
 				# return to hand
 				playerhand_node.add_card_to_hand(card, index_dragged_from)
-				
+				playerhand_node.update_hand_positions()
+				print(playerhand_node.player_hand)
 	
 	card_being_dragged = null
 	

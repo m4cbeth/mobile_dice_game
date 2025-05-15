@@ -85,25 +85,11 @@ func hit_by_slime(entity: CharacterBody2D):
 		entity.state_machine.transition_to("Death")
 		green_smoke.play_backwards("eight_reveal")
 		await green_smoke.animation_finished
-		
-		
-		
-		
-		
-		
 		# hide old die // disable if needed (collision etc)
 		dice_sprite.visible = false
 		mob_die.visible = true
 		# show new dice // enable etc if needed
-		
-		green_smoke.play("eight_reveal")
-		
-		
-		
-		
-		
-		
-		
+		green_smoke.play("eight_reveal")		
 		return
 	take_damage(-1)
 
@@ -171,7 +157,7 @@ func spawn_card():
 	new_card.add_to_group("playing_cards")
 	new_card.global_position = deck_coords
 	card_manager.add_child(new_card)
-	player_hand.add_card_to_hand(new_card)
+	player_hand.add_card_to_hand(new_card, 0)
 	player_hand.update_hand_positions()
 
 func deal_cards_after_roll(number_of_cards):

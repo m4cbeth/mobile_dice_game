@@ -705,7 +705,7 @@ scale = Vector2(0.546875, 0.546875)
 sprite_frames = SubResource("SpriteFrames_xu1gf")
 animation = &"mob_die"
 autoplay = "mob_die"
-frame_progress = 0.267014
+frame_progress = 0.291386
 
 [node name="DiceDome" type="StaticBody2D" parent="." groups=["dice"]]
 collision_layer = 3

@@ -20,14 +20,12 @@ func _ready() -> void:
 	var dice_deck_position = get_parent().find_child("CardManager").find_child("DiceDeck").global_position
 	var card_scene = preload(CARD_SCENE_PATH)
 	for i in range(HAND_COUNT):
-		
 		dice_deck_node.spawn_card()
-		
-		
 		await get_tree().create_timer(DEAL_DELAY).timeout
 
-func add_card_to_hand(card, pos = 0):
-	player_hand.insert(pos, card)
+func add_card_to_hand(card, pos):
+	var val = pos if pos >= 0 else 0
+	player_hand.insert(val, card)
 	update_hand_positions()
 	print('playerhand: ', player_hand)
 
