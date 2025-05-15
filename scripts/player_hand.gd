@@ -32,6 +32,7 @@ func add_card_to_hand(card):
 	update_hand_positions()
 
 func update_hand_positions():
+	print('has run')
 	for i in range(player_hand.size()):
 		# z index based off some base num + index of card in hand
 		

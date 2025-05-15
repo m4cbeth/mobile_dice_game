@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var player_hand = $"../PlayerHand"
+@onready var playerhand_node = $"../PlayerHand"
 
 var card_being_dragged
 var drag_offset = Vector2.ZERO
@@ -39,6 +39,7 @@ func _input(event):
 				start_drag(card)
 			else:
 				if card_being_dragged:
+					print('hel')
 					finish_drag()
 		else:
 			if card_being_dragged:
@@ -47,28 +48,42 @@ func _input(event):
 			card_being_dragged = null
 
 func start_drag(card):
+	print(card)
 	card_return_position = card.position
 	card_being_dragged = card
 	card.scale = DEFAULT_SCALE_AMOUNT
 	
-	
-	
+	var hand_array: Array = playerhand_node.player_hand
+	hand_array.erase(card)
 	
 	"""
+	
+	
 	# var index of card
 	# array.remove() or .erase() based on if we know index or name of card
+
+	slight change of plan. don't remove right away
+	remove on release if over...
 	"""
-
-
 
 
 func finish_drag():
 	card_being_dragged.scale = Vector2(HOVER_SCALE_AMOUNT, HOVER_SCALE_AMOUNT)
 	card_being_dragged = null
+	print(playerhand_node)
+	print(playerhand_node.update_hand_positions)
+	playerhand_node.update_hand_positions()
+	playerhand_node.update_hand_positions()
+
+"""
+
+if card body collison over lapping with invoke?
+	release the way it works right now
+else:
+	add back to hand or leave in hand and call update hand pos funciton
 
 
-
-
+"""
 
 
 
