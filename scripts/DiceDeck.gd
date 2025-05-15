@@ -2,13 +2,16 @@ extends Node2D
 
 @onready var card_scene = preload("res://scenes/card.tscn")
 @onready var dice_sprite = $BlueDie
+@onready var mob_die = $RedDie # RedDie.play_her("won") ("ready player one")
 @onready var health_display = $HealthNumber
+@onready var green_smoke: AnimatedSprite2D = $GreenSmoke
 
 var rolling := false
 var tween: Tween
 var faces := 6
 var current_frame := 0
 var dice_health := 2
+var dice_transform_threshold := 4
 var is_taking_damage := false
 
 @export var rumble_duration: float = 0.5  # How long the rumble lasts
@@ -22,14 +25,10 @@ var initial_position: Vector2
 var initial_rotation: float
 var animated_sprite: AnimatedSprite2D
 
-
 func _ready():
 	animated_sprite = $BlueDie
 	initial_position = $BlueDie.position
 	initial_rotation = $BlueDie.rotation
-	
-func _process(delta: float) -> void:
-	pass
 
 func reset_die_position():
 	animated_sprite.position = initial_position
@@ -81,8 +80,31 @@ func _on_button_button_down() -> void:
 	spawn_card()
 
 func hit_by_slime(entity: CharacterBody2D):
+	# if health is above threashold, transform into new die
 	if dice_health >= 4:
 		entity.state_machine.transition_to("Death")
+		green_smoke.play_backwards("eight_reveal")
+		await green_smoke.animation_finished
+		
+		
+		
+		
+		
+		
+		# hide old die // disable if needed (collision etc)
+		dice_sprite.visible = false
+		mob_die.visible = true
+		# show new dice // enable etc if needed
+		
+		green_smoke.play("eight_reveal")
+		
+		
+		
+		
+		
+		
+		
+		return
 	take_damage(-1)
 
 func take_damage(amount: int):

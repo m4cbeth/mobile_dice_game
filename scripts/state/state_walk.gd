@@ -113,19 +113,6 @@ func get_target():
 	if entity.is_in_group("slimes"):
 		return get_dicedeck_ref()
 	if entity.is_in_group("knights"):
-		
-		
-		
-		
-		var en = get_bad_guys()
-		for each in en:
-			print("Object is ", each, "; and owner is: ", each.owner)
-		
-		
-		
-		
-		
-		
 		var bad_guys = get_bad_guys()
 		if bad_guys.size() > 0:
 			var closest_guy = find_closest(bad_guys)
