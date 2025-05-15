@@ -32,6 +32,7 @@ window/vsync/vsync_mode=0
 
 dice="Things pertaining to the dice of the dice deck"
 bad_guys=""
+glyph=""
 
 [rendering]
 

@@ -16,7 +16,7 @@ scale = Vector2(0.136719, 0.136719)
 texture = ExtResource("1_m6ryv")
 script = ExtResource("2_fgeon")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." groups=["glyph"]]
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("2_8eqmr")

@@ -168,6 +168,7 @@ func spawn_card():
 	var player_hand: PlayerHand = owner.find_child("PlayerHand")
 	var deck_coords = self.global_position
 	var new_card = card_scene.instantiate()
+	new_card.add_to_group("playing_cards")
 	new_card.global_position = deck_coords
 	card_manager.add_child(new_card)
 	player_hand.add_card_to_hand(new_card)

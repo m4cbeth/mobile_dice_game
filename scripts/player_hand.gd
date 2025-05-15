@@ -6,7 +6,7 @@ const HAND_COUNT = 1
 const CARD_SCENE_PATH = "res://scenes/card.tscn"
 const HAND_Y_AXIS = 920
 const CARD_WIDTH = 177
-const center_screen_x = 2020.0 / 2.0
+const center_screen_x = 1920.0 / 2.0
 const CARD_OVERLAP = 75
 const DEAL_SPEED = .3 # lower = faster
 const DEAL_DELAY = 0.25
@@ -31,7 +31,6 @@ func add_card_to_hand(card):
 	update_hand_positions()
 
 func update_hand_positions():
-	print('has run')
 	for i in range(player_hand.size()):
 		# z index based off some base num + index of card in hand
 		
@@ -51,7 +50,7 @@ func calculate_card_position(index):
 	if hand_size == 0:
 		return center_screen_x
 	var total_width = CARD_WIDTH + (hand_size - 1) * (CARD_WIDTH - CARD_OVERLAP)
-	var start_x = center_screen_x - total_width / 2.0
+	var start_x = 95 + center_screen_x - total_width / 2.0
 	return start_x + index * (CARD_WIDTH - CARD_OVERLAP)
 
 

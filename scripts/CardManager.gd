@@ -27,14 +27,14 @@ func _process(_delta):
 
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		var card = raycast_check_for_card()
 		if event.pressed:
-			var card = raycast_check_for_card()
 			if card:
 				drag_offset = card.global_position - get_global_mouse_position()
 				start_drag(card)
 		else: # ON RELEASE
 			if card_being_dragged:
-				finish_drag()
+				finish_drag(card)
 				$"../Camera2D".trigger_shake()
 				$"../CardDropSound".play()
 
@@ -55,10 +55,23 @@ func start_drag(card):
 	
 	"""
 
-func finish_drag():
+func finish_drag(card):
 	card_being_dragged.scale = Vector2(HOVER_SCALE_AMOUNT, HOVER_SCALE_AMOUNT)
+	# check for overlap
+	if card.is_in_group("playing_cards"):
+		var overlapping = cardarea.get_overlapping_areas()
+		if overlapping.any(func(elem): return elem.is_in_group("glyph")):
+			print('is overlapping glpyth')
+		else:
+			print('nope')
+		#var cardarea: Area2D = card.find_child("Area2D")
+		#for each in overlap:
+			#print(each.is_in_group('glyph'))
+	
 	card_being_dragged = null
-	#playerhand_node.update_hand_positions()
+	
+	
+	#playerhand_node.update_hand_positions() ONLY IF no overlap
 
 """
 
