@@ -1,5 +1,7 @@
 extends Node2D
 
+@onready var player_hand = $"../PlayerHand"
+
 var card_being_dragged
 var drag_offset = Vector2.ZERO
 var screen_size
@@ -49,12 +51,32 @@ func start_drag(card):
 	card_being_dragged = card
 	card.scale = DEFAULT_SCALE_AMOUNT
 	
+	
+	
+	
+	"""
 	# var index of card
 	# array.remove() or .erase() based on if we know index or name of card
+	"""
+
+
+
 
 func finish_drag():
 	card_being_dragged.scale = Vector2(HOVER_SCALE_AMOUNT, HOVER_SCALE_AMOUNT)
 	card_being_dragged = null
+
+
+
+
+
+
+
+
+
+
+
+
 
 func on_hovered_over_card(card):
 	if !is_hovering_on_card:
