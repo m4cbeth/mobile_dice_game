@@ -3,7 +3,10 @@ class_name PlayerHand
 
 @onready var dice_deck_node = $"../CardManager/DiceDeck"
 
+# Number of starting cards
 const HAND_COUNT = 1
+# hand size ie max cards but part of game, can increase hand size
+var hand_max := 4
 #YETTOBE IMPLEMENTED CONST MAXCARDS
 const CARD_SCENE_PATH = "res://scenes/card.tscn"
 const HAND_Y_AXIS = 920
@@ -30,19 +33,52 @@ func add_card_to_hand(card, pos):
 	print('playerhand: ', player_hand)
 
 func update_hand_positions():
-	for i in range(player_hand.size()):
-		# z index based off some base num + index of card in hand
-		
-		var card = player_hand[i]
+	var current_card_count = player_hand.size()
+	for i in range(current_card_count):
+		var card: Node2D = player_hand[i]
+		card.z_index = 2 + current_card_count - i
 		var new_position = Vector2(calculate_card_position(i), HAND_Y_AXIS)
 		animate_card_to_position(card, new_position)
+		"""
 		#card.rotation_degrees = calculate_card_rotation(i)
-		#await get_tree().create_timer(.5)
+		#would need a tween?
+		"""
+		
+
+func destroy_a_card(card: Node2D):
+	var destruction_animation: AnimatedSprite2D
+	var burning_animation: AnimatedSprite2D
+	var sprite: CharacterBody2D
+	var fire_sound: AudioStreamPlayer
+	
+	var card_children = card.get_children()	
+	for child in card_children:
+			match child.name:
+				"Destruction":
+					destruction_animation = child
+				"Burning":
+					burning_animation = child
+				"FireWhoosh":
+					fire_sound = child
+	destruction_animation.play()
+	fire_sound.play()
+	await get_tree().create_timer(0.5).timeout
+	burning_animation.play()
+	destruction_animation.animation_finished.connect(func(): card.queue_free())
 
 func animate_card_to_position(card, new_position):
 	#card.position = new_position
 	var tween = get_tree().create_tween()
 	tween.tween_property(card, "position", new_position, DEAL_SPEED)
+	await tween.finished
+	if player_hand.size() > hand_max:
+		var random_spot = randi_range(0, player_hand.size()-1)
+		print("randomspot ", random_spot)
+		
+		
+	#while player_hand.size() > hand_max:
+		#var card_to_destroy = player_hand[random_spot]
+		#destroy_a_card(card_to_destroy)
 
 func calculate_card_position(index):
 	var hand_size = player_hand.size()

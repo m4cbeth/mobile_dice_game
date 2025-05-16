@@ -1,15 +1,17 @@
-[gd_scene load_steps=70 format=3 uid="uid://d1ti5odadd840"]
+[gd_scene load_steps=72 format=3 uid="uid://d1ti5odadd840"]
 
 [ext_resource type="Script" uid="uid://bflst71urcn21" path="res://scripts/CardManager.gd" id="2_86uwx"]
 [ext_resource type="Script" uid="uid://dwkbp3is8tles" path="res://scenes/Camera2D.gd" id="2_iwjdk"]
 [ext_resource type="Texture2D" uid="uid://bsvghgl8o2lyl" path="res://assets/backgrounds/background2.webp" id="2_s2308"]
 [ext_resource type="Texture2D" uid="uid://bcr1eujrl30l3" path="res://assets/backgrounds/pixelFieldNight3.png" id="3_tqu8w"]
+[ext_resource type="AudioStream" uid="uid://diktqw7nmiqxn" path="res://assets/music/Sketchbook 2024-11-30.ogg" id="4_2debr"]
 [ext_resource type="PackedScene" uid="uid://dks7yhc2ba12p" path="res://scenes/DiceDeck.tscn" id="5_6mh84"]
+[ext_resource type="Texture2D" uid="uid://b18tytna243dm" path="res://assets/backgrounds/Futuristic Digital Landscape with Circuitry.png" id="5_buiih"]
 [ext_resource type="AudioStream" uid="uid://dbw14rt6j53hq" path="res://assets/music/Sketchbook 2024-10-13.ogg" id="6_427xc"]
 [ext_resource type="Texture2D" uid="uid://h2o1qvha5lmw" path="res://assets/sprites/invoke_button.png" id="6_vu0qa"]
 [ext_resource type="AudioStream" uid="uid://dko64tga8m4vu" path="res://assets/sounds/FUI Holographic Button Press-1.wav" id="7_45i77"]
 [ext_resource type="PackedScene" uid="uid://dnpqvg2wo1tj6" path="res://scenes/card_drop_area.tscn" id="8_0e170"]
-[ext_resource type="Script" uid="uid://bf0pa6kur8fsm" path="res://scripts/card_drop_area.gd" id="8_82ybk"]
+[ext_resource type="Script" uid="uid://bf0pa6kur8fsm" path="res://assets/card_drop_area.gd" id="8_82ybk"]
 [ext_resource type="Script" uid="uid://b8oyhb3ihk7h6" path="res://scripts/player_hand.gd" id="9_6xg5x"]
 [ext_resource type="PackedScene" uid="uid://5dpfxn07yxd0" path="res://scenes/enemies.tscn" id="10_vu0qa"]
 [ext_resource type="Texture2D" uid="uid://miv4pvkq1osc" path="res://assets/sprites/Hearts.png" id="12_6mh84"]
@@ -422,24 +424,38 @@ filter_clip = true
 
 [node name="CardGame" type="Node2D"]
 
-[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_427xc")
-volume_db = -9.369
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_0k00j")
 
-[node name="Background2" type="Sprite2D" parent="."]
+[node name="Background" type="Node" parent="."]
+
+[node name="Background2" type="Sprite2D" parent="Background"]
+visible = false
 z_index = -2
 position = Vector2(959, 500)
 scale = Vector2(1.30339, 1.19336)
 texture = ExtResource("2_s2308")
 
-[node name="PixelFieldNight3" type="Sprite2D" parent="."]
+[node name="PixelFieldNight3" type="Sprite2D" parent="Background"]
 visible = false
 position = Vector2(962, 438)
 scale = Vector2(1.34375, 1.34375)
 texture = ExtResource("3_tqu8w")
+
+[node name="FuturisticDigitalLandscapeWithCircuitry" type="Sprite2D" parent="Background"]
+z_index = -1
+position = Vector2(957, 487)
+scale = Vector2(1.28776, 1.23633)
+texture = ExtResource("5_buiih")
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="Background"]
+stream = ExtResource("6_427xc")
+volume_db = -9.369
+
+[node name="TechnoPopMusic" type="AudioStreamPlayer" parent="Background"]
+stream = ExtResource("4_2debr")
+volume_db = -21.081
+autoplay = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(968, 566)
