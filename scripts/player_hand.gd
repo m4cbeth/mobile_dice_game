@@ -6,7 +6,7 @@ class_name PlayerHand
 # Number of starting cards
 const HAND_COUNT = 0
 # hand size ie max cards but part of game, can increase hand size
-var hand_max := 1
+var hand_max := 3
 #YETTOBE IMPLEMENTED CONST MAXCARDS
 const CARD_SCENE_PATH = "res://scenes/card.tscn"
 const HAND_Y_AXIS = 920
@@ -50,6 +50,8 @@ func update_hand_positions():
 		destroy_a_card(player_hand[random_spot])
 
 func destroy_a_card(card: PlayingCard):
+	if not is_instance_valid(card):
+		return
 	await get_tree().create_timer(.5).timeout
 	var destruction_animation: AnimatedSprite2D
 	var burning_animation: AnimatedSprite2D
@@ -69,11 +71,14 @@ func destroy_a_card(card: PlayingCard):
 	fire_sound.finished.connect(func(): card.queue_free())
 	fire_sound.play()
 	await get_tree().create_timer(0.5).timeout
-	card.find_child("CardBackground").visible = false
-	card.find_child("Knight").visible = false
-	burning_animation.play()
+	if card.find_child("CardBackground"):
+		card.find_child("CardBackground").visible = false
+	if card.find_child("Knight"):
+		card.find_child("Knight").visible = false
+	if burning_animation:
+		burning_animation.play()
 	for child in card_children:
-		if child.name != "FireWhoosh":
+		if is_instance_valid(child) and child.name != "FireWhoosh":
 			child.queue_free()
 	await get_tree().create_timer(.5).timeout
 	update_hand_positions()
