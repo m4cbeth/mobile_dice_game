@@ -58,18 +58,13 @@ func finish_drag(card: Node):
 	if card and card.is_in_group(Groups.playing_cards):
 		card_being_dragged.scale = Vector2(HOVER_SCALE_AMOUNT, HOVER_SCALE_AMOUNT)
 	if card:
-		print(card)
-		print(card.is_in_group("playing_cards"))
 		var cardarea: Area2D = card.find_child("Area2D")
 		if card.is_in_group("playing_cards"):
 			var overlapping = cardarea.get_overlapping_areas()
-			if overlapping.any(func(elem): return elem.is_in_group("glyph")):
-				print('is overlapping glpyth')
-			else:
+			if not overlapping.any(func(elem): return elem.is_in_group("glyph")):
 				# return to hand
 				playerhand_node.add_card_to_hand(card, index_dragged_from)
 				playerhand_node.update_hand_positions()
-				print(playerhand_node.player_hand)
 	
 	card_being_dragged = null
 	

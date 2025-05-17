@@ -455,7 +455,6 @@ volume_db = -9.369
 [node name="TechnoPopMusic" type="AudioStreamPlayer" parent="Background"]
 stream = ExtResource("4_2debr")
 volume_db = -21.081
-autoplay = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(968, 566)
