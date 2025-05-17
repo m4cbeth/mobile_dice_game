@@ -8,7 +8,7 @@ var is_hovering_on_card
 var index_dragged_from := 0
 
 const COLLISION_CARD_MASK = 1
-const HOVER_SCALE_AMOUNT = 4.5
+const HOVER_SCALE_AMOUNT = 4.3
 const DEFAULT_SCALE_AMOUNT = Vector2(4,4)
 const HOVER_TWEEEN_SPEED = 0.2
 const MAX_X = 1920
@@ -55,6 +55,7 @@ func start_drag(card):
 	"""
 
 func finish_drag(card: Node):
+	print(playerhand_node.player_hand)
 	if card and card.is_in_group(Groups.playing_cards):
 		card_being_dragged.scale = Vector2(HOVER_SCALE_AMOUNT, HOVER_SCALE_AMOUNT)
 	if card:
@@ -63,7 +64,7 @@ func finish_drag(card: Node):
 			var overlapping = cardarea.get_overlapping_areas()
 			if not overlapping.any(func(elem): return elem.is_in_group("glyph")):
 				# return to hand
-				playerhand_node.add_card_to_hand(card, index_dragged_from)
+				playerhand_node.add_card_to_hand(card, 0)
 				playerhand_node.update_hand_positions()
 	
 	card_being_dragged = null
