@@ -14,6 +14,7 @@ var dice_health := 2
 var dice_transform_threshold := 4
 var is_taking_damage := false
 
+
 @export var rumble_duration: float = 0.5  # How long the rumble lasts
 @export var rumble_intensity: float = 3.0  # How strong the position rumble is (in pixels)
 @export var rotation_intensity: float = 0.1  # How much rotation in the rumble (in radians)
@@ -69,15 +70,20 @@ func start_roll():
 	tween.tween_callback(func(): rolling = false).set_delay(roll_duration)
 	# Update current_frame to match the final result
 	tween.tween_callback(func(): current_frame = final_result).set_delay(roll_duration)
-	tween.tween_callback(func(): print(final_result + 1)).set_delay(roll_duration)
-	# Restart rolling loop
-	var displaycooldown = get_tree().create_timer(5)
-	await displaycooldown.timeout
-	animated_sprite.play()
+	tween.tween_callback(func(): deal_cards(final_result)).set_delay(roll_duration)
+
+func deal_cards(number_of_cards: int) -> void:
+	var counter = number_of_cards
+	while counter + 1 > 0:
+		counter -= 1
+		print('but')
+		spawn_card()
+		await get_tree().create_timer(.1).timeout
+		if counter == 0:
+			animated_sprite.play()
 
 func _on_button_button_down() -> void:
-	#start_roll()
-	spawn_card()
+	start_roll()
 
 func hit_by_slime(entity: CharacterBody2D):
 	# if health is above threashold, transform into new die
@@ -147,7 +153,6 @@ func take_damage(amount: int):
 		is_taking_damage = false
 		animated_sprite.play("default")
 		reset_die_position())
-
 
 func spawn_card():
 	var card_manager = get_parent()
