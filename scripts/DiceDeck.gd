@@ -76,7 +76,6 @@ func deal_cards(number_of_cards: int) -> void:
 	var counter = number_of_cards
 	while counter + 1 > 0:
 		counter -= 1
-		print('but')
 		spawn_card()
 		await get_tree().create_timer(.1).timeout
 		if counter == 0:

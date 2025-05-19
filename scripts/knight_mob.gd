@@ -19,12 +19,3 @@ func take_damage(attacker = null, dmg := 1) -> void:
 		return
 	else:
 		state_machine.transition_to("TakeDamage", {"attacker" = attacker, "damage" = dmg})
-	#"""
-	#state transition to States.TakeDamage(entity, parameters)
-	#parameters...
-	#wait... who switches to takedmg?
-	#ok, so take damage is a function that takes the target (e.g. slime) and
-	#transis THAT to TakeDamage state, with parameters of the attacker and damage amount
-	#(because eventually the slimes will track who has attacked them, not to mention this might be
-	#important for calulating knockback direction later)
-	#"""

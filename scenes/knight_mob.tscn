@@ -433,3 +433,5 @@ collision_mask = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DangerZone"]
 polygon = PackedVector2Array(2, -2, 16, 12, 27, 5, 31, -10, 19, -24, 2, -24)
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

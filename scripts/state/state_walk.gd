@@ -3,7 +3,7 @@ class_name Walk
 
 @onready var sprite: AnimatedSprite2D = owner.get_node("AnimatedSprite2D")
 @onready var attack_area: Area2D = owner.get_node("DangerZone")
-
+@onready var nav_agent: NavigationAgent2D = owner.get_node("NavigationAgent2D")
 
 var target_coords: Vector2
 var direction: Vector2
@@ -25,13 +25,24 @@ const GRAVITY = 980 #* .7
 const MAX_HEIGHT_MIN_Y = 745
 var fake_floor: int
 
-@export var speed := 12.0 # disagree w export, get based on type (knights faster than slimes)
+var running := true
+
+
+
+
+
 
 func enter(_msg: Dictionary = {}) -> void:
+	running = true
 	speed_modifier = speed_modifiers["knights"] if get_parent().is_in_group(Groups.slimes) else speed_modifiers[Groups.slimes]
 	if sprite:
 		sprite.play("Walk")
+	start_refreshing_path()
 
+func start_refreshing_path():
+	while running:
+		print('refresh coords nav makepath()')
+		await get_tree().create_timer(1).timeout
 
 func update(delta):
 	if avoiding:
@@ -40,7 +51,6 @@ func update(delta):
 			avoiding = false
 
 func physics_update(delta):
-
 	if entity.is_falling:
 		entity.velocity.x = 0 # do I need this line?
 		fall_velocity += GRAVITY * delta
@@ -90,6 +100,8 @@ func physics_update(delta):
 	if entity.global_position.y < MAX_HEIGHT_MIN_Y and !entity.is_falling:
 		entity.global_position.y = MAX_HEIGHT_MIN_Y
 
+func exit():
+	running = false
 
 func get_target_coords():
 	if entity.is_in_group("slimes"):
@@ -121,8 +133,6 @@ func get_target():
 		else:
 			#this would be a good place to idle if they do that
 			return get_dicedeck_ref()
-	
-
 
 func get_dicedeck_ref():
 	return get_tree().root.get_node("CardGame").find_child("DiceDeck")
