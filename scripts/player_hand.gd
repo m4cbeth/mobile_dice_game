@@ -11,7 +11,7 @@ var hand_max := 3
 const CARD_SCENE_PATH = "res://scenes/card.tscn"
 const HAND_Y_AXIS = 920
 const CARD_WIDTH = 177
-const center_screen_x = 1920.0 / 2.0
+const center_screen_x = 1920.0 / 2.0 - 500
 const CARD_OVERLAP = 75
 const DEAL_SPEED = .3 # lower = faster
 const DEAL_DELAY = 0.25

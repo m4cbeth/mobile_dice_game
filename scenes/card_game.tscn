@@ -466,7 +466,7 @@ position = Vector2(8, 26)
 script = ExtResource("2_86uwx")
 
 [node name="DiceDeck" parent="CardManager" instance=ExtResource("5_6mh84")]
-position = Vector2(162, 868)
+position = Vector2(966, 856)
 scale = Vector2(4, 4)
 
 [node name="CardDropSound" type="AudioStreamPlayer2D" parent="."]
@@ -477,7 +477,7 @@ stream = ExtResource("7_45i77")
 modulate = Color(1, 3.825, 4.918, 1)
 light_mask = 2
 visibility_layer = 2
-position = Vector2(539, 213)
+position = Vector2(229, 195)
 scale = Vector2(4, 4)
 script = ExtResource("8_82ybk")
 
