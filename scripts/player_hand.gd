@@ -19,8 +19,11 @@ const ROTATION_AMOUNT = 5.0
 var player_hand = []
 
 
+func get_dice_deck_position():
+	return get_parent().find_child("CardManager").find_child("DiceDeck").global_position
+
 func _ready() -> void:
-	var dice_deck_position = get_parent().find_child("CardManager").find_child("DiceDeck").global_position
+	var dice_deck_position = get_dice_deck_position()
 	var card_scene = preload(CARD_SCENE_PATH)
 	for i in range(HAND_COUNT):
 		dice_deck_node.spawn_card()
@@ -45,13 +48,13 @@ func update_hand_positions():
 		var new_position = Vector2(calculate_card_position(i), HAND_Y_AXIS)
 		animate_card_to_position(card, new_position)
 	if player_hand.size() > hand_max:
-		#var random_spot = randi_range(0, player_hand.size()-1)
-		var random_spot = 0
+		var random_spot = randi_range(0, player_hand.size()-1)
 		destroy_a_card(player_hand[random_spot])
 
 func destroy_a_card(card: PlayingCard):
 	if not is_instance_valid(card):
 		return
+	player_hand.erase(card)	
 	await get_tree().create_timer(.5).timeout
 	var destruction_animation: AnimatedSprite2D
 	var burning_animation: AnimatedSprite2D
@@ -66,7 +69,6 @@ func destroy_a_card(card: PlayingCard):
 					burning_animation = child
 				"FireWhoosh":
 					fire_sound = child
-	player_hand.erase(card)
 	destruction_animation.play()
 	fire_sound.finished.connect(func(): card.queue_free())
 	fire_sound.play()
@@ -91,22 +93,9 @@ func calculate_card_position(index):
 	var start_x = 95 + center_screen_x - total_width / 2.0
 	return start_x + index * (CARD_WIDTH - CARD_OVERLAP)
 
-
 func calculate_card_rotation(index):
 	var count = player_hand.size()
 	if count <= 1:
 		return 0.0
 	var t = index / float(count -1) * 2.0 - 1.0
 	return t * ROTATION_AMOUNT
-
-#func raycast_check_for_card():
-	#var space_state = get_world_2d().direct_space_state
-	#var parameters = PhysicsPointQueryParameters2D.new()
-	#parameters.position = get_global_mouse_position()
-	#parameters.collide_with_areas = true
-	#parameters.collision_mask = COLLISION_CARD_MASK
-	#var result = space_state.intersect_point(parameters)
-	#if result.size() > 0:
-	##	return result[0].collider.get_parent()
-		#return get_card_with_highest_z_index(result)
-	#return null

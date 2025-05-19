@@ -17,8 +17,6 @@ const MAX_Y = 1080
 func clamp_mouse(mouse_pos: Vector2):
 	return Vector2(clamp(mouse_pos.x, 0, MAX_X), clamp(mouse_pos.y, 0, MAX_Y))
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if card_being_dragged:
 		var mouse_pos = get_global_mouse_position() + drag_offset
@@ -44,18 +42,8 @@ func start_drag(card):
 	index_dragged_from = hand_array.find(card)
 	hand_array.erase(card)
 	playerhand_node.update_hand_positions()
-	
-	"""
-	# var index of card
-	# array.remove() or .erase() based on if we know index or name of card
-
-	slight change of plan. don't remove right away
-	remove on release if over...
-	
-	"""
 
 func finish_drag(card: Node):
-	print(playerhand_node.player_hand)
 	if card and card.is_in_group(Groups.playing_cards):
 		card_being_dragged.scale = Vector2(HOVER_SCALE_AMOUNT, HOVER_SCALE_AMOUNT)
 	if card:
@@ -68,20 +56,6 @@ func finish_drag(card: Node):
 				playerhand_node.update_hand_positions()
 	
 	card_being_dragged = null
-	
-	# this works.... until card is laid on glyph. Then the logic stops...
-
-"""
-
-if card body collison over lapping with invoke?
-	release the way it works right now
-else:
-	add back to hand or leave in hand and call update hand pos funciton
-
-"""
-
-
-
 
 func on_hovered_over_card(card):
 	if !is_hovering_on_card:
