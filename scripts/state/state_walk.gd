@@ -28,7 +28,17 @@ var fake_floor: int
 var running := true
 
 
-
+func tune_entity_nav_agent():
+	nav_agent.avoidance_enabled = true
+	var is_good_guy = entity.is_in_group(Groups.good_guys)
+	if is_good_guy:
+		nav_agent.avoidance_layers = 1
+		nav_agent.avoidance_mask = 1
+	else:
+		nav_agent.avoidance_layers = 2
+		nav_agent.avoidance_mask = 2
+		
+		
 
 
 
@@ -63,12 +73,25 @@ func physics_update(delta):
 	else:
 		var target = get_target()
 		if entity and target:			
+			
 			target_coords = target.global_position
+			
 			if target_coords.y <  MAX_HEIGHT_MIN_Y:
 				target_coords.y = MAX_HEIGHT_MIN_Y
-			direction = target_coords - entity.global_position
+			
+			nav_agent.target_position = target_coords
+			
+			direction = (nav_agent.get_next_path_position() - entity.global_position).normalized()
+			
+			#direction = target_coords - entity.global_position
+			
 			velocity = direction.normalized() * speed_modifier
+			
 			entity.velocity = velocity
+			
+			
+			
+			
 			flip_body(entity)
 			if velocity and sprite.animation != "Walk":
 				sprite.play("Walk")
@@ -86,8 +109,12 @@ func physics_update(delta):
 				this will either be done via groups or collision masks
 			
 			"""
+			
+			
 			if is_in_strike_range and is_in_y_range and sprite.animation != "Attack":
 				transition_to("Attack", {target = target_coords})
+			
+			
 			var collision = entity.move_and_collide(velocity)
 			if collision:
 				var collider = collision.get_collider()
