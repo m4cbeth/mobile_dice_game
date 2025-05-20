@@ -25,44 +25,19 @@ const GRAVITY = 980 #* .7
 const MAX_HEIGHT_MIN_Y = 745
 var fake_floor: int
 
-var running := true
-
-
-func tune_entity_nav_agent():
-	nav_agent.avoidance_enabled = true
-	var is_good_guy = entity.is_in_group(Groups.good_guys)
-	if is_good_guy:
-		nav_agent.avoidance_layers = 1
-		nav_agent.avoidance_mask = 1
-	else:
-		nav_agent.avoidance_layers = 2
-		nav_agent.avoidance_mask = 2
-		
-		
-
 
 
 func enter(_msg: Dictionary = {}) -> void:
-	running = true
 	speed_modifier = speed_modifiers["knights"] if get_parent().is_in_group(Groups.slimes) else speed_modifiers[Groups.slimes]
 	if sprite:
 		sprite.play("Walk")
-	start_refreshing_path()
+	nav_agent.velocity_computed.connect(_on_velocity_computed)
 
-func start_refreshing_path():
-	while running:
-		print('refresh coords nav makepath()')
-		await get_tree().create_timer(1).timeout
-
-func update(delta):
-	if avoiding:
-		avoid_timer -= delta
-		if avoid_timer < 0:
-			avoiding = false
+func exit():
+	nav_agent.velocity_computed.disconnect(_on_velocity_computed)
 
 func physics_update(delta):
 	if entity.is_falling:
-		entity.velocity.x = 0 # do I need this line?
 		fall_velocity += GRAVITY * delta
 		entity.global_position.y += fall_velocity * delta
 		if entity.fake_floor:
@@ -72,26 +47,15 @@ func physics_update(delta):
 				entity.is_falling = false
 	else:
 		var target = get_target()
-		if entity and target:			
-			
+		if entity and target:
 			target_coords = target.global_position
-			
 			if target_coords.y <  MAX_HEIGHT_MIN_Y:
 				target_coords.y = MAX_HEIGHT_MIN_Y
-			
 			nav_agent.target_position = target_coords
-			
 			direction = (nav_agent.get_next_path_position() - entity.global_position).normalized()
-			
-			#direction = target_coords - entity.global_position
-			
-			velocity = direction.normalized() * speed_modifier
-			
+			velocity = direction * speed_modifier
 			entity.velocity = velocity
-			
-			
-			
-			
+			nav_agent.set_velocity_forced(velocity)
 			flip_body(entity)
 			if velocity and sprite.animation != "Walk":
 				sprite.play("Walk")
@@ -99,36 +63,18 @@ func physics_update(delta):
 			var is_in_y_range = abs(entity.global_position.y - target_coords.y) < 50
 			var is_in_strike_range = distance_to_target < 110
 			"""
-			var test = attack_area.get_overlapping_areas()
-			print(test.size())
-			
 			THE BELOW IF:
-				should be adding if attack_area.get_overlapping.size() > 0
-				but right now that would need sopme reorganization of what is in which group
-				(because the dice deck card is an area...)
-				this will either be done via groups or collision masks
-			
+				add if attack_area.overlapping_areas has bad guys for good guys (or vice versa)
 			"""
-			
-			
 			if is_in_strike_range and is_in_y_range and sprite.animation != "Attack":
 				transition_to("Attack", {target = target_coords})
-			
-			
-			var collision = entity.move_and_collide(velocity)
-			if collision:
-				var collider = collision.get_collider()
-				if collider is not StaticBody2D:
-					if collider.is_in_group(Groups.slimes):
-						avoiding = true
-						direction = (Vector2.UP if randi() % 2 == 0 else Vector2.DOWN)
+			var collision = entity.move_and_collide(direction * speed_modifier)
 
-	#keep below horizion
-	if entity.global_position.y < MAX_HEIGHT_MIN_Y and !entity.is_falling:
-		entity.global_position.y = MAX_HEIGHT_MIN_Y
 
-func exit():
-	running = false
+
+func _on_velocity_computed(safe_velocity: Vector2):
+	entity.velocity = safe_velocity
+	entity.move_and_slide()
 
 func get_target_coords():
 	if entity.is_in_group("slimes"):

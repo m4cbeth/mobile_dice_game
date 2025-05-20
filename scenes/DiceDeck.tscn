@@ -759,4 +759,10 @@ animation = &"eight_reveal"
 frame = 11
 frame_progress = 1.0
 
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+radius = 11.26
+vertices = PackedVector2Array(-10, -10, 9, -9, 9, 9, -10, 13)
+affect_navigation_mesh = true
+avoidance_layers = 255
+
 [connection signal="button_down" from="DeckOCards/Button" to="." method="_on_button_button_down"]

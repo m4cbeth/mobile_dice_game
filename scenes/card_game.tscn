@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://d1ti5odadd840"]
+[gd_scene load_steps=73 format=3 uid="uid://d1ti5odadd840"]
 
 [ext_resource type="Script" uid="uid://bflst71urcn21" path="res://scripts/CardManager.gd" id="2_86uwx"]
 [ext_resource type="Script" uid="uid://dwkbp3is8tles" path="res://scenes/Camera2D.gd" id="2_iwjdk"]
@@ -422,6 +422,11 @@ atlas = ExtResource("12_6mh84")
 region = Rect2(0, 0, 15.803, 17)
 filter_clip = true
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_2debr"]
+vertices = PackedVector2Array(1936.02, 757.992, 1936.97, 1110, -21.0313, 1110, -21.9688, 757)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-32, 747, 1946, 748, 1947, 1120, -31, 1120)])
+
 [node name="CardGame" type="Node2D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -513,6 +518,7 @@ frame_progress = 0.196188
 shape = SubResource("CircleShape2D_f8vwx")
 
 [node name="Enemies" parent="." instance=ExtResource("10_vu0qa")]
+z_index = 1
 position = Vector2(3, 39)
 
 [node name="UI" type="CanvasLayer" parent="."]
@@ -595,6 +601,13 @@ stretch_mode = 2
 layout_mode = 2
 texture = SubResource("AtlasTexture_6mh84")
 stretch_mode = 2
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+visible = false
+navigation_polygon = SubResource("NavigationPolygon_2debr")
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+radius = 6.76
 
 [connection signal="button_down" from="InvokeButton/Button" to="CardDropArea" method="_on_button_button_down"]
 [connection signal="button_down" from="InvokeButton/Button" to="InvokeButton" method="_on_button_button_down"]
