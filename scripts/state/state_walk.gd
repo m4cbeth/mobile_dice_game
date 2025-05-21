@@ -5,6 +5,7 @@ class_name Walk
 @onready var attack_area: Area2D = owner.get_node("DangerZone")
 @onready var nav_agent: NavigationAgent2D = owner.get_node("NavigationAgent2D")
 
+@onready var castle_coords := Vector2(199, 907)
 var target_coords: Vector2
 var direction: Vector2
 var avoiding: bool
@@ -24,8 +25,6 @@ var fall_velocity = 0.0
 const GRAVITY = 980 #* .7
 const MAX_HEIGHT_MIN_Y = 745
 var fake_floor: int
-
-
 
 func enter(_msg: Dictionary = {}) -> void:
 	speed_modifier = speed_modifiers["knights"] if get_parent().is_in_group(Groups.slimes) else speed_modifiers[Groups.slimes]
@@ -48,9 +47,12 @@ func physics_update(delta):
 	else:
 		var target = get_target()
 		if entity and target:
-			target_coords = target.global_position
-			if target_coords.y <  MAX_HEIGHT_MIN_Y:
-				target_coords.y = MAX_HEIGHT_MIN_Y
+			if entity == target:
+				target_coords = castle_coords
+			else:
+				target_coords = target.global_position
+			if target_coords.y <  MAX_HEIGHT_MIN_Y: # DIDN'T SEE I STILL HAVE THIS
+				target_coords.y = MAX_HEIGHT_MIN_Y # are these lines the thing keeping pathfinding inbound?
 			nav_agent.target_position = target_coords
 			direction = (nav_agent.get_next_path_position() - entity.global_position).normalized()
 			velocity = direction * speed_modifier
@@ -68,6 +70,8 @@ func physics_update(delta):
 			"""
 			if is_in_strike_range and is_in_y_range and sprite.animation != "Attack":
 				transition_to("Attack", {target = target_coords})
+			if target == entity and is_in_strike_range and sprite.animation != "Idle":
+				transition_to("Idle")
 			var collision = entity.move_and_collide(direction * speed_modifier)
 
 
@@ -92,7 +96,10 @@ func get_target_coords():
 				x_shift = -1 * shift_amount
 			#x_shift
 			return Vector2(base_position.x + x_shift, base_position.y + y_shift)
-	return get_dice_coords()
+	if GameState.dice_level > 1:
+		return get_dice_coords()
+	else:
+		return castle_coords
 
 func get_target():
 	if entity.is_in_group("slimes"):
@@ -102,9 +109,10 @@ func get_target():
 		if bad_guys.size() > 0:
 			var closest_guy = find_closest(bad_guys)
 			return closest_guy
-		else:
-			#this would be a good place to idle if they do that
+		elif GameState.dice_level > 1:
 			return get_dicedeck_ref()
+		else:
+			return entity
 
 func get_dicedeck_ref():
 	return get_tree().root.get_node("CardGame").find_child("DiceDeck")

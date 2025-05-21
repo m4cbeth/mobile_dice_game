@@ -5,6 +5,7 @@ extends Node2D
 @onready var mob_die = $RedDie # RedDie.play_her("won") ("ready player one")
 @onready var health_display = $HealthNumber
 @onready var green_smoke: AnimatedSprite2D = $GreenSmoke
+@onready var hearts_container: HBoxContainer = owner.find_child("HeartContainer")
 
 var rolling := false
 var tween: Tween
@@ -13,7 +14,7 @@ var current_frame := 0
 var dice_transform_threshold := 4
 var is_taking_damage := false
 
-var dice_health := 2
+var dice_health := 3
 var die_health_transform_threshold := 4
 
 @export var rumble_duration: float = 0.5  # How long the rumble lasts
@@ -28,6 +29,7 @@ var initial_rotation: float
 var animated_sprite: AnimatedSprite2D
 
 func _ready():
+	update_hearts()
 	animated_sprite = $BlueDie
 	initial_position = $BlueDie.position
 	initial_rotation = $BlueDie.rotation
@@ -94,32 +96,58 @@ func deal_cards(number_of_cards: int) -> void:
 func _on_button_button_down() -> void:
 	start_roll()
 
-func hit_by_slime(entity: CharacterBody2D):
+func hit_by_slime(slime_hit_by: CharacterBody2D):
 	take_damage(-1)
+	update_hearts()
 	if dice_health > dice_transform_threshold:
-		entity.state_machine.transition_to("Death")
+		slime_hit_by.state_machine.transition_to("Death")
 	# if health is at threashold, transform into new die
 	if dice_health == 4:
+		#green_smoke.play_backwards("eight_reveal")
+		#await green_smoke.animation_finished
+		## hide old die // disable if needed (collision etc)
+		#dice_sprite.visible = false
+		#mob_die.visible = true
+		## show new dice // enable etc if needed
+		#green_smoke.play("eight_reveal")		
+		return
+
+func update_hearts():
+	var hearts = hearts_container.get_children()
+	for heart in range(hearts.size()):
+		if heart + 1 <= dice_health:
+			hearts[heart].visible = true
+
+func take_damage(damage: int):
+	# don't start if already taking damage
+	if is_taking_damage:
+		return
+	# add/minus damage and put in damage state
+	is_taking_damage = true
+	if GameState.dice_level == 2 and dice_health - damage < dice_transform_threshold:
+		print('transform down')
+		GameState.dice_level = 1
+		green_smoke.play_backwards("eight_reveal")
+		await green_smoke.animation_finished
+		# hide old die // disable if needed (collision etc)
+		dice_sprite.visible = true
+		mob_die.visible = false
+		# show new dice // enable etc if needed
+		green_smoke.play("eight_reveal")	
+	if GameState.dice_level == 1 and  dice_health - damage > dice_transform_threshold:
+		print('evolve dice')
+		GameState.dice_level = 2
 		green_smoke.play_backwards("eight_reveal")
 		await green_smoke.animation_finished
 		# hide old die // disable if needed (collision etc)
 		dice_sprite.visible = false
 		mob_die.visible = true
 		# show new dice // enable etc if needed
-		green_smoke.play("eight_reveal")		
-		return
-
-func take_damage(amount: int):
-	# don't start if already taking damage
-	if is_taking_damage:
-		return
-	
-	# add/minus damage and put in damage state
-	is_taking_damage = true
-	dice_health -= amount
+		green_smoke.play("eight_reveal")	
+	dice_health -= damage
 	# Play damage animation
-	health_display.show_number(amount)
-	if amount > 0:
+	health_display.show_number(damage)
+	if damage > 0:
 		animated_sprite.play("Hit")
 	else:
 		animated_sprite.play('green')

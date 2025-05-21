@@ -438,4 +438,3 @@ polygon = PackedVector2Array(2, -2, 16, 12, 27, 5, 31, -10, 19, -24, 2, -24)
 path_postprocessing = 1
 avoidance_enabled = true
 radius = 83.23
-debug_enabled = true

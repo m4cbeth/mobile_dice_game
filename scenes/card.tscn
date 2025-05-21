@@ -177,5 +177,9 @@ shape = SubResource("RectangleShape2D_pi1jj")
 stream = ExtResource("6_6ligt")
 volume_db = -16.213
 
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+vertices = PackedVector2Array(-27.5, -39.75, 27.25, -39.5, 29.75, 41.5, -28.75, 41.25)
+affect_navigation_mesh = true
+
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
