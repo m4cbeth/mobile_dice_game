@@ -1,14 +1,16 @@
 extends Node2D
 
-
-@onready var mob_scene = preload("res://scenes/Mob.tscn")
-
+@onready var enemies_node: Node2D = $"../Enemies"
+@onready var glyph_drop_circle: Area2D = $"Area2D"
 
 # INVOKE button
 func _on_button_button_down() -> void:
-	if $Area2D.get_overlapping_areas().size() == 0:
-		$"../Enemies".spawn_slime()
-	for area in $Area2D.get_overlapping_areas():
+	#if $Area2D.get_overlapping_areas().size() == 0:
+	enemies_node.spawn_slime()
+	
+	print(glyph_drop_circle.get_overlapping_areas())
+	for area in glyph_drop_circle.get_overlapping_areas():
+		enemies_node.spawn_slime()
 		var card = area.get_parent()
 		var card_back
 		for child in card.get_children():
@@ -17,7 +19,6 @@ func _on_button_button_down() -> void:
 					card_back = child
 		if card_back:
 			destroy_card(card)
-
 
 func destroy_card(card):
 	var destruction_animation: AnimatedSprite2D
@@ -49,7 +50,6 @@ func destroy_card(card):
 	burning_animation.play()
 	destruction_animation.animation_finished.connect(func(): card_back.queue_free())
 	summon_sprite(sprite)
-
 
 func summon_sprite(knight: CharacterBody2D):
 	knight.add_to_group(Groups.knights)

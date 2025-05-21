@@ -4,7 +4,7 @@ class_name PlayerHand
 @onready var dice_deck_node = $"../CardManager/DiceDeck"
 
 # Number of starting cards
-const HAND_COUNT = 0
+const HAND_COUNT = 2
 # hand size ie max cards but part of game, can increase hand size
 var hand_max := 3
 #YETTOBE IMPLEMENTED CONST MAXCARDS

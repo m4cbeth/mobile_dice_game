@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready var card_scene = preload("res://scenes/card.tscn")
-@onready var dice_sprite = $BlueDie
+@onready var dice_sprite: AnimatedSprite2D = $BlueDie
 @onready var mob_die = $RedDie # RedDie.play_her("won") ("ready player one")
 @onready var health_display = $HealthNumber
 @onready var green_smoke: AnimatedSprite2D = $GreenSmoke
@@ -10,10 +10,11 @@ var rolling := false
 var tween: Tween
 var faces := 6
 var current_frame := 0
-var dice_health := 2
 var dice_transform_threshold := 4
 var is_taking_damage := false
 
+var dice_health := 2
+var die_health_transform_threshold := 4
 
 @export var rumble_duration: float = 0.5  # How long the rumble lasts
 @export var rumble_intensity: float = 3.0  # How strong the position rumble is (in pixels)
@@ -71,6 +72,15 @@ func start_roll():
 	# Update current_frame to match the final result
 	tween.tween_callback(func(): current_frame = final_result).set_delay(roll_duration)
 	tween.tween_callback(func(): deal_cards(final_result)).set_delay(roll_duration)
+	tween.tween_callback(visual_feedback)
+
+func visual_feedback():
+	var original_scale = dice_sprite.scale
+	var scale_up = original_scale * 1.75
+	var animation_time := 0.93
+	var tween = create_tween().set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+	tween.tween_property(dice_sprite, "scale", scale_up, animation_time)
+	tween.tween_property(dice_sprite, "scale", original_scale, animation_time)
 
 func deal_cards(number_of_cards: int) -> void:
 	var counter = number_of_cards
@@ -85,8 +95,9 @@ func _on_button_button_down() -> void:
 	start_roll()
 
 func hit_by_slime(entity: CharacterBody2D):
-	# if health is above threashold, transform into new die
-	if dice_health >= 4:
+	take_damage(-1)
+	# if health is at threashold, transform into new die
+	if dice_health == 4:
 		entity.state_machine.transition_to("Death")
 		green_smoke.play_backwards("eight_reveal")
 		await green_smoke.animation_finished
@@ -96,7 +107,6 @@ func hit_by_slime(entity: CharacterBody2D):
 		# show new dice // enable etc if needed
 		green_smoke.play("eight_reveal")		
 		return
-	take_damage(-1)
 
 func take_damage(amount: int):
 	# don't start if already taking damage
@@ -164,10 +174,10 @@ func spawn_card():
 	player_hand.add_card_to_hand(new_card, 0)
 	player_hand.update_hand_positions()
 
-func deal_cards_after_roll(number_of_cards):
-	if number_of_cards <= 0:
-		return
-	# spawn 1 card
+#func deal_cards_after_roll(number_of_cards):
+	#if number_of_cards <= 0:
+		#return
+	## spawn 1 card
 	
 	# position it at deck
 	# move it to hand (use add to array of player hand function)

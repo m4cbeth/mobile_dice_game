@@ -71,7 +71,6 @@ func physics_update(delta):
 			var collision = entity.move_and_collide(direction * speed_modifier)
 
 
-
 func _on_velocity_computed(safe_velocity: Vector2):
 	entity.velocity = safe_velocity
 	entity.move_and_slide()

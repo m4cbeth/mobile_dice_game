@@ -437,5 +437,5 @@ polygon = PackedVector2Array(2, -2, 16, 12, 27, 5, 31, -10, 19, -24, 2, -24)
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_postprocessing = 1
 avoidance_enabled = true
-radius = 80.71
+radius = 83.23
 debug_enabled = true
