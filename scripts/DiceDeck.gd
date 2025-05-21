@@ -96,9 +96,10 @@ func _on_button_button_down() -> void:
 
 func hit_by_slime(entity: CharacterBody2D):
 	take_damage(-1)
+	if dice_health > dice_transform_threshold:
+		entity.state_machine.transition_to("Death")
 	# if health is at threashold, transform into new die
 	if dice_health == 4:
-		entity.state_machine.transition_to("Death")
 		green_smoke.play_backwards("eight_reveal")
 		await green_smoke.animation_finished
 		# hide old die // disable if needed (collision etc)
@@ -173,16 +174,3 @@ func spawn_card():
 	card_manager.add_child(new_card)
 	player_hand.add_card_to_hand(new_card, 0)
 	player_hand.update_hand_positions()
-
-#func deal_cards_after_roll(number_of_cards):
-	#if number_of_cards <= 0:
-		#return
-	## spawn 1 card
-	
-	# position it at deck
-	# move it to hand (use add to array of player hand function)
-	
-	
-	
-	
-	
