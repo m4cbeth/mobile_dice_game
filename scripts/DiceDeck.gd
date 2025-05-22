@@ -1,7 +1,6 @@
 extends Node2D
 
 @onready var card_scene = preload("res://scenes/card.tscn")
-@onready var dice_sprite: AnimatedSprite2D = $BlueDie
 @onready var mob_die = $RedDie # RedDie.play_her("won") ("ready player one")
 @onready var health_display = $HealthNumber
 @onready var green_smoke: AnimatedSprite2D = $GreenSmoke
@@ -26,23 +25,25 @@ var num_shakes = 4
 var rumble_time_left = 0.0
 var initial_position: Vector2
 var initial_rotation: float
-var animated_sprite: AnimatedSprite2D
+var blue_die: AnimatedSprite2D
+var current_die: AnimatedSprite2D
 
 func _ready():
 	update_hearts()
-	animated_sprite = $BlueDie
+	blue_die = $BlueDie
 	initial_position = $BlueDie.position
 	initial_rotation = $BlueDie.rotation
+	current_die = blue_die
 
 func reset_die_position():
-	animated_sprite.position = initial_position
-	animated_sprite.rotation = initial_rotation
+	current_die.position = initial_position
+	current_die.rotation = initial_rotation
 
 func start_roll():
 	if rolling:	
 		return
 	rolling = true
-	animated_sprite.stop()
+	current_die.stop()
 	if tween:
 		tween.kill()
 	tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
@@ -68,7 +69,7 @@ func start_roll():
 	})
 	# Schedule all frame changes
 	for frame_data in frames_to_show:
-		tween.tween_callback(func(): dice_sprite.frame = frame_data["frame"]).set_delay(frame_data["time"])
+		tween.tween_callback(func(): current_die.frame = frame_data["frame"]).set_delay(frame_data["time"])
 	# End rolling state when complete
 	tween.tween_callback(func(): rolling = false).set_delay(roll_duration)
 	# Update current_frame to match the final result
@@ -77,12 +78,12 @@ func start_roll():
 	tween.tween_callback(visual_feedback)
 
 func visual_feedback():
-	var original_scale = dice_sprite.scale
+	var original_scale = current_die.scale
 	var scale_up = original_scale * 1.75
 	var animation_time := 0.93
 	var tween = create_tween().set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
-	tween.tween_property(dice_sprite, "scale", scale_up, animation_time)
-	tween.tween_property(dice_sprite, "scale", original_scale, animation_time)
+	tween.tween_property(current_die, "scale", scale_up, animation_time)
+	tween.tween_property(current_die, "scale", original_scale, animation_time)
 
 func deal_cards(number_of_cards: int) -> void:
 	var counter = number_of_cards
@@ -91,7 +92,7 @@ func deal_cards(number_of_cards: int) -> void:
 		spawn_card()
 		await get_tree().create_timer(.1).timeout
 		if counter == 0:
-			animated_sprite.play()
+			current_die.play()
 
 func _on_button_button_down() -> void:
 	start_roll()
@@ -128,27 +129,29 @@ func take_damage(damage: int):
 		green_smoke.play_backwards("eight_reveal")
 		await green_smoke.animation_finished
 		# hide old die // disable if needed (collision etc)
-		dice_sprite.visible = true
+		blue_die.visible = true
 		mob_die.visible = false
 		# show new dice // enable etc if needed
-		green_smoke.play("eight_reveal")	
+		green_smoke.play("eight_reveal")
+		#current_die = blue_die
 	if GameState.dice_level == 1 and  dice_health - damage > dice_transform_threshold:
+		current_die = mob_die
 		print('evolve dice')
 		GameState.dice_level = 2
 		green_smoke.play_backwards("eight_reveal")
 		await green_smoke.animation_finished
 		# hide old die // disable if needed (collision etc)
-		dice_sprite.visible = false
+		blue_die.visible = false
 		mob_die.visible = true
 		# show new dice // enable etc if needed
-		green_smoke.play("eight_reveal")	
+		green_smoke.play("eight_reveal")
 	dice_health -= damage
 	# Play damage animation
 	health_display.show_number(damage)
 	if damage > 0:
-		animated_sprite.play("Hit")
+		blue_die.play("Hit")
 	else:
-		animated_sprite.play('green')
+		blue_die.play('green')
 	
 	# Create a tween for the rumble effect
 	var tween = create_tween()
@@ -172,22 +175,22 @@ func take_damage(damage: int):
 			randf_range(-current_intensity, current_intensity),
 			randf_range(-current_intensity, current_intensity)
 		)
-		tween.tween_property(animated_sprite, "position", 
+		tween.tween_property(current_die, "position", 
 			initial_position + offset, shake_duration)
 			
 		# Random rotation
 		var rot_offset = randf_range(-current_rotation, current_rotation)
-		tween.tween_property(animated_sprite, "rotation", 
+		tween.tween_property(current_die, "rotation", 
 			initial_rotation + rot_offset, shake_duration)
 	
 	# Final reset to ensure no drift
-	tween.chain().tween_property(animated_sprite, "position", initial_position, 0.1)
-	tween.tween_property(animated_sprite, "rotation", initial_rotation, 0.1)
+	tween.chain().tween_property(current_die, "position", initial_position, 0.1)
+	tween.tween_property(current_die, "rotation", initial_rotation, 0.1)
 	
 	# When done, reset state and play default animation
 	tween.finished.connect(func():
 		is_taking_damage = false
-		animated_sprite.play("default")
+		current_die.play("default")
 		reset_die_position())
 	
 	update_hearts()

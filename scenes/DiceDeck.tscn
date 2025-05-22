@@ -744,6 +744,7 @@ theme = SubResource("Theme_labqa")
 text = "  ⍼"
 
 [node name="TextBoxt" type="RichTextLabel" parent="HealthNumber"]
+visible = false
 offset_left = 6.0
 offset_top = -67.0
 offset_right = 175.0

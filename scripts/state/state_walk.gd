@@ -17,7 +17,7 @@ var speed_modifier: float
 const base_speed = 2
 const speed_modifiers = {
 	Groups.slimes: 1 * base_speed,
-	"knights": 2 * base_speed,
+	"knights": 1.75 * base_speed,
 	"whateversnext": 2 * base_speed
 }
 var velocity
