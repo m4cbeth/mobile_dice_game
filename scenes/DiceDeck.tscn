@@ -700,7 +700,7 @@ z_index = 4
 position = Vector2(-0.75, 0.25)
 scale = Vector2(1.09375, 1.09375)
 sprite_frames = SubResource("SpriteFrames_xu1gf")
-animation = &"green"
+animation = &"mob_die"
 autoplay = "default"
 
 [node name="RedDie" type="AnimatedSprite2D" parent="."]

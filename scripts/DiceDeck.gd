@@ -29,6 +29,7 @@ var blue_die: AnimatedSprite2D
 var current_die: AnimatedSprite2D
 
 func _ready():
+	randomize()
 	update_hearts()
 	blue_die = $BlueDie
 	initial_position = $BlueDie.position
@@ -62,7 +63,7 @@ func start_roll():
 			"frame": current_frame
 		})
 		current_time += interval
-	var final_result = randi() % faces
+	var final_result = randi_range(1, 6)
 	frames_to_show.append({
 		"time": roll_duration,
 		"frame": final_result
@@ -76,6 +77,18 @@ func start_roll():
 	tween.tween_callback(func(): current_frame = final_result).set_delay(roll_duration)
 	tween.tween_callback(func(): deal_cards(final_result)).set_delay(roll_duration)
 	tween.tween_callback(visual_feedback)
+
+func handle_deal(result_number: int):
+	if GameState.dice_level == 1:
+		#result_number is just number of cards
+		deal_cards(result_number)
+	elif GameState.dice_level == 2:
+		#use as array
+		match result_number:
+			0:
+				deal_cards(1)
+			3:
+				deal_cards(2)
 
 func visual_feedback():
 	var original_scale = blue_die.scale

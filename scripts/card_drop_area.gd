@@ -60,12 +60,23 @@ func summon_sprite(card: PlayingCard):
 	enemies_node.add_child(knight)
 	knight.scale = Vector2(4,4)
 	knight.global_position = curpos
-	
-	var remaining_children = card.get_children()
-	for child in remaining_children:
-		if child is not AudioStreamPlayer:
-			child.queue_free()
-	#card.queue_free()
 	knight.is_falling = true
 	knight.is_off_card = true
 	knight.find_child("StateMachine").transition_to("Walk")
+	
+	#var test: AudioStreamPlayer
+	#test.finished
+	
+	var echo: AudioStreamPlayer
+	var remaining_children = card.get_children()
+	for child in remaining_children:
+		if child is  AudioStreamPlayer:
+			echo = child
+		else:
+			child.queue_free()
+	if echo:
+		await echo.finished
+		await get_tree().create_timer(.2).timeout
+		card.queue_free()
+	else:
+		card.queue_free()
