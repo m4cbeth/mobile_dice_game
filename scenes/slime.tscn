@@ -452,4 +452,5 @@ debug_enabled = true
 position = Vector2(0, -10)
 radius = 9.01
 vertices = PackedVector2Array(8.75, -6.5, -8.25, -7.75, -9.75, 9.75, 9.25, 9.5)
+avoidance_enabled = false
 avoidance_layers = 4

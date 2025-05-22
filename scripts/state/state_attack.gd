@@ -19,7 +19,6 @@ func enter(msg: Dictionary = {}) -> void:
 	attack_in_progress = true
 	if sprite:
 		sprite.play('Attack')
-		print(sprite.animation)
 
 func exit():
 	if sprite.animation_finished.is_connected(_on_animation_finished):

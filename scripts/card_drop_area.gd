@@ -6,6 +6,9 @@ extends Node2D
 # INVOKE button
 func _on_button_button_down() -> void:
 	#if glyph_drop_circle.get_overlapping_areas().size() == 0:
+		##print(owner.find_child("PlayerHand"))
+		#GameState.dice_level += 1
+		#return
 	enemies_node.spawn_slime()
 	for area in glyph_drop_circle.get_overlapping_areas():
 		enemies_node.spawn_slime()

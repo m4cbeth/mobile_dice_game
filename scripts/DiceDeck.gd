@@ -64,7 +64,7 @@ func start_roll():
 			"frame": current_frame
 		})
 		current_time += interval
-	var final_result = randi_range(1, 6)
+	var final_result = randi_range(0, 5)
 	frames_to_show.append({
 		"time": roll_duration,
 		"frame": final_result
@@ -83,24 +83,27 @@ func start_roll():
 
 func handle_deal(result_number: int):
 	# incoming result will be "dice num" ie 1-6 (not 0-5)
-	#if GameState.dice_level == 1:
-		##result_number is just number of cards
-		#deal_cards(result_number)
-	#elif GameState.dice_level == 2:
-		##use as array
-		#match result_number-1:
-			#0 or 2 or 4:
-				#deal_cards(1)
-			#3:
-				#deal_cards(2)
-			#5:
-				#print(5)
-	var current_card_count = player_hand.player_hand.size()
-	if current_card_count > 0:
-		var pick_a_spot = randi_range(0, current_card_count - 1)
-		var to_destroy = player_hand.player_hand[pick_a_spot]
-		player_hand.destroy_a_card(to_destroy)
-
+	if GameState.dice_level == 1:
+		#result_number is just number of cards
+		deal_cards(result_number + 1)
+	elif GameState.dice_level > 1:
+		#use as array.... (confused on numbers, but works as index num)
+		print("result_number: ", result_number)
+		match result_number:
+			0, 2, 4:
+				deal_cards(1)
+			1:
+				deal_cards(99)
+			3:
+				deal_cards(2)
+			5:
+				var current_card_count = player_hand.player_hand.size()
+				if current_card_count > 0:
+					current_card_count = player_hand.player_hand.size()
+					var pick_a_spot = randi_range(0, current_card_count - 1)
+					var to_destroy = player_hand.player_hand[pick_a_spot]
+					print("todestroy: ", to_destroy)
+					player_hand.destroy_a_card(to_destroy)
 
 func visual_feedback():
 	var original_scale = blue_die.scale
@@ -111,13 +114,17 @@ func visual_feedback():
 	tween.tween_property(blue_die, "scale", original_scale, animation_time)
 
 func deal_cards(number_of_cards: int) -> void:
+	if number_of_cards == 99:
+		print('deal wolf')
+		return
 	var counter = number_of_cards
-	while counter + 1 > 0:
+	while counter > 0:
+		print('dealworks')
 		counter -= 1
 		spawn_card()
 		await get_tree().create_timer(.1).timeout
 		if counter == 0:
-			current_die.play()
+			blue_die.play()
 
 func _on_button_button_down() -> void:
 	start_roll()
@@ -149,6 +156,7 @@ func take_damage(damage: int):
 	# add/minus damage and put in damage state
 	is_taking_damage = true
 	dice_health -= damage
+	player_hand.hand_max -= damage
 	# Play damage animation
 	health_display.show_number(damage)
 	if damage > 0:
@@ -169,39 +177,28 @@ func take_damage(damage: int):
 		#current_die = blue_die
 	if GameState.dice_level == 1 and  dice_health - damage > dice_transform_threshold:
 		current_die = mob_die
-		print('evolve dice')
 		blue_die.scale = Vector2(1, 1)
 		GameState.dice_level = 2
 		green_smoke.play_backwards("eight_reveal")
 		await green_smoke.animation_finished
-		# hide old die // disable if needed (collision etc)
-		#blue_die.visible = false
-		print('isthishappening?')
 		blue_die.stop()
 		blue_die.play("mob_die")
 		blue_die.scale = Vector2(.5, .5)
-		print(blue_die.animation)
-		#mob_die.visible = true
-		# show new dice // enable etc if needed
 		green_smoke.play("eight_reveal")
-	
 	# Create a tween for the rumble effect
 	var tween = create_tween()
 	tween.set_parallel(true)
-	
 	# Define rumble parameters
 	var rumble_duration = 0.6
 	var rumble_intensity = 15.0
 	var rotation_intensity = 0.1
 	var num_shakes = 6
-	
 	# Add position and rotation shakes that diminish over time
 	for i in range(num_shakes):
 		var progress = float(i) / num_shakes
 		var shake_duration = rumble_duration / num_shakes
 		var current_intensity = rumble_intensity * (1.0 - progress)
 		var current_rotation = rotation_intensity * (1.0 - progress)
-		
 		# Random position offset
 		var offset = Vector2(
 			randf_range(-current_intensity, current_intensity),
@@ -214,11 +211,9 @@ func take_damage(damage: int):
 		var rot_offset = randf_range(-current_rotation, current_rotation)
 		tween.tween_property(current_die, "rotation", 
 			initial_rotation + rot_offset, shake_duration)
-	
 	# Final reset to ensure no drift
 	tween.chain().tween_property(blue_die, "position", initial_position, 0.1)
 	tween.tween_property(blue_die, "rotation", initial_rotation, 0.1)
-	
 	# When done, reset state and play default animation
 	tween.finished.connect(func():
 		is_taking_damage = false
