@@ -38,8 +38,8 @@ func _ready():
 	current_die = blue_die
 
 func reset_die_position():
-	current_die.position = initial_position
-	current_die.rotation = initial_rotation
+	blue_die.position = initial_position
+	blue_die.rotation = initial_rotation
 
 func start_roll():
 	if rolling:	
@@ -82,13 +82,12 @@ func start_roll():
 	tween.tween_callback(visual_feedback)
 
 func handle_deal(result_number: int):
-	# incoming result will be "dice num" ie 1-6 (not 0-5)
+	# incoming numb is die face array num i.e. 0-5
 	if GameState.dice_level == 1:
 		#result_number is just number of cards
 		deal_cards(result_number + 1)
 	elif GameState.dice_level > 1:
-		#use as array.... (confused on numbers, but works as index num)
-		print("result_number: ", result_number)
+		var test = 5
 		match result_number:
 			0, 2, 4:
 				deal_cards(1)
@@ -104,6 +103,7 @@ func handle_deal(result_number: int):
 					var to_destroy = player_hand.player_hand[pick_a_spot]
 					print("todestroy: ", to_destroy)
 					player_hand.destroy_a_card(to_destroy)
+					blue_die.play()
 
 func visual_feedback():
 	var original_scale = blue_die.scale
@@ -119,10 +119,10 @@ func deal_cards(number_of_cards: int) -> void:
 		return
 	var counter = number_of_cards
 	while counter > 0:
-		print('dealworks')
 		counter -= 1
 		spawn_card()
 		await get_tree().create_timer(.1).timeout
+		print(counter)
 		if counter == 0:
 			blue_die.play()
 
@@ -204,12 +204,12 @@ func take_damage(damage: int):
 			randf_range(-current_intensity, current_intensity),
 			randf_range(-current_intensity, current_intensity)
 		)
-		tween.tween_property(current_die, "position", 
+		tween.tween_property(blue_die, "position", 
 			initial_position + offset, shake_duration)
 			
 		# Random rotation
 		var rot_offset = randf_range(-current_rotation, current_rotation)
-		tween.tween_property(current_die, "rotation", 
+		tween.tween_property(blue_die, "rotation", 
 			initial_rotation + rot_offset, shake_duration)
 	# Final reset to ensure no drift
 	tween.chain().tween_property(blue_die, "position", initial_position, 0.1)
