@@ -8,6 +8,7 @@ var fake_floor := 800
 var is_falling := false
 var shitlist := [] # a list of people who've harmed me
 var damage := 1
+var is_off_card := false
 const mob_type = Groups.knights
 
 func take_damage(attacker = null, dmg := 1) -> void:

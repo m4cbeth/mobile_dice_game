@@ -19,6 +19,7 @@ func enter(msg: Dictionary = {}) -> void:
 	attack_in_progress = true
 	if sprite:
 		sprite.play('Attack')
+		print(sprite.animation)
 
 func exit():
 	if sprite.animation_finished.is_connected(_on_animation_finished):
@@ -59,7 +60,7 @@ func update(delta):
 		transition_to("Walk")
 	if attack_in_progress and entity.is_in_group(Groups.knights) and sprite.frame == 3:
 		for body in attack_area.get_overlapping_areas():
-			if body.is_in_group(Groups.dice):
+			if body.is_in_group(Groups.dice) and GameState.dice_level > 1:
 				body.get_parent().take_damage(damage)
 			if body.is_in_group("bad_guys"):
 				body.get_parent().take_damage(entity, damage)

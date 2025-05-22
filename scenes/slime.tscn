@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://cg3uapk2i3dy7"]
+[gd_scene load_steps=62 format=3 uid="uid://cg3uapk2i3dy7"]
 
 [ext_resource type="Texture2D" uid="uid://dsvagi3rep0qk" path="res://assets/sprites/enemies/Green_Slime-Idle.png" id="1_371uh"]
 [ext_resource type="Script" uid="uid://dnqov7hyx0rxd" path="res://scripts/slime.gd" id="1_p2gj0"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://igtb0obeg75" path="res://scripts/state/state_take_damage.gd" id="8_0l8pv"]
 [ext_resource type="Script" uid="uid://g5h5p16chtoj" path="res://scripts/state/state_death.gd" id="10_2xjuo"]
 [ext_resource type="Script" uid="uid://hpfnehdxwtm7" path="res://scripts/state/state_attack.gd" id="12_pu8ps"]
+[ext_resource type="Script" uid="uid://dor0i5y5k10ru" path="res://scripts/state/state_idle.gd" id="13_g40cl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2qvl"]
 atlas = ExtResource("2_v5wyi")
@@ -413,6 +414,10 @@ metadata/_custom_type_script = "uid://g5h5p16chtoj"
 script = ExtResource("12_pu8ps")
 metadata/_custom_type_script = "uid://hpfnehdxwtm7"
 
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("13_g40cl")
+metadata/_custom_type_script = "uid://dor0i5y5k10ru"
+
 [node name="LandSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_fd6lc")
 volume_db = -11.318
@@ -434,3 +439,9 @@ position = Vector2(0.3125, -8.75)
 shape = SubResource("RectangleShape2D_pu8ps")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
+radius = 22.63
+time_horizon_agents = 2.57
+time_horizon_obstacles = 2.22
+avoidance_priority = 0.62
+debug_enabled = true

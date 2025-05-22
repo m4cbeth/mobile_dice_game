@@ -69,6 +69,7 @@ func physics_update(delta):
 				add if attack_area.overlapping_areas has bad guys for good guys (or vice versa)
 			"""
 			if is_in_strike_range and is_in_y_range and sprite.animation != "Attack":
+				print('transition to attack')
 				transition_to("Attack", {target = target_coords})
 			if target == entity and is_in_strike_range and sprite.animation != "Idle":
 				transition_to("Idle")

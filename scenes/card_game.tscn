@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://d1ti5odadd840"]
+[gd_scene load_steps=74 format=3 uid="uid://d1ti5odadd840"]
 
 [ext_resource type="Script" uid="uid://bflst71urcn21" path="res://scripts/CardManager.gd" id="2_86uwx"]
 [ext_resource type="Script" uid="uid://dwkbp3is8tles" path="res://scenes/Camera2D.gd" id="2_iwjdk"]
@@ -8,10 +8,11 @@
 [ext_resource type="PackedScene" uid="uid://dks7yhc2ba12p" path="res://scenes/DiceDeck.tscn" id="5_6mh84"]
 [ext_resource type="Texture2D" uid="uid://b18tytna243dm" path="res://assets/backgrounds/Futuristic Digital Landscape with Circuitry.png" id="5_buiih"]
 [ext_resource type="AudioStream" uid="uid://dbw14rt6j53hq" path="res://assets/music/Sketchbook 2024-10-13.ogg" id="6_427xc"]
+[ext_resource type="Texture2D" uid="uid://cu1166tb2ii80" path="res://assets/sprites/arcane-glyph.png" id="6_buiih"]
 [ext_resource type="Texture2D" uid="uid://h2o1qvha5lmw" path="res://assets/sprites/invoke_button.png" id="6_vu0qa"]
 [ext_resource type="AudioStream" uid="uid://dko64tga8m4vu" path="res://assets/sounds/FUI Holographic Button Press-1.wav" id="7_45i77"]
 [ext_resource type="PackedScene" uid="uid://dnpqvg2wo1tj6" path="res://scenes/card_drop_area.tscn" id="8_0e170"]
-[ext_resource type="Script" uid="uid://bf0pa6kur8fsm" path="res://assets/card_drop_area.gd" id="8_82ybk"]
+[ext_resource type="Script" uid="uid://bf0pa6kur8fsm" path="res://scripts/card_drop_area.gd" id="8_82ybk"]
 [ext_resource type="Script" uid="uid://b8oyhb3ihk7h6" path="res://scripts/player_hand.gd" id="9_6xg5x"]
 [ext_resource type="PackedScene" uid="uid://5dpfxn07yxd0" path="res://scenes/enemies.tscn" id="10_vu0qa"]
 [ext_resource type="Texture2D" uid="uid://miv4pvkq1osc" path="res://assets/sprites/Hearts.png" id="12_6mh84"]
@@ -423,9 +424,9 @@ region = Rect2(0, 0, 15.803, 17)
 filter_clip = true
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_2debr"]
-vertices = PackedVector2Array(1936.02, 757.992, 1936.97, 1110, -21.0313, 1110, -21.9688, 757)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-32, 747, 1946, 748, 1947, 1120, -31, 1120)])
+vertices = PackedVector2Array(1936.02, 757.992, 1936.97, 1110, 682.406, 1110, 562.75, 971.203, 208.852, 1110.06, -21.0234, 1110, -21.9688, 757, 324.258, 960.781)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(7, 6, 0, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-32, 747, 1946, 748, 1947, 1120, -31, 1120), PackedVector2Array(329, 971, 220, 1112, 683, 1126, 558, 981)])
 
 [node name="CardGame" type="Node2D"]
 
@@ -460,6 +461,11 @@ volume_db = -9.369
 [node name="TechnoPopMusic" type="AudioStreamPlayer" parent="Background"]
 stream = ExtResource("4_2debr")
 volume_db = -21.081
+
+[node name="Arcane-glyph" type="Sprite2D" parent="."]
+position = Vector2(967, 885)
+scale = Vector2(0.183594, 0.183594)
+texture = ExtResource("6_buiih")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(968, 566)
@@ -681,9 +687,6 @@ stretch_mode = 2
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 visible = false
 navigation_polygon = SubResource("NavigationPolygon_2debr")
-
-[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
-radius = 6.76
 
 [connection signal="button_down" from="InvokeButton/Button" to="CardDropArea" method="_on_button_button_down"]
 [connection signal="button_down" from="InvokeButton/Button" to="InvokeButton" method="_on_button_button_down"]

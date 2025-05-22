@@ -43,7 +43,7 @@ func update_hand_positions():
 	var current_card_count = player_hand.size()
 	var tweens = []
 	for i in range(current_card_count):
-		var card: Node2D = player_hand[i]
+		var card: PlayingCard = player_hand[i]
 		card.z_index = 2 + current_card_count - i
 		var new_position = Vector2(calculate_card_position(i), HAND_Y_AXIS)
 		animate_card_to_position(card, new_position)

@@ -5,7 +5,7 @@ extends CharacterBody2D
 @onready var state_machine: StateMachine = find_child("StateMachine")
 
 var fake_floor
-var health = 2.0
+var health := 4
 var is_falling: bool
 const mob_type = Groups.slimes
 var shitlist := [] # a list of people who've harmed me
