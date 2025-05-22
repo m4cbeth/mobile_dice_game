@@ -1,5 +1,20 @@
 # TODO
 
+|----------------------------WORKING ON----------------------------------------|
+
+CREATING WOLF:
+	deal option, origanize mob class structure, knights, slimes etc
+	sprite and hit boxes.
+
+|------------------------------------------------------------------------------|
+|----------------------------ON MY MIND----------------------------------------|
+
+When player adds too many knights (e.g. -gt 4):
+	card destroys on enter (we have on enter set up):
+		if overlapping.filter(is_knight).size() -gt 4
+		destroy card in player's grip
+
+
 CURR GOALS ----------------:
 	Die roll, land on number, deal that many cards.
 		if hand_count > max cards:
@@ -25,8 +40,13 @@ NEXT GOALS ----------------:
 	4) Invoke logic:
 		color should be based not on seperate layers, but:
 			controling the RAW values via dynamic code (i.e. card count body overlap)
-	
-DONE -----------------------:
+
+
+
+|------------------------------------------------------------------------------|
+|----------------------------DONE----------------------------------------------|
+|------------------------------------------------------------------------------|
+
 
 
 Current Bugs:
