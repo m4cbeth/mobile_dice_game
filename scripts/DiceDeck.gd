@@ -98,7 +98,6 @@ func _on_button_button_down() -> void:
 
 func hit_by_slime(slime_hit_by: CharacterBody2D):
 	take_damage(-1)
-	update_hearts()
 	if dice_health > dice_transform_threshold:
 		slime_hit_by.state_machine.transition_to("Death")
 	# if health is at threashold, transform into new die
@@ -114,9 +113,8 @@ func hit_by_slime(slime_hit_by: CharacterBody2D):
 
 func update_hearts():
 	var hearts = hearts_container.get_children()
-	for heart in range(hearts.size()):
-		if heart + 1 <= dice_health:
-			hearts[heart].visible = true
+	for heart in range(hearts.size()-1):
+		hearts[heart].visible = heart + 1 <= dice_health
 
 func take_damage(damage: int):
 	# don't start if already taking damage
@@ -191,6 +189,8 @@ func take_damage(damage: int):
 		is_taking_damage = false
 		animated_sprite.play("default")
 		reset_die_position())
+	
+	update_hearts()
 
 func spawn_card():
 	var card_manager = get_parent()

@@ -8,7 +8,7 @@ func _on_button_button_down() -> void:
 	#if glyph_drop_circle.get_overlapping_areas().size() == 0:
 	enemies_node.spawn_slime()
 	for area in glyph_drop_circle.get_overlapping_areas():
-		enemies_node.spawn_slime()
+		#enemies_node.spawn_slime()
 		var card = area.get_parent()
 		var card_back
 		for child in card.get_children():

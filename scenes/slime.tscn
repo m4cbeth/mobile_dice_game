@@ -443,5 +443,7 @@ avoidance_enabled = true
 radius = 22.63
 time_horizon_agents = 2.57
 time_horizon_obstacles = 2.22
+avoidance_layers = 4
+avoidance_mask = 4
 avoidance_priority = 0.62
 debug_enabled = true
