@@ -43,7 +43,7 @@ func start_roll():
 	if rolling:	
 		return
 	rolling = true
-	current_die.stop()
+	blue_die.stop()
 	if tween:
 		tween.kill()
 	tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
@@ -69,7 +69,7 @@ func start_roll():
 	})
 	# Schedule all frame changes
 	for frame_data in frames_to_show:
-		tween.tween_callback(func(): current_die.frame = frame_data["frame"]).set_delay(frame_data["time"])
+		tween.tween_callback(func(): blue_die.frame = frame_data["frame"]).set_delay(frame_data["time"])
 	# End rolling state when complete
 	tween.tween_callback(func(): rolling = false).set_delay(roll_duration)
 	# Update current_frame to match the final result
@@ -78,12 +78,12 @@ func start_roll():
 	tween.tween_callback(visual_feedback)
 
 func visual_feedback():
-	var original_scale = current_die.scale
+	var original_scale = blue_die.scale
 	var scale_up = original_scale * 1.75
 	var animation_time := 0.93
 	var tween = create_tween().set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
-	tween.tween_property(current_die, "scale", scale_up, animation_time)
-	tween.tween_property(current_die, "scale", original_scale, animation_time)
+	tween.tween_property(blue_die, "scale", scale_up, animation_time)
+	tween.tween_property(blue_die, "scale", original_scale, animation_time)
 
 func deal_cards(number_of_cards: int) -> void:
 	var counter = number_of_cards
@@ -123,28 +123,6 @@ func take_damage(damage: int):
 		return
 	# add/minus damage and put in damage state
 	is_taking_damage = true
-	if GameState.dice_level == 2 and dice_health - damage < dice_transform_threshold:
-		print('transform down')
-		GameState.dice_level = 1
-		green_smoke.play_backwards("eight_reveal")
-		await green_smoke.animation_finished
-		# hide old die // disable if needed (collision etc)
-		blue_die.visible = true
-		mob_die.visible = false
-		# show new dice // enable etc if needed
-		green_smoke.play("eight_reveal")
-		#current_die = blue_die
-	if GameState.dice_level == 1 and  dice_health - damage > dice_transform_threshold:
-		current_die = mob_die
-		print('evolve dice')
-		GameState.dice_level = 2
-		green_smoke.play_backwards("eight_reveal")
-		await green_smoke.animation_finished
-		# hide old die // disable if needed (collision etc)
-		blue_die.visible = false
-		mob_die.visible = true
-		# show new dice // enable etc if needed
-		green_smoke.play("eight_reveal")
 	dice_health -= damage
 	# Play damage animation
 	health_display.show_number(damage)
@@ -152,6 +130,35 @@ func take_damage(damage: int):
 		blue_die.play("Hit")
 	else:
 		blue_die.play('green')
+	if GameState.dice_level == 2 and dice_health - damage < dice_transform_threshold:
+		print('transform down')
+		GameState.dice_level = 1
+		green_smoke.play_backwards("eight_reveal")
+		await green_smoke.animation_finished
+		# hide old die // disable if needed (collision etc)
+		#blue_die.visible = true
+		#mob_die.visible = false
+		blue_die.play("default")
+		# show new dice // enable etc if needed
+		green_smoke.play("eight_reveal")
+		#current_die = blue_die
+	if GameState.dice_level == 1 and  dice_health - damage > dice_transform_threshold:
+		current_die = mob_die
+		print('evolve dice')
+		blue_die.scale = Vector2(1, 1)
+		GameState.dice_level = 2
+		green_smoke.play_backwards("eight_reveal")
+		await green_smoke.animation_finished
+		# hide old die // disable if needed (collision etc)
+		#blue_die.visible = false
+		print('isthishappening?')
+		blue_die.stop()
+		blue_die.play("mob_die")
+		blue_die.scale = Vector2(.5, .5)
+		print(blue_die.animation)
+		#mob_die.visible = true
+		# show new dice // enable etc if needed
+		green_smoke.play("eight_reveal")
 	
 	# Create a tween for the rumble effect
 	var tween = create_tween()
@@ -184,13 +191,16 @@ func take_damage(damage: int):
 			initial_rotation + rot_offset, shake_duration)
 	
 	# Final reset to ensure no drift
-	tween.chain().tween_property(current_die, "position", initial_position, 0.1)
-	tween.tween_property(current_die, "rotation", initial_rotation, 0.1)
+	tween.chain().tween_property(blue_die, "position", initial_position, 0.1)
+	tween.tween_property(blue_die, "rotation", initial_rotation, 0.1)
 	
 	# When done, reset state and play default animation
 	tween.finished.connect(func():
 		is_taking_damage = false
-		current_die.play("default")
+		if GameState.dice_level > 1:
+			blue_die.play("mob_die")
+		else:
+			blue_die.play("default")
 		reset_die_position())
 	
 	update_hearts()
