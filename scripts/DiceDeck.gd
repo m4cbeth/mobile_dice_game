@@ -5,6 +5,7 @@ extends Node2D
 @onready var health_display = $HealthNumber
 @onready var green_smoke: AnimatedSprite2D = $GreenSmoke
 @onready var hearts_container: HBoxContainer = owner.find_child("HeartContainer")
+@onready var player_hand: PlayerHand = owner.find_child("PlayerHand")
 
 var rolling := false
 var tween: Tween
@@ -75,20 +76,31 @@ func start_roll():
 	tween.tween_callback(func(): rolling = false).set_delay(roll_duration)
 	# Update current_frame to match the final result
 	tween.tween_callback(func(): current_frame = final_result).set_delay(roll_duration)
-	tween.tween_callback(func(): deal_cards(final_result)).set_delay(roll_duration)
+	
+	tween.tween_callback(func(): handle_deal(final_result)).set_delay(roll_duration)
+	
 	tween.tween_callback(visual_feedback)
 
 func handle_deal(result_number: int):
-	if GameState.dice_level == 1:
-		#result_number is just number of cards
-		deal_cards(result_number)
-	elif GameState.dice_level == 2:
-		#use as array
-		match result_number:
-			0:
-				deal_cards(1)
-			3:
-				deal_cards(2)
+	# incoming result will be "dice num" ie 1-6 (not 0-5)
+	#if GameState.dice_level == 1:
+		##result_number is just number of cards
+		#deal_cards(result_number)
+	#elif GameState.dice_level == 2:
+		##use as array
+		#match result_number-1:
+			#0 or 2 or 4:
+				#deal_cards(1)
+			#3:
+				#deal_cards(2)
+			#5:
+				#print(5)
+	var current_card_count = player_hand.player_hand.size()
+	if current_card_count > 0:
+		var pick_a_spot = randi_range(0, current_card_count - 1)
+		var to_destroy = player_hand.player_hand[pick_a_spot]
+		player_hand.destroy_a_card(to_destroy)
+
 
 func visual_feedback():
 	var original_scale = blue_die.scale

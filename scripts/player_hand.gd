@@ -18,7 +18,6 @@ const DEAL_DELAY = 0.25
 const ROTATION_AMOUNT = 5.0
 var player_hand = []
 
-
 func get_dice_deck_position():
 	return get_parent().find_child("CardManager").find_child("DiceDeck").global_position
 
