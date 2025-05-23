@@ -42,7 +42,7 @@ func reset_die_position():
 	blue_die.rotation = initial_rotation
 
 func start_roll():
-	if rolling:	
+	if rolling:
 		return
 	rolling = true
 	blue_die.stop()

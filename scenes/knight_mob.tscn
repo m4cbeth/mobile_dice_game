@@ -35,6 +35,22 @@ region = Rect2(500, 200, 100, 100)
 atlas = ExtResource("2_6eskw")
 region = Rect2(600, 200, 100, 100)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_2gehv"]
+atlas = ExtResource("2_6eskw")
+region = Rect2(0, 700, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0fiyr"]
+atlas = ExtResource("2_6eskw")
+region = Rect2(100, 700, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8iqau"]
+atlas = ExtResource("2_6eskw")
+region = Rect2(200, 700, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7v4mp"]
+atlas = ExtResource("2_6eskw")
+region = Rect2(300, 700, 100, 100)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_0iavu"]
 atlas = ExtResource("2_6eskw")
 region = Rect2(0, 0, 100, 100)
@@ -106,22 +122,6 @@ region = Rect2(200, 600, 100, 100)
 [sub_resource type="AtlasTexture" id="AtlasTexture_1q325"]
 atlas = ExtResource("2_6eskw")
 region = Rect2(300, 600, 100, 100)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2gehv"]
-atlas = ExtResource("2_6eskw")
-region = Rect2(0, 700, 100, 100)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0fiyr"]
-atlas = ExtResource("2_6eskw")
-region = Rect2(100, 700, 100, 100)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8iqau"]
-atlas = ExtResource("2_6eskw")
-region = Rect2(200, 700, 100, 100)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7v4mp"]
-atlas = ExtResource("2_6eskw")
-region = Rect2(300, 700, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d0ttk"]
 atlas = ExtResource("2_6eskw")
@@ -237,6 +237,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_2gehv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0fiyr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8iqau")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7v4mp")
+}],
+"loop": true,
+"name": &"Death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_0iavu")
 }, {
 "duration": 1.0,
@@ -302,23 +319,6 @@ animations = [{
 }],
 "loop": true,
 "name": &"damage",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2gehv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0fiyr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8iqau")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7v4mp")
-}],
-"loop": true,
-"name": &"death",
 "speed": 5.0
 }, {
 "frames": [{
@@ -403,9 +403,8 @@ script = ExtResource("1_6eskw")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-2, -6)
 sprite_frames = SubResource("SpriteFrames_6nkab")
-animation = &"Attack"
+animation = &"Idle"
 autoplay = "Idle"
-frame = 3
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-2, 1, 2, 1, 2, -5, 2, -11, -2, -11, -5, -8, -7, -3, -5, 1, -2, 1)

@@ -1,0 +1,113 @@
+[gd_scene load_steps=15 format=3 uid="uid://bt0sdddhfe0ck"]
+
+[ext_resource type="Texture2D" uid="uid://o38q71l7xrfw" path="res://assets/sprites/Werewolf.png" id="1_hgn4c"]
+[ext_resource type="Script" uid="uid://ifmuhqqi8kkx" path="res://scripts/wolf_mob.gd" id="1_pw3wn"]
+[ext_resource type="Script" uid="uid://vtrrxjocmn18" path="res://scripts/state/state_machine.gd" id="2_eb5bn"]
+[ext_resource type="Script" uid="uid://dor0i5y5k10ru" path="res://scripts/state/state_idle.gd" id="3_pw3wn"]
+[ext_resource type="Script" uid="uid://d0vin3tgf07sw" path="res://scripts/state/state_walk.gd" id="4_ll207"]
+[ext_resource type="Script" uid="uid://hpfnehdxwtm7" path="res://scripts/state/state_attack.gd" id="5_6yfl6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2wjr4"]
+atlas = ExtResource("1_hgn4c")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_htcu4"]
+atlas = ExtResource("1_hgn4c")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wwbdd"]
+atlas = ExtResource("1_hgn4c")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eb5bn"]
+atlas = ExtResource("1_hgn4c")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pw3wn"]
+atlas = ExtResource("1_hgn4c")
+region = Rect2(400, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ll207"]
+atlas = ExtResource("1_hgn4c")
+region = Rect2(500, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6yfl6"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"Attack",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2wjr4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_htcu4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wwbdd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eb5bn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pw3wn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ll207")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 12.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nrgav"]
+radius = 5.0
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_pw3wn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-4, -7)
+sprite_frames = SubResource("SpriteFrames_6yfl6")
+animation = &"Idle"
+autoplay = "Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, -5)
+shape = SubResource("CircleShape2D_nrgav")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("2_eb5bn")
+metadata/_custom_type_script = "uid://vtrrxjocmn18"
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("3_pw3wn")
+metadata/_custom_type_script = "uid://dor0i5y5k10ru"
+
+[node name="Walk" type="Node" parent="StateMachine"]
+script = ExtResource("4_ll207")
+metadata/_custom_type_script = "uid://d0vin3tgf07sw"
+
+[node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource("5_6yfl6")
+metadata/_custom_type_script = "uid://hpfnehdxwtm7"
+
+[node name="DangerZone" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DangerZone"]
+polygon = PackedVector2Array(5, -4, 5, -19, 25, -10, 21, 1, 6, 3)
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true

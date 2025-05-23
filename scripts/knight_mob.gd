@@ -1,9 +1,9 @@
-extends CharacterBody2D
-class_name Mob
+extends Mob
+class_name KnightMob
 
 @onready var state_machine: StateMachine = find_child("StateMachine")
 
-var health = 10.0
+var health := 10
 var fake_floor := 800
 var is_falling := false
 var shitlist := [] # a list of people who've harmed me
