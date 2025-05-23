@@ -116,7 +116,7 @@ func visual_feedback():
 
 func deal_cards(number_of_cards: int) -> void:
 	if number_of_cards == 99:
-		print('deal wolf')
+		spawn_card(Groups.wolves)
 		return
 	var counter = number_of_cards
 	while counter > 0:
@@ -223,12 +223,12 @@ func take_damage(damage: int):
 	
 	update_hearts()
 
-func spawn_card():
+func spawn_card(mob_type: String = Groups.knights):
 	var card_manager = get_parent()
 	var player_hand: PlayerHand = owner.find_child("PlayerHand")
 	var deck_coords = self.global_position
-	var new_card = card_scene.instantiate()
-	if true:
+	var new_card: PlayingCard = card_scene.instantiate()
+	if mob_type == Groups.wolves:
 	# remove knight from card
 		var knightmob = new_card.find_child("Knight")
 		print(knightmob)
