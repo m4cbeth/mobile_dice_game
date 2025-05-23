@@ -231,11 +231,11 @@ func spawn_card(mob_type: String = Groups.knights):
 	if mob_type == Groups.wolves:
 	# remove knight from card
 		var knightmob = new_card.find_child("Knight")
-		print(knightmob)
 		knightmob.queue_free()
 	# add wolf mob to card
 		var new_wolf = wolf_mob_scene.instantiate()
 		new_card.add_child(new_wolf)
+		new_card.cards_mob_type = Groups.wolves
 	new_card.add_to_group("playing_cards")
 	new_card.global_position = deck_coords
 	card_manager.add_child(new_card)

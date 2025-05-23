@@ -5,21 +5,38 @@ extends Node2D
 
 # INVOKE button
 func _on_button_button_down() -> void:
-	#if glyph_drop_circle.get_overlapping_areas().size() == 0:
-		##print(owner.find_child("PlayerHand"))
-		#GameState.dice_level += 1
-		#return
-	enemies_node.spawn_slime()
-	for area in glyph_drop_circle.get_overlapping_areas():
-		enemies_node.spawn_slime()
-		var card = area.get_parent()
-		var card_back
-		for child in card.get_children():
-			match child.name:
-				"CardBackground":
-					card_back = child
-		if card_back:
-			destroy_card(card)
+	#oooo interestingthought: dice_health -= 1 && update_hearts()
+	
+	var over_lapping_areas = glyph_drop_circle.get_overlapping_areas()
+	var cards := []
+	var knights := []
+	for area in over_lapping_areas:
+		if area.is_in_group(Groups.good_guys):
+			cards.append(area.owner)
+	for card: PlayingCard in cards:
+		if card.cards_mob_type == Groups.knights:
+			knights.append(card)
+		
+	
+	# while more than two knights
+	# take two knights, vector2++/2, remove one mob, position the other,
+	# scale up and change internal stats, ie damage health
+	
+	
+	
+	
+	#enemies_node.spawn_slime()
+	#
+	#for area in glyph_drop_circle.get_overlapping_areas():
+		#enemies_node.spawn_slime()
+		#var card = area.get_parent()
+		#var card_back
+		#for child in card.get_children():
+			#match child.name:
+				#"CardBackground":
+					#card_back = child
+		#if card_back:
+			#destroy_card(card)
 
 func destroy_card(card):
 	var destruction_animation: AnimatedSprite2D

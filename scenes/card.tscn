@@ -159,11 +159,11 @@ sprite_frames = SubResource("SpriteFrames_rywyy")
 frame = 15
 frame_progress = 1.0
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." groups=["good_guys"]]
 collision_layer = 3
 collision_mask = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["good_guys"]]
 shape = SubResource("RectangleShape2D_pi1jj")
 
 [node name="CardBody" type="StaticBody2D" parent="."]

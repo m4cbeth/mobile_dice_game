@@ -36,6 +36,7 @@ dice="Things pertaining to the dice of the dice deck"
 bad_guys=""
 glyph=""
 playing_cards=""
+good_guys=""
 
 [rendering]
 
