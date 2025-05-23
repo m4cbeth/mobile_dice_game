@@ -14,7 +14,7 @@ var avoid_duration: float
 const DICE_COORDS = Vector2(41, 303)
 var dice_coords := DICE_COORDS
 var speed_modifier: float
-const base_speed = 2
+const base_speed = 3
 const speed_modifiers = {
 	Groups.slimes: 1 * base_speed,
 	"knights": 1.75 * base_speed,
@@ -135,7 +135,7 @@ func find_closest(nodes: Array):
 func flip_body(mob: CharacterBody2D):
 	if mob.is_in_group(Groups.good_guys):
 		attack_area.scale.x = sign(mob.velocity.x)
-		mob.find_child('CollisionPolygon2D').scale.x = sign(mob.velocity.x)
+		mob.find_child('CollisionShape2D').scale.x = sign(mob.velocity.x)
 		if mob.velocity.x < 0:
 			mob.find_child("AnimatedSprite2D").flip_h = true
 		else:

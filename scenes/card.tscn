@@ -178,7 +178,7 @@ stream = ExtResource("6_6ligt")
 volume_db = -16.213
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
-radius = 11.83
+radius = 35.0
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

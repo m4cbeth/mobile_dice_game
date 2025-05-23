@@ -163,27 +163,24 @@ func take_damage(damage: int):
 		blue_die.play("Hit")
 	else:
 		blue_die.play('green')
-	if GameState.dice_level == 2 and dice_health - damage < dice_transform_threshold:
-		print('transform down')
-		GameState.dice_level = 1
-		green_smoke.play_backwards("eight_reveal")
-		await green_smoke.animation_finished
-		# hide old die // disable if needed (collision etc)
-		#blue_die.visible = true
-		#mob_die.visible = false
-		blue_die.play("default")
-		# show new dice // enable etc if needed
-		green_smoke.play("eight_reveal")
-		#current_die = blue_die
+	# EVOLVE
 	if GameState.dice_level == 1 and  dice_health - damage > dice_transform_threshold:
 		current_die = mob_die
-		blue_die.scale = Vector2(1, 1)
 		GameState.dice_level = 2
 		green_smoke.play_backwards("eight_reveal")
 		await green_smoke.animation_finished
 		blue_die.stop()
 		blue_die.play("mob_die")
+		# THIS HACK WORKS; BUT SPRITE NEEDS TO BE REEXPORTED (I.E. MOB_DIE) FROM PHOTOSHOP AT RIGHT SIZE
 		blue_die.scale = Vector2(.5, .5)
+		green_smoke.play("eight_reveal")
+	# DEVOLVE
+	if GameState.dice_level == 2 and dice_health - damage < dice_transform_threshold:
+		GameState.dice_level = 1
+		green_smoke.play_backwards("eight_reveal")
+		await green_smoke.animation_finished
+		blue_die.scale = Vector2(1, 1)
+		blue_die.play("default")
 		green_smoke.play("eight_reveal")
 	# Create a tween for the rumble effect
 	var tween = create_tween()

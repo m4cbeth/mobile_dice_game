@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://dfiyo16w3vyaa"]
+[gd_scene load_steps=59 format=3 uid="uid://dfiyo16w3vyaa"]
 
 [ext_resource type="Script" uid="uid://b6podv2knbvop" path="res://scripts/knight_mob.gd" id="1_6eskw"]
 [ext_resource type="Texture2D" uid="uid://dr5788p5dql23" path="res://assets/sprites/Knight.png" id="2_6eskw"]
@@ -395,6 +395,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_7fdty"]
+radius = 5.0
+
 [node name="Knight" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 2
@@ -406,8 +409,9 @@ sprite_frames = SubResource("SpriteFrames_6nkab")
 animation = &"Idle"
 autoplay = "Idle"
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-2, 1, 2, 1, 2, -5, 2, -11, -2, -11, -5, -8, -7, -3, -5, 1, -2, 1)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -4)
+shape = SubResource("CircleShape2D_7fdty")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_m4dc5")
