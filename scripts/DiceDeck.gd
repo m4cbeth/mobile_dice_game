@@ -1,7 +1,8 @@
 extends Node2D
 
 @onready var card_scene = preload("res://scenes/card.tscn")
-@onready var mob_die = $RedDie # RedDie.play_her("won") ("ready player one")
+@onready var wolf_mob_scene = preload("res://scenes/wolf_mob.tscn")
+@onready var mob_die = $RedDie # RedDie.play_her("won") ("ready player one") ("RedDee" maybe?)
 @onready var health_display = $HealthNumber
 @onready var green_smoke: AnimatedSprite2D = $GreenSmoke
 @onready var hearts_container: HBoxContainer = owner.find_child("HeartContainer")
@@ -227,6 +228,14 @@ func spawn_card():
 	var player_hand: PlayerHand = owner.find_child("PlayerHand")
 	var deck_coords = self.global_position
 	var new_card = card_scene.instantiate()
+	if true:
+	# remove knight from card
+		var knightmob = new_card.find_child("Knight")
+		print(knightmob)
+		knightmob.queue_free()
+	# add wolf mob to card
+		var new_wolf = wolf_mob_scene.instantiate()
+		new_card.add_child(new_wolf)
 	new_card.add_to_group("playing_cards")
 	new_card.global_position = deck_coords
 	card_manager.add_child(new_card)

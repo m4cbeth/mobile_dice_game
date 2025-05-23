@@ -66,10 +66,6 @@ func summon_sprite(card: PlayingCard):
 	knight.is_falling = true
 	knight.is_off_card = true
 	knight.find_child("StateMachine").transition_to("Walk")
-	
-	#var test: AudioStreamPlayer
-	#test.finished
-	
 	var echo: AudioStreamPlayer
 	var remaining_children = card.get_children()
 	for child in remaining_children:
