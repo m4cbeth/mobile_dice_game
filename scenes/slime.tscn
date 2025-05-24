@@ -445,7 +445,6 @@ time_horizon_obstacles = 2.22
 avoidance_layers = 4
 avoidance_mask = 4
 avoidance_priority = 0.62
-debug_enabled = true
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
 position = Vector2(0, -10)

@@ -7,6 +7,8 @@ signal hovered_off
 # assume card is a knight until otherwise told
 var cards_mob_type := Groups.knights
 
+var is_jumbo := false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#
