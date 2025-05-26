@@ -3,8 +3,9 @@ class_name Attack
 
 @onready var sprite: AnimatedSprite2D = owner.get_node("AnimatedSprite2D")
 @onready var attack_area: Area2D = owner.get_node("DangerZone")
-@onready var damage : int = owner.damage
+#@onready var damage : int = owner.damage can't get this on load, because might be diff at attack time
 var attack_timer := 0.0
+var damage
 var target
 var attack_in_progress := false
 @export var can_attack := true
@@ -12,6 +13,7 @@ var attack_in_progress := false
 @export var attack_target := []
 
 func enter(msg: Dictionary = {}) -> void:
+	damage = owner.damage
 	if msg.has("target"):
 		target = msg.target
 	if !sprite.animation_finished.is_connected(_on_animation_finished):

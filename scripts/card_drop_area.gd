@@ -6,6 +6,7 @@ extends Node2D
 # INVOKE button
 func _on_button_button_down() -> void:
 	#oooo interestingthought: dice_health -= 1 && update_hearts()
+	#0000OOOOOO AND ROLling dice: health += 1 && update_hearts()
 	
 	var over_lapping_areas = glyph_drop_circle.get_overlapping_areas()
 	var cards: Array[PlayingCard]
@@ -26,15 +27,16 @@ func _on_button_button_down() -> void:
 		var avg_pos = (card1.global_position + card2.global_position) / 2
 		cards.erase(card1)
 		card1.queue_free()
-		#make as jumbo
+		#make a jumbo
 		card2.is_jumbo = true
 		card2.global_position = avg_pos
-		
-	# take two knights, vector2++/2, remove one mob, position the other,
-	# scale up and change internal stats, ie damage health
+		# change internal stats, ie damage health
+		var mob: Mob = card2.get_children().filter(func(node): return node is CharacterBody2D)[0]
+		mob.health = 10
+		mob.damage = 4
 	
 	
-	#enemies_node.spawn_slime()
+	enemies_node.spawn_slime()
 	
 	
 	for card in cards:

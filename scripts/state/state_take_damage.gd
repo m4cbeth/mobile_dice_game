@@ -12,7 +12,7 @@ var knockback_timer := 0.0
 var knockback_duration := 0.3  # Duration of knockback effect in seconds
 
 func enter(msg: Dictionary = {}) -> void:
-	#print('Entered TakeDamage state')
+	# print('Entered TakeDamage state')
 	# Reset state variables
 	damage_in_progress = true
 	knockback_timer = 0.0
@@ -39,13 +39,12 @@ func enter(msg: Dictionary = {}) -> void:
 		entity.health -= damage_amount
 
 func exit() -> void:
-	#print("Exiting TakeDamage state")
-	
+	# print("Exiting TakeDamage state")
 	# Clean up signal connection
 	if sprite.animation_finished.is_connected(_on_animation_finished):
 		sprite.animation_finished.disconnect(_on_animation_finished)
-	
 	damage_in_progress = false
+
 
 func update(delta: float) -> void:
 	# Track knockback duration
@@ -77,7 +76,6 @@ func apply_knockback() -> void:
 	#print("Applying knockback: ", knockback_direction * knockback_strength)
 	entity.velocity = knockback_direction * knockback_strength
 
-# Fixed function name - was "*on*animation_finished"
 func _on_animation_finished() -> void:
 	#print("Animation finished signal received!")
 	damage_in_progress = false

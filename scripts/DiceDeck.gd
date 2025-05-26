@@ -99,7 +99,6 @@ func handle_deal(result_number: int):
 			5:
 				var current_card_count = player_hand.player_hand.size()
 				if current_card_count > 0:
-					current_card_count = player_hand.player_hand.size()
 					var pick_a_spot = randi_range(0, current_card_count - 1)
 					var to_destroy = player_hand.player_hand[pick_a_spot]
 					print("todestroy: ", to_destroy)

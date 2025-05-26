@@ -1,6 +1,16 @@
 #### Mobile Dice Game ####
 (which is slowly just becoming a desktop game)
 
+# Calendar:
+	If I were to make a calendar right now:
+		1) wolves working
+		2) hand max +1:
+			When roll a double knight
+			Animation... shit wait.
+			Is hand max tied to hearst? 
+			then this doesn't make sense anymore...
+			Or hearts is max, and rolling doubleknight gives hearts +1
+			
 
 # GAMEPLAY:
 	todo: when slime is hit by knight, it adds to memory, then
