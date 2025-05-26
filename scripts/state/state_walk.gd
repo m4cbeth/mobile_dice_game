@@ -102,13 +102,15 @@ func get_target_coords():
 		return castle_coords
 
 func get_target():
+	var closest_guy: Mob
 	if entity.is_in_group("slimes"):
-		if entity.shitlist.size()
+		if entity.shitlist.size() > 0:
+			print('shitlist exist')
 		return get_dicedeck_ref()
 	if entity.is_in_group("knights"):
 		var bad_guys = get_bad_guys()
 		if bad_guys.size() > 0:
-			var closest_guy = find_closest(bad_guys)
+			closest_guy = find_closest(bad_guys)
 			return closest_guy
 		elif GameState.dice_level > 1:
 			return get_dicedeck_ref()

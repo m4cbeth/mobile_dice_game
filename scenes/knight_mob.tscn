@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://dfiyo16w3vyaa"]
+[gd_scene load_steps=60 format=3 uid="uid://dfiyo16w3vyaa"]
 
 [ext_resource type="Script" uid="uid://b6podv2knbvop" path="res://scripts/knight_mob.gd" id="1_6eskw"]
 [ext_resource type="Texture2D" uid="uid://dr5788p5dql23" path="res://assets/sprites/Knight.png" id="2_6eskw"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://d0vin3tgf07sw" path="res://scripts/state/state_walk.gd" id="4_wjd2n"]
 [ext_resource type="Script" uid="uid://dor0i5y5k10ru" path="res://scripts/state/state_idle.gd" id="5_724m8"]
 [ext_resource type="Script" uid="uid://hpfnehdxwtm7" path="res://scripts/state/state_attack.gd" id="6_7fdty"]
+[ext_resource type="PackedScene" uid="uid://b5xnas6gux52b" path="res://scenes/death_spell.tscn" id="7_m4dc5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mpugr"]
 atlas = ExtResource("2_6eskw")
@@ -248,7 +249,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7v4mp")
 }],
-"loop": true,
+"loop": false,
 "name": &"Death",
 "speed": 5.0
 }, {
@@ -406,8 +407,10 @@ script = ExtResource("1_6eskw")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-2, -6)
 sprite_frames = SubResource("SpriteFrames_6nkab")
-animation = &"Idle"
+animation = &"Death"
 autoplay = "Idle"
+frame = 3
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, -4)
@@ -441,3 +444,6 @@ polygon = PackedVector2Array(2, -2, 16, 12, 27, 5, 31, -10, 19, -24, 2, -24)
 simplify_path = true
 avoidance_enabled = true
 radius = 83.23
+
+[node name="DeathSpell" parent="." instance=ExtResource("7_m4dc5")]
+position = Vector2(2, -15)

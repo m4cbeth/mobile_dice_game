@@ -1,0 +1,86 @@
+[gd_scene load_steps=12 format=3 uid="uid://b5xnas6gux52b"]
+
+[ext_resource type="Texture2D" uid="uid://ca1adrkm8b4n2" path="res://assets/sprites/Red Effect Bullet Impact Explosion 32x32.png" id="1_4y0ft"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jj60r"]
+atlas = ExtResource("1_4y0ft")
+region = Rect2(192, 384, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ld2i"]
+atlas = ExtResource("1_4y0ft")
+region = Rect2(352, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qo2md"]
+atlas = ExtResource("1_4y0ft")
+region = Rect2(416, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j43o5"]
+atlas = ExtResource("1_4y0ft")
+region = Rect2(448, 224, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_75623"]
+atlas = ExtResource("1_4y0ft")
+region = Rect2(352, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g8fk3"]
+atlas = ExtResource("1_4y0ft")
+region = Rect2(192, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mooma"]
+atlas = ExtResource("1_4y0ft")
+region = Rect2(224, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bra5n"]
+atlas = ExtResource("1_4y0ft")
+region = Rect2(256, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jkvsp"]
+atlas = ExtResource("1_4y0ft")
+region = Rect2(288, 192, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6ofuq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jj60r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ld2i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qo2md")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j43o5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_75623")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g8fk3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mooma")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bra5n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jkvsp")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"burn",
+"speed": 13.0
+}]
+
+[node name="DeathSpell" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_6ofuq")
+animation = &"burn"
+frame = 10
+frame_progress = 1.0
