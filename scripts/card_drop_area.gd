@@ -32,7 +32,7 @@ func _on_button_button_down() -> void:
 		card2.global_position = avg_pos
 		# change internal stats, ie damage health
 		var mob: Mob = card2.get_children().filter(func(node): return node is CharacterBody2D)[0]
-		mob.health = 10
+		mob.health = 5
 		mob.damage = 4
 	
 	

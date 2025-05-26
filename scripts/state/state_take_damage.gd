@@ -22,6 +22,7 @@ func enter(msg: Dictionary = {}) -> void:
 	# Set knockback direction based on attacker or facing direction
 	if msg.has("attacker") and msg.attacker != null:
 		attacker = msg.attacker
+		entity.add_to_shitlist(attacker)
 		knockback_direction = (entity.global_position - attacker.global_position).normalized()
 	else:
 		# Fallback direction based on sprite facing

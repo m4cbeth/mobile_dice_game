@@ -103,6 +103,7 @@ func get_target_coords():
 
 func get_target():
 	if entity.is_in_group("slimes"):
+		if entity.shitlist.size()
 		return get_dicedeck_ref()
 	if entity.is_in_group("knights"):
 		var bad_guys = get_bad_guys()

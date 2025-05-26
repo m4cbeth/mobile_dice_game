@@ -1,5 +1,6 @@
-[gd_scene load_steps=74 format=3 uid="uid://d1ti5odadd840"]
+[gd_scene load_steps=75 format=3 uid="uid://d1ti5odadd840"]
 
+[ext_resource type="Script" uid="uid://rss15rds36m7" path="res://scripts/card_game.gd" id="1_3xrs3"]
 [ext_resource type="Script" uid="uid://bflst71urcn21" path="res://scripts/CardManager.gd" id="2_86uwx"]
 [ext_resource type="Script" uid="uid://dwkbp3is8tles" path="res://scenes/Camera2D.gd" id="2_iwjdk"]
 [ext_resource type="Texture2D" uid="uid://bsvghgl8o2lyl" path="res://assets/backgrounds/background2.webp" id="2_s2308"]
@@ -429,6 +430,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 outlines = Array[PackedVector2Array]([PackedVector2Array(-32, 747, 1946, 748, 1947, 1120, -31, 1120), PackedVector2Array(329, 971, 220, 1112, 683, 1126, 558, 981)])
 
 [node name="CardGame" type="Node2D"]
+script = ExtResource("1_3xrs3")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_0k00j")
@@ -436,19 +438,19 @@ environment = SubResource("Environment_0k00j")
 [node name="Background" type="Node" parent="."]
 
 [node name="Background2" type="Sprite2D" parent="Background"]
-visible = false
-z_index = -2
+z_index = -1
 position = Vector2(959, 500)
 scale = Vector2(1.30339, 1.19336)
 texture = ExtResource("2_s2308")
 
 [node name="PixelFieldNight3" type="Sprite2D" parent="Background"]
-visible = false
+z_index = -1
 position = Vector2(962, 438)
 scale = Vector2(1.34375, 1.34375)
 texture = ExtResource("3_tqu8w")
 
 [node name="FuturisticDigitalLandscapeWithCircuitry" type="Sprite2D" parent="Background"]
+visible = false
 z_index = -1
 position = Vector2(957, 487)
 scale = Vector2(1.28776, 1.23633)

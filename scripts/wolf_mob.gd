@@ -6,7 +6,7 @@ class_name WolfMob
 var health := 13
 var fake_floor := 800
 var is_falling := false
-var shitlist := [] # a list of people who've harmed me
+#(declared in mob)var shitlist := [] # a list of people who've harmed me
 var damage := 4
 var is_off_card := false
 const mob_type = Groups.wolves

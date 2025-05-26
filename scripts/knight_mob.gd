@@ -3,10 +3,10 @@ class_name KnightMob
 
 @onready var state_machine: StateMachine = find_child("StateMachine")
 
-var health := 3
+#(declared in mob) shitlist := [] # a list of people who've harmed me
+var health := 2
 var fake_floor := 800
 var is_falling := false
-var shitlist := [] # a list of people who've harmed me
 var damage := 1
 var is_off_card := false
 var is_jumbo := false

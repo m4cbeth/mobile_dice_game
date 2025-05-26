@@ -1,4 +1,5 @@
-extends CharacterBody2D
+extends Mob
+class_name SlimeMob
 
 
 @onready var sprite: AnimatedSprite2D = find_child("AnimatedSprite2D")
@@ -8,7 +9,7 @@ var fake_floor
 var health := 4
 var is_falling: bool
 const mob_type = Groups.slimes
-var shitlist := [] # a list of people who've harmed me
+#var shitlist := [] # a list of people who've harmed me
 var damage := 1
 
 func take_damage(attacker = null, dmg := 1) -> void:

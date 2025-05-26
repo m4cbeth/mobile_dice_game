@@ -5,7 +5,7 @@ class_name StateMachine
 
 var current_state: State
 var states: Dictionary = {}
-var entity: CharacterBody2D
+var entity: Mob
 
 func _ready():
 	await  owner.ready
