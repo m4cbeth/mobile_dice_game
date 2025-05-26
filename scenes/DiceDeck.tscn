@@ -762,8 +762,7 @@ frame = 11
 frame_progress = 1.0
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
-visible = false
-radius = 9.01
+radius = 2.0
 affect_navigation_mesh = true
 carve_navigation_mesh = true
 
