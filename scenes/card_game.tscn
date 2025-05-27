@@ -405,8 +405,11 @@ animations = [{
 }]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kvndu"]
-render_priority = 0
 shader = ExtResource("8_lfli0")
+shader_parameter/glitch_mode = 0.05
+shader_parameter/glitch_level = 3.0
+shader_parameter/block_size_y = 0.2
+shader_parameter/block_size_x = 0.3
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mpugr"]
 atlas = ExtResource("14_f8vwx")
@@ -854,8 +857,15 @@ stream = ExtResource("4_2debr")
 volume_db = -21.081
 
 [node name="Terrace2" type="Sprite2D" parent="Background"]
+visible = false
 z_index = -1
 material = SubResource("ShaderMaterial_kvndu")
+position = Vector2(955, 663)
+scale = Vector2(0.59537, 0.59537)
+texture = ExtResource("9_efjup")
+
+[node name="Terrace3" type="Sprite2D" parent="Background"]
+z_index = -1
 position = Vector2(955, 663)
 scale = Vector2(0.59537, 0.59537)
 texture = ExtResource("9_efjup")
