@@ -5,6 +5,12 @@
 	But right now:
 	knights take damage:
 		but that needs slime to add to shit list first
+		also, slimes need a "taking damage state" to not repeatedly take damage?
+		also, knockback is a problem right now, no slimes can get to a knight
+		yeah, once slime has entered attack, it needs to NOT switch to TakeDamage:
+			Which involves...:
+				is attacking var on slime
+				check "if is_attacking" before applying "take_damage" in attack
 
 
 |----------------------------ON MY MIND----------------------------------------|:
