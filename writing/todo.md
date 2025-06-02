@@ -39,10 +39,15 @@
 	4) Invoke logic:
 			color should be based not on seperate layers, but:
 				controling the RAW values via dynamic code (i.e. card count body overlap)
-	|------------------------------------------------------------------------------|
-	|-------------------------------CURRENT BUGS-----------------------------------|
-	|------------------------------------------------------------------------------|
-
+				
+				
+	-------------------------------CURRENT BUGS-----------------------------------:
+	
+	can grab card, and if dropped slightly up, sometimes sits there.
+	it seems to leave PlayerHand.player_hand: Array.
+	because when picked up again, and released, and "added" back to player_hand
+	if at max minus 1 cards, a card is destroyed (suggesting, duplication in the array)
+	
 	collision when falling?
 	navigation affect slimes around dice, not good.
 	Navigation in general could use some work.

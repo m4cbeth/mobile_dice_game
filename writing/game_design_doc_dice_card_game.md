@@ -145,3 +145,7 @@ Maybe slimes die and animate into hearts?
 	the game is playing you, making you "hack" but by getting you to call commands and attack nodes.
 	Like... I don't know. Maybe that's dumb. Maybe go with what's easier/more natural? Fucking around
 	and trying to be funny?
+
+
+
+I want to talk about IE. Not internet explorer. But rather, "id es" (i.e. "i.e." i.e. "id es")
