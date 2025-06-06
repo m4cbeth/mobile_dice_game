@@ -428,6 +428,7 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DangerZone"]
+position = Vector2(-0.5, -0.5)
 polygon = PackedVector2Array(-9.75, 0, -10, -16.5, -16.75, -21, -28.25, -17.5, -28.75, 0)
 
 [node name="DamageArea" type="Area2D" parent="." groups=["bad_guys"]]
@@ -435,7 +436,7 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" groups=["bad_guys"]]
-position = Vector2(0.3125, -8.75)
+position = Vector2(0.25, -8.5)
 shape = SubResource("RectangleShape2D_pu8ps")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

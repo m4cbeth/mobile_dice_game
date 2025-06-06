@@ -433,6 +433,14 @@ metadata/_custom_type_script = "uid://dor0i5y5k10ru"
 script = ExtResource("6_7fdty")
 metadata/_custom_type_script = "uid://hpfnehdxwtm7"
 
+[node name="DamageArea" type="Area2D" parent="." groups=["knights"]]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DamageArea" groups=["knights"]]
+position = Vector2(-1, -4)
+shape = SubResource("CircleShape2D_7fdty")
+
 [node name="DangerZone" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 2

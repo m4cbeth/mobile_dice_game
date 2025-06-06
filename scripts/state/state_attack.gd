@@ -22,18 +22,11 @@ func enter(msg: Dictionary = {}) -> void:
 	attack_in_progress = true
 	if sprite:
 		sprite.play('Attack')
-
 func exit():
 	if sprite.animation_finished.is_connected(_on_animation_finished):
 		sprite.animation_finished.disconnect(_on_animation_finished)
 	attack_in_progress = false
 	entity.is_attacking = false
-
-func _on_animation_finished():
-	if sprite.animation == "Attack":
-		if attack_in_progress:
-			transition_to("Walk")
-			attack_in_progress = false
 
 func perform_attack():
 	if attack_in_progress:
@@ -71,9 +64,9 @@ func update(delta):
 				body.get_parent().take_damage(entity, damage)
 	elif attack_in_progress and entity.is_in_group(Groups.slimes) and sprite.frame == 6:
 		for body in attack_area.get_overlapping_areas():
-			print(attack_area, body)
 			if body.is_in_group(Groups.knights):
-				#do damage to knights
+				#transition knight to take damage
+				print(body.get_parent())
 				pass
 			if body.is_in_group(Groups.dice):
 				body.get_parent().hit_by_slime(entity)
@@ -90,6 +83,11 @@ func update(delta):
 func physics_update(_delta):
 	pass
 
+func _on_animation_finished():
+	if sprite.animation == "Attack":
+		if attack_in_progress:
+			transition_to("Walk")
+			attack_in_progress = false
 #helper function so can call trans in state
 func transition_to(state_name: String, msg: Dictionary = {}) -> void:
 	state_machine.transition_to(state_name, msg)
