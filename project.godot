@@ -37,6 +37,7 @@ bad_guys=""
 glyph=""
 playing_cards=""
 good_guys=""
+knights=""
 
 [rendering]
 

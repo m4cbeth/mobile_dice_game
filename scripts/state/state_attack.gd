@@ -13,6 +13,7 @@ var attack_in_progress := false
 @export var attack_target := []
 
 func enter(msg: Dictionary = {}) -> void:
+	entity.is_attacking = true
 	damage = owner.damage
 	if msg.has("target"):
 		target = msg.target
@@ -26,6 +27,7 @@ func exit():
 	if sprite.animation_finished.is_connected(_on_animation_finished):
 		sprite.animation_finished.disconnect(_on_animation_finished)
 	attack_in_progress = false
+	entity.is_attacking = false
 
 func _on_animation_finished():
 	if sprite.animation == "Attack":
@@ -63,17 +65,18 @@ func update(delta):
 		for body in attack_area.get_overlapping_areas():
 			if body.is_in_group(Groups.dice) and GameState.dice_level > 1:
 				body.get_parent().take_damage(damage)
-			if body.is_in_group("bad_guys"):
+			if body.is_in_group("bad_guys") and not body.get_parent().is_attacking:
+				#print(body)
+				#if not body.is_attacking:
 				body.get_parent().take_damage(entity, damage)
-	elif  attack_in_progress and entity.is_in_group(Groups.slimes) and sprite.frame == 6:
+	elif attack_in_progress and entity.is_in_group(Groups.slimes) and sprite.frame == 6:
 		for body in attack_area.get_overlapping_areas():
+			print(attack_area, body)
 			if body.is_in_group(Groups.knights):
 				#do damage to knights
 				pass
 			if body.is_in_group(Groups.dice):
 				body.get_parent().hit_by_slime(entity)
-				pass
-
 	if not is_instance_valid(target): #or entity.global_position.distance_to(target) > 95:
 		if !attack_in_progress:
 			attack_in_progress = false
@@ -82,7 +85,7 @@ func update(delta):
 	if !attack_in_progress:
 		if attack_timer > attack_cooldown:
 			perform_attack()
-		
+
 
 func physics_update(_delta):
 	pass

@@ -32,8 +32,8 @@ func _input(event):
 		else: # ON RELEASE
 			if card_being_dragged:
 				finish_drag(card)
-				$"../Camera2D".trigger_shake()
-				$"../CardDropSound".play()
+				$"../Background/Camera2D".trigger_shake()
+				$"CardDropSound".play()
 
 func start_drag(card):
 	card_being_dragged = card

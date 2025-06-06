@@ -13,6 +13,7 @@ var is_jumbo := false
 const mob_type = Groups.knights
 
 func take_damage(attacker = null, dmg := 1) -> void:
+	print("happening")
 	if not shitlist.has(attacker):
 		shitlist.append(attacker)
 	health -= dmg

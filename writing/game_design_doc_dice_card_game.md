@@ -147,5 +147,31 @@ Maybe slimes die and animate into hearts?
 	and trying to be funny?
 
 
+# Credits
+I just had what is a really good idea and good goal to work towards.
+Having a end state that player can get to.
+And a good credits thing. Found the music.
+Would love to pay credit to everyone that did everything before me.
+And make it animated and like good movie or pixar credits.
+
+Knights and wolves by this guy.
+	Slimes and this from same guy
+
+Music by
+	Sound effects by
+	Explosions by
+	Dice sheet from this guy. Hearts from here.
+
+Creative Director: ChatGPT
+Cheif Technology Officer and Game Director: Claude Ai
+Game Designer and Lead Writer: macbeth v entropy
+Additional Research and Moral Support: Gemini
+hahahahahahahahahaha
+Each coukld have a screen shot; gemini saying its' ok bro
+claude helping with code and game desing but funny
+chat being creative but funny (either real or fabricated works for me haha)
+
+
+
 
 I want to talk about IE. Not internet explorer. But rather, "id es" (i.e. "i.e." i.e. "id es")

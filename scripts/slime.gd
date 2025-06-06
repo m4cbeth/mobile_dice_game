@@ -13,9 +13,9 @@ const mob_type = Groups.slimes
 var damage := 1
 
 func take_damage(attacker = null, dmg := 1) -> void:
-	print("attacker is: ", attacker)
+	#print("attacker is: ", attacker)
 	if not shitlist.has(attacker):
-		print(attacker, " IS A PEICE OF SHIT!")
+		#print(attacker, " IS A PEICE OF SHIT!")
 		shitlist.append(attacker)
 	if health <= 0:
 		state_machine.transition_to("Death")

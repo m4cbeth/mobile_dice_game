@@ -101,7 +101,7 @@ func handle_deal(result_number: int):
 				if current_card_count > 0:
 					var pick_a_spot = randi_range(0, current_card_count - 1)
 					var to_destroy = player_hand.player_hand[pick_a_spot]
-					print("todestroy: ", to_destroy)
+					#print("todestroy: ", to_destroy)
 					player_hand.destroy_a_card(to_destroy)
 					blue_die.play()
 
@@ -122,7 +122,6 @@ func deal_cards(number_of_cards: int) -> void:
 		counter -= 1
 		spawn_card()
 		await get_tree().create_timer(.1).timeout
-		print(counter)
 		if counter == 0:
 			blue_die.play()
 
