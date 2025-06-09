@@ -25,7 +25,7 @@ func enter(msg: Dictionary = {}) -> void:
 	else:
 		# Fallback direction based on sprite facing
 		knockback_direction = Vector2(-1 if sprite.flip_h else 1, 0)
-	# Connect animation finished signal
+	# Connect animation f inished signal
 	if !sprite.animation_finished.is_connected(_on_animation_finished):
 		sprite.animation_finished.connect(_on_animation_finished)
 	# Apply initial knockback
